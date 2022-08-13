@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public interface UserRepository extends MongoRepository<User, Long> {
 
     User findByUsername(String username);
+    User findById(String id);
+
     User findByEmail(String email);
     public ArrayList<User> findAll();
 }

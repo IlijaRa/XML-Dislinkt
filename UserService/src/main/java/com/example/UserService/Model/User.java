@@ -5,6 +5,9 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @Document(collection = "User")
@@ -18,7 +21,15 @@ public class User {
     private String email;
     private String phone;
     private String gender;
-    // private LocalDateTime dateOfBirth;
+
+
+
+    private String biography;
+
+
+
+
+
     public String getId() {
         return id;
     }

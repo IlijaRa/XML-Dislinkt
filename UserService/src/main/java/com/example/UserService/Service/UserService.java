@@ -5,8 +5,12 @@ import com.example.UserService.Model.User;
 import com.example.UserService.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 @Service
@@ -16,7 +20,8 @@ public class UserService {
     private UserRepository userRepository;
     private EmailValidator emailValidator = new EmailValidator();
 
-    public void register(User user) {
+
+    public User create(User user) {
         boolean isValidEmail = emailValidator.test(user.getEmail());
 
         if(!isValidEmail){
@@ -33,12 +38,63 @@ public class UserService {
         }
 
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 
     public ArrayList<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public User findByUsername(String username){
+        User user = userRepository.findByUsername(username);
+        if(user == null){
+            throw new IllegalStateException("Korisnik ne postoji!");
+        }
+        return user;
+    }
+    public User findByEmail(String email){
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            throw new IllegalStateException("Korisnik ne postoji!");
+        }
+        return user;
+    }
+    public Boolean deleteUserByUsername(String username){
+        User user = this.findByUsername(username);
+        userRepository.delete(user);
+        return true;
+    }
+    public Boolean deleteUserByEmail(String email){
+        User user = this.findByEmail(email);
+        userRepository.delete(user);
+        return true;
+    }
+
+
+    public void deleteAllUsers(){
+        userRepository.deleteAll();
+    }
+
+    public ResponseEntity<User> updateUser(String userId,
+                                           @RequestBody User u)  {
+
+            User user = userRepository.findById(userId);
+
+            System.out.println("prosledjeni user " + u.getUsername());
+        System.out.println("pronadjeni user " + user.getUsername());
+
+            user.setUsername(u.getUsername());
+            user.setPassword(u.getPassword());
+            user.setName(u.getName());
+            user.setEmail(u.getEmail());
+            user.setPhone(u.getPhone());
+            user.setGender(u.getGender());
+            user.setBiography(u.getBiography());
+
+            final User updatedUser = userRepository.save(user);
+            return ResponseEntity.ok(updatedUser);
+
     }
 
 }

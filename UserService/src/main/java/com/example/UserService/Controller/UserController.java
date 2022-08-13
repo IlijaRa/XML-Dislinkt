@@ -5,9 +5,21 @@ import com.example.UserService.Model.User;
 import com.example.UserService.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
@@ -21,13 +33,82 @@ public class UserController {
     public String helloWorld(){
         return "Hello World from Spring Boot";
     }
-    @GetMapping("/users")
-    public ResponseEntity<ArrayList<User>> getAllUsers(){
+
+
+    //get all users
+    @GetMapping(
+            value = "/users",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllUsers(){
+        ArrayList<User> users = userService.getAllUsers();
+        if(users.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<ArrayList<User>>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public void register(@RequestBody User newUser){
-        userService.register(newUser);
+    //save user
+    @PostMapping(
+            value = "/create",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> create(@RequestBody User newUser){
+        try {
+            return new ResponseEntity<User>(userService.create(newUser) , HttpStatus.CREATED);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    //get user by username
+    @GetMapping(
+            value = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserByUsername(@RequestParam(value="username") String username){
+        try{
+            return new ResponseEntity<User>(userService.findByUsername(username), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //get user by email
+    @GetMapping(value="/userByEmail",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserByEmail(@RequestParam(value="email") String email){
+        try{
+            return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //delete user by username
+    @DeleteMapping(value = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteUserByUsername(@RequestParam(value="username") String username){
+        try{
+            userService.deleteUserByUsername(username);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("User deleted by username", HttpStatus.OK);
+    }
+    //delete user by email
+    @DeleteMapping(value = "/userByEmail",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteUserByEmail(@RequestParam(value="email") String email){
+        try{
+            userService.deleteUserByEmail(email);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("User deleted by email", HttpStatus.OK);
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String userId,
+                                                           @RequestBody User user)
+    {
+        return userService.updateUser(userId, user);
     }
 }
