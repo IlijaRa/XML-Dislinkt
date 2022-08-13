@@ -111,4 +111,14 @@ public class UserController {
     {
         return userService.updateUser(userId, user);
     }
+
+    //get all users by part of username
+    @GetMapping(path = "/search/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> searchForUsername(@PathVariable("username") String username){
+        ArrayList<User> users = userService.searchUserByUsername(username);
+        if(users.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<ArrayList<User>>(users, HttpStatus.OK);
+    }
 }

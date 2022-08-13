@@ -22,9 +22,21 @@ public class User {
     private String phone;
     private String gender;
 
-
+  //  private LocalDate dateOfBirth;
 
     private String biography;
+    private String skills;
+    private String interests;
+    private String education;
+    private Boolean isPrivate;
+    public String getInterests() {
+        return interests;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
+    }
+
 
 
 
