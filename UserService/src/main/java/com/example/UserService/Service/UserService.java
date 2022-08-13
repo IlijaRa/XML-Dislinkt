@@ -82,7 +82,7 @@ public class UserService {
             User user = userRepository.findById(userId);
 
             System.out.println("prosledjeni user " + u.getUsername());
-        System.out.println("pronadjeni user " + user.getUsername());
+            System.out.println("pronadjeni user " + user.getUsername());
 
             user.setUsername(u.getUsername());
             user.setPassword(u.getPassword());
@@ -91,10 +91,18 @@ public class UserService {
             user.setPhone(u.getPhone());
             user.setGender(u.getGender());
             user.setBiography(u.getBiography());
+            user.setInterests(u.getInterests());
+            user.setEducation(u.getEducation());
+            user.setSkills(u.getSkills());
+            user.setIsPrivate(u.getIsPrivate());
 
             final User updatedUser = userRepository.save(user);
             return ResponseEntity.ok(updatedUser);
 
+    }
+    public ArrayList<User> searchUserByUsername(String partOfUsername)
+    {
+        return userRepository.findByUsernameContaining(partOfUsername);
     }
 
 }
