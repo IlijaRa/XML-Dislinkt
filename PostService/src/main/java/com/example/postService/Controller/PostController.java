@@ -84,11 +84,34 @@ public class PostController {
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
+    //comment on post
     @PutMapping(path = "posts/{postId}")
     public ResponseEntity<Post> commentPost(@PathVariable String postId,@RequestBody Comment comment){
         Post savedPost= this.postService.commentPost(postId,comment).getBody();
         return new ResponseEntity<>(savedPost,HttpStatus.CREATED);
     }
+    // get all comments from one post
 
+    @GetMapping(path="/posts/{postId}/comments")
+    public ResponseEntity<ArrayList<Comment>> getAllCommentsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<Comment> commentsFromPost = post.getComments();
+        return new ResponseEntity<>(commentsFromPost,HttpStatus.OK);
+    }
+
+    // get all user id's who like post
+    @GetMapping(path="/posts/{postId}/likes")
+    public ResponseEntity<ArrayList<String>> getAllLikedUserIdsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<String> likedUserIdsFromPost = post.getLikedUserIds();
+        return new ResponseEntity<>(likedUserIdsFromPost,HttpStatus.OK);
+    }
+    // get all user id's who disliked post
+    @GetMapping(path="/posts/{postId}/dislikes")
+    public ResponseEntity<ArrayList<String>> getAllDislikedUserIdsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<String> dislikedUserIdsFromPost = post.getDislikedUserIds();
+        return new ResponseEntity<>(dislikedUserIdsFromPost,HttpStatus.OK);
+    }
 
 }
