@@ -1,6 +1,8 @@
 package com.example.postService.Controller;
 
+import com.example.postService.Model.Comment;
 import com.example.postService.Model.Post;
+import com.example.postService.Service.CommentService;
 import com.example.postService.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,8 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-
+    @Autowired
+    private CommentService commentService;
     @RequestMapping("/")
     public String helloWorld(){
         return "Hello World from Spring Boot";
@@ -80,6 +83,11 @@ public class PostController {
         catch(Exception e){
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
+    }
+    @PutMapping(path = "posts/{postId}")
+    public ResponseEntity<Post> commentPost(@PathVariable String postId,@RequestBody Comment comment){
+        Post savedPost= this.postService.commentPost(postId,comment).getBody();
+        return new ResponseEntity<>(savedPost,HttpStatus.CREATED);
     }
 
 
