@@ -1,6 +1,8 @@
 package com.example.postService.Controller;
 
+import com.example.postService.Model.Comment;
 import com.example.postService.Model.Post;
+import com.example.postService.Service.CommentService;
 import com.example.postService.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,8 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-
+    @Autowired
+    private CommentService commentService;
     @RequestMapping("/")
     public String helloWorld(){
         return "Hello World from Spring Boot";
@@ -81,6 +84,34 @@ public class PostController {
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
+    //comment on post
+    @PutMapping(path = "posts/{postId}")
+    public ResponseEntity<Post> commentPost(@PathVariable String postId,@RequestBody Comment comment){
+        Post savedPost= this.postService.commentPost(postId,comment).getBody();
+        return new ResponseEntity<>(savedPost,HttpStatus.CREATED);
+    }
+    // get all comments from one post
 
+    @GetMapping(path="/posts/{postId}/comments")
+    public ResponseEntity<ArrayList<Comment>> getAllCommentsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<Comment> commentsFromPost = post.getComments();
+        return new ResponseEntity<>(commentsFromPost,HttpStatus.OK);
+    }
+
+    // get all user id's who like post
+    @GetMapping(path="/posts/{postId}/likes")
+    public ResponseEntity<ArrayList<String>> getAllLikedUserIdsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<String> likedUserIdsFromPost = post.getLikedUserIds();
+        return new ResponseEntity<>(likedUserIdsFromPost,HttpStatus.OK);
+    }
+    // get all user id's who disliked post
+    @GetMapping(path="/posts/{postId}/dislikes")
+    public ResponseEntity<ArrayList<String>> getAllDislikedUserIdsFromPost(@PathVariable String postId){
+        Post post= postService.findByPostId(postId);
+        ArrayList<String> dislikedUserIdsFromPost = post.getDislikedUserIds();
+        return new ResponseEntity<>(dislikedUserIdsFromPost,HttpStatus.OK);
+    }
 
 }
