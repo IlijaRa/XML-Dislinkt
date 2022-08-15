@@ -90,6 +90,7 @@ public class PostController {
         Post savedPost= this.postService.commentPost(postId,comment).getBody();
         return new ResponseEntity<>(savedPost,HttpStatus.CREATED);
     }
+
     // get all comments from one post
 
     @GetMapping(path="/posts/{postId}/comments")
