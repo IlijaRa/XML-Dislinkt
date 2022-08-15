@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +30,47 @@ public class User {
     private String interests;
     private String education;
     private Boolean isPrivate;
+
+    private ArrayList<String> following;
+    private ArrayList<String> followRequests;
+    private ArrayList<String> blocked;
+
+    public Boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public ArrayList<String> getFollowing() {
+        if(following==null)
+            following = new ArrayList<String>();
+        return following;
+    }
+
+    public void setFollowing(ArrayList<String> following) {
+        this.following = following;
+    }
+
+    public ArrayList<String> getFollowRequests() {
+        if(followRequests==null)
+            followRequests = new ArrayList<String>();
+        return followRequests;
+    }
+
+    public void setFollowRequests(ArrayList<String> followRequests) {
+        this.followRequests = followRequests;
+    }
+
+    public ArrayList<String> getBlocked() {
+        if(blocked==null)
+            blocked = new ArrayList<String>();
+        return blocked;
+    }
+
+    public void setBlocked(ArrayList<String> blocked) {
+        this.blocked = blocked;
+    }
+
+
+
     public String getInterests() {
         return interests;
     }

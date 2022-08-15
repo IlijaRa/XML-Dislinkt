@@ -105,4 +105,76 @@ public class UserService {
         return userRepository.findByUsernameContaining(partOfUsername);
     }
 
+    //follow user
+    public User follow(String followerUsername, String toFollowUsername) {
+        System.out.println(followerUsername);
+        System.out.println(toFollowUsername);
+        User followerUser = userRepository.findByUsername(followerUsername);
+        User toFollowUser = userRepository.findByUsername(toFollowUsername);
+
+        if(followerUser == null){
+            throw new IllegalStateException("followerUser does not exist!");
+        }
+        if(toFollowUser == null){
+            throw new IllegalStateException("toFollowUser does not exist!");
+        }
+        if(followerUser.getFollowing().contains(toFollowUsername)){
+            throw new IllegalStateException("You already follow this user!");
+        }
+        if(followerUser.getBlocked().contains(toFollowUsername))
+        {
+            throw new IllegalStateException("You have blocked this user!");
+        }
+        if(toFollowUser.isPrivate()){
+            toFollowUser.getFollowRequests().add(followerUsername);
+            return userRepository.save(toFollowUser);
+        }else{
+            followerUser.getFollowing().add(toFollowUsername);
+            return userRepository.save(followerUser);
+        }
+    }
+    public User block(String userBlockingUsername,String userBlockedUsername){
+        User userBlocking=userRepository.findByUsername(userBlockingUsername);
+        User userBlocked=userRepository.findByUsername(userBlockedUsername);
+        ArrayList<String> blockedUsers = userBlocking.getBlocked();
+        if(userBlocking==null){
+            throw new IllegalStateException("User who is trying to block does not exist!");
+        }
+
+        if(userBlocked==null){
+            throw new IllegalStateException("User being blocked does not exist!");
+        }
+
+        if( userBlocking.getBlocked().contains(userBlockedUsername)){
+            throw new IllegalStateException("You already blocked this user!");
+        }
+
+        if( userBlocking.getFollowing().contains(userBlockedUsername)){
+            userBlocking.getFollowing().remove(userBlockedUsername);
+        }
+
+        if( userBlocking.getFollowRequests().contains(userBlockedUsername)){
+            userBlocking.getFollowRequests().remove(userBlockedUsername);
+        }
+
+        if(userBlocked.getFollowing().contains(userBlockingUsername)){
+            userBlocked.getFollowing().remove(userBlockingUsername);
+        }
+
+        if( userBlocked.getFollowRequests().contains(userBlockingUsername)){
+            userBlocked.getFollowRequests().remove(userBlockingUsername);
+        }
+
+       /* if(blockedUsers.isEmpty())
+            System.out.println("lista je prazna pre dodavanja");*/
+        blockedUsers.add(userBlockedUsername);
+        System.out.println("blocked users "+ blockedUsers.get(0));
+        userBlocking.setBlocked(blockedUsers);
+
+        userRepository.save(userBlocked);
+        return userRepository.save(userBlocking);
+
+    }
+
+
 }
