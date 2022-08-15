@@ -7,6 +7,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import RegistrationFormContainer from './Containers/RegistrationFormContainer';
+import HomePageContainer from './Containers/HomePageContainer';
+import LoginContainer from './Containers/LoginContainer';
 
 function App() {
   return (
@@ -15,6 +17,12 @@ function App() {
         <Switch>
           <Route path="/registration">
             <RegistrationFormContainer></RegistrationFormContainer>
+          </Route>
+          <Route path="/homePage">
+            <HomePageContainer></HomePageContainer>
+          </Route>
+          <Route path="/login">
+            <LoginContainer></LoginContainer>
           </Route>
         </Switch>
       </Router>
