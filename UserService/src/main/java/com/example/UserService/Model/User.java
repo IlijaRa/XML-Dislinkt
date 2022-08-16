@@ -26,9 +26,10 @@ public class User {
   //  private LocalDate dateOfBirth;
 
     private String biography;
-    private String skills;
-    private String interests;
-    private String education;
+    private ArrayList<String> skills;
+    private ArrayList<String> interests;
+    private ArrayList<Education> education;
+    private ArrayList<Experience> experience;
     private Boolean isPrivate;
 
     private ArrayList<String> following;
@@ -71,13 +72,7 @@ public class User {
 
 
 
-    public String getInterests() {
-        return interests;
-    }
 
-    public void setInterests(String interests) {
-        this.interests = interests;
-    }
 
 
 
@@ -140,7 +135,59 @@ public class User {
         this.gender = gender;
     }
 
+    public ArrayList<Education> getEducation() {
+        if(education==null)
+            education = new ArrayList<Education>();
+        return education;
+    }
 
+    public void setEducation(ArrayList<Education> education) {
+        this.education = education;
+    }
 
+    public String getBiography() {
+        return biography;
+    }
 
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public ArrayList<String> getSkills() {
+        if(skills==null)
+            skills = new ArrayList<String>();
+        return skills;
+    }
+
+    public void setSkills(ArrayList<String> skills) {
+        this.skills = skills;
+    }
+
+    public ArrayList<String> getInterests() {
+        if(interests==null)
+            interests = new ArrayList<String>();
+        return interests;
+    }
+
+    public void setInterests(ArrayList<String> interests) {
+        this.interests = interests;
+    }
+
+    public ArrayList<Experience> getExperience() {
+        if(experience==null)
+            experience = new ArrayList<Experience>();
+        return experience;
+    }
+
+    public void setExperience(ArrayList<Experience> experience) {
+        this.experience = experience;
+    }
+
+    public Boolean getPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
 }
