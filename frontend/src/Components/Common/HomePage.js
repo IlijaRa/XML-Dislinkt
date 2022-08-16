@@ -1,10 +1,14 @@
 import React from 'react'
 
-export default function HomePage() {
+export default function HomePage({user}) {
+console.log('user', user)
+  
+
   return (
     <div><div id="card">
     
     <h1>John Doe</h1>
+    
     <div className="image-crop">
       <img
         id="avatar"

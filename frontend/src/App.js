@@ -18,7 +18,7 @@ function App() {
           <Route path="/registration">
             <RegistrationFormContainer></RegistrationFormContainer>
           </Route>
-          <Route path="/homePage">
+          <Route path="/homePage/:username">
             <HomePageContainer></HomePageContainer>
           </Route>
           <Route path="/login">
