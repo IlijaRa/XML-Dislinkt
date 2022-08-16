@@ -197,5 +197,23 @@ public class UserService {
 
     }
 
+    public Boolean approveFollow(String userId, String followerUserId) {
+        User user = userRepository.findById(userId);
+        User followerUser = userRepository.findById(followerUserId);
+        if (user.getFollowRequests() != null && user.getFollowRequests().contains(followerUserId)) {
+            user.getFollowRequests().remove(followerUserId);
+            followerUser.getFollowing().add(userId);
+            if (userRepository.save(user) != null && userRepository.save(followerUser) != null) {
+                System.out.println("User '" + userId + "' approved follow request from '" + followerUserId + "'.");
+                return true;
+            }
+            System.out.println("User '" + userId + "' failed to approve follow request from '" + followerUserId + "'.");
+            return false;
+        }
+        System.out.println("No such request exists from '" + followerUserId + "' to '" + userId + "'.");
+        return false;
+    }
+
+
 
 }
