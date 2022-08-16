@@ -36,6 +36,16 @@ public class User {
     private ArrayList<String> followRequests;
     private ArrayList<String> blocked;
 
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
+
+    private String apiToken;
+
     public Boolean isPrivate() {
         return isPrivate;
     }

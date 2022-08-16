@@ -166,4 +166,16 @@ public class UserController {
         }
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
+
+    @PutMapping(path="/generateToken/{userId}",
+            consumes=MediaType.APPLICATION_JSON_VALUE,
+            produces=MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> generateToken(@PathVariable("userId") String userId){
+        try{
+            return new ResponseEntity<String>(userService.generateAPIToken(userId),HttpStatus.OK);
+        } catch(IllegalStateException e){
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
 }
