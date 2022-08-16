@@ -1,6 +1,7 @@
 package com.example.UserService.Controller;
 
 
+import com.example.UserService.Dto.LoginDto;
 import com.example.UserService.Model.User;
 import com.example.UserService.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class UserController {
         return new ResponseEntity<ArrayList<User>>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    //save user
+    //create (register) user
     @PostMapping(
             value = "/create",
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -57,6 +58,17 @@ public class UserController {
             return new ResponseEntity<User>(userService.create(newUser) , HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+    //login user
+    @PostMapping(path = "/login",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto){
+        try{
+            return new ResponseEntity<User>(userService.login(loginDto.getUsername(), loginDto.getPassword()), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
