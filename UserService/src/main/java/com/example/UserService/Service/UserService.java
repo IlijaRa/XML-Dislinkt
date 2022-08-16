@@ -25,7 +25,7 @@ public class UserService {
         boolean isValidEmail = emailValidator.test(user.getEmail());
 
         if(!isValidEmail){
-            throw new IllegalStateException("Email nije user validnom formatu!");
+            throw new IllegalStateException("Email nije u validnom formatu!");
         }
 
         boolean userExists = userRepository.findByEmail(user.getEmail()) != null;
@@ -93,6 +93,7 @@ public class UserService {
             user.setBiography(u.getBiography());
             user.setInterests(u.getInterests());
             user.setEducation(u.getEducation());
+            user.setExperience(u.getExperience());
             user.setSkills(u.getSkills());
             user.setIsPrivate(u.getIsPrivate());
 
