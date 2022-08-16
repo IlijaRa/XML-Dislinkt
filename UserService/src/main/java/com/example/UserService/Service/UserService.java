@@ -71,6 +71,17 @@ public class UserService {
         return true;
     }
 
+    public User login(String username, String password){
+        User user = userRepository.findByUsername(username);
+        if(user == null){
+            throw new IllegalStateException("Korisnik ne postoji");
+        }
+        if(!user.getPassword().equals(password)){
+            throw new IllegalStateException("Lozinka ne postoji");
+        }
+        return user;
+    }
+
 
     public void deleteAllUsers(){
         userRepository.deleteAll();
@@ -103,7 +114,16 @@ public class UserService {
     }
     public ArrayList<User> searchUserByUsername(String partOfUsername)
     {
-        return userRepository.findByUsernameContaining(partOfUsername);
+        ArrayList<User> users = userRepository.findByUsernameContaining(partOfUsername);
+        ArrayList<User> privateUsers = new ArrayList<User>();
+        for (User u:
+             users) {
+            if(!u.isPrivate())
+            {
+                privateUsers.add(u);
+            }
+        }
+        return privateUsers;
     }
 
     //follow user
@@ -120,11 +140,11 @@ public class UserService {
             throw new IllegalStateException("toFollowUser does not exist!");
         }
         if(followerUser.getFollowing().contains(toFollowUsername)){
-            throw new IllegalStateException("You already follow this user!");
+            throw new IllegalStateException("Vec pratite ovog korisnika!");
         }
         if(followerUser.getBlocked().contains(toFollowUsername))
         {
-            throw new IllegalStateException("You have blocked this user!");
+            throw new IllegalStateException("Blokirali ste ovog korisnika!");
         }
         if(toFollowUser.isPrivate()){
             toFollowUser.getFollowRequests().add(followerUsername);
