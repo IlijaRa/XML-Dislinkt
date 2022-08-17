@@ -70,17 +70,66 @@ public class PostService {
         return ResponseEntity.ok(updatedPost);
 
     }*/
-    public ResponseEntity<Post> commentPost(String postId,
-                                           @RequestBody Comment c)  {
+    public Post commentPost(String postId,Comment c)  {
 
         Post post = postRepository.findById(postId);
-        ArrayList<Comment> postComments = post.getComments();
-        postComments.add(c);
-        post.setComments(postComments);
-        final Post updatedPost = postRepository.save(post);
-        return ResponseEntity.ok(updatedPost);
-
+        post.getComments().add(c);
+        return postRepository.save(post);
     }
+    public boolean userAlreadyLiked(String userId,String postId) {
 
+        Post post = postRepository.findById(postId);
+        if(post.getLikedUserIds().contains(userId))
+            return true;
+        return false;
+    }
+    public boolean userAlreadyDisLiked(String userId,String postId) {
+        Post post = postRepository.findById(postId);
+        if(post.getDislikedUserIds().contains(userId))
+            return true;
+        return false;
+    }
+    public Post likePost(String userId,String postId) {
+        Post post = postRepository.findById(postId);
+        if(userAlreadyDisLiked(userId,postId))
+        {
+            post.getLikedUserIds().add(userId);
+            post.setLikes(post.getLikes()+1);
+            post.getDislikedUserIds().remove(userId);
+            post.setDislikes(post.getDislikes()-1);
+            return this.postRepository.save(post);
+        }
+        if(!userAlreadyLiked(userId,postId)) {
+            post.getLikedUserIds().add(userId);
+            post.setLikes(post.getLikes()+1);
+            return this.postRepository.save(post);
+        }
+        else {
+            post.getLikedUserIds().remove(userId);
+            post.setLikes(post.getLikes()-1);
+            return this.postRepository.save(post);
+        }
+    }
+    public Post dislikePost(String userId,String postId) {
+        Post post = postRepository.findById(postId);
+        if(userAlreadyLiked(userId,postId))
+        {
+            post.getLikedUserIds().remove(userId);
+            post.setLikes(post.getLikes()-1);
+            post.getDislikedUserIds().add(userId);
+            post.setDislikes(post.getDislikes()+1);
+            return this.postRepository.save(post);
+        }
+        if(!userAlreadyDisLiked(userId,postId)) {
+            post.getDislikedUserIds().add(userId);
+            post.setDislikes(post.getDislikes()+1);
+            return this.postRepository.save(post);
+        }
+        else {
+            post.setDislikes(post.getDislikes()-1);
+            post.getDislikedUserIds().remove(userId);
+            return this.postRepository.save(post);
+        }
+    }
 
 }

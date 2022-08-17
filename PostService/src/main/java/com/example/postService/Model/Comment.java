@@ -16,6 +16,9 @@ public class Comment {
     private String id;
     private String content;
 
+    private String userId;
+
+
     //getter and setter
     public String getId() {
         return id;
@@ -30,4 +33,11 @@ public class Comment {
         this.content = content;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
