@@ -14,7 +14,35 @@ const userServices = {
       username: username,
       password: password,
     });
-  }
+  },
+
+  getPostsByUserId: (userId) => {
+    return axios.get(`${process.env.REACT_APP_API_URL_POST}post?userId=${userId}`);
+  },
+
+
+  likePost: (userId,postId) => {
+    return axios.put(
+      `${process.env.REACT_APP_API_URL_POST}like`,
+      {
+        userId: userId,
+        postId: postId,
+      }
+    );
+  },
+
+  unlikePost: (userId,postId) => {
+    return axios.put(
+      `${process.env.REACT_APP_API_URL_POST}dislike`,
+      {
+        userId: userId,
+        postId: postId,
+      }
+    );
+  },
+
+
+
 };
 
 export default userServices;

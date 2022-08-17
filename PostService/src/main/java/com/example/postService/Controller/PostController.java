@@ -41,7 +41,7 @@ public class PostController {
     //get all posts by userId
     @GetMapping( value = "/post",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllPostsByUserId(@RequestParam(value="postId") String userId){
+    public ResponseEntity<?> getAllPostsByUserId(@RequestParam(value="userId") String userId){
         ArrayList<Post> posts = postService.getAllPostsByUserId(userId);
         if(posts.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
