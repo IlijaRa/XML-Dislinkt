@@ -125,14 +125,15 @@ public class UserController {
         return userService.updateUser(userId, user);
     }
 
-    //get all users by part of username
-    @GetMapping(path = "/search/{username}",
+    @GetMapping(
+            value = "/following",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> searchForUsername(@PathVariable("username") String username){
-        ArrayList<User> users = userService.searchUserByUsername(username);
-        if(users.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<ArrayList<User>>(users, HttpStatus.OK);
+    public ResponseEntity<?> getUserByUsername(@RequestBody Map<String, String> isFollowing){
+        try{
+            return new ResponseEntity<Boolean>(userService.isFollowing(isFollowing.get("userId"),isFollowing.get("followedUserId")),HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
     //follow user
     @PutMapping(path = "/follow",
@@ -165,6 +166,16 @@ public class UserController {
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+    }
+
+    //get all users by part of username
+    @GetMapping(path = "/search/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> searchForUsername(@PathVariable("username") String username){
+        ArrayList<User> users = userService.searchUserByUsername(username);
+        if(users.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<ArrayList<User>>(users, HttpStatus.OK);
     }
 
     @PutMapping(path="/generateToken/{userId}",
