@@ -11,7 +11,7 @@ let { username } = useParams();
 const [user, setUser] = useState({});
 
 useEffect(() => {
-  userServices.getUserByUsername("nikolaakv")
+  userServices.getUserByUsername(username)
     .then((data) => {
       setUser(data.data);
     })

@@ -7,7 +7,8 @@ console.log('user', user)
   return (
     <div><div id="card">
     
-    <h1>John Doe</h1>
+    <h1>{user.name}{" "} {user.username} <br/>
+    </h1>
     
     <div className="image-crop">
       <img
