@@ -39,6 +39,7 @@ public class PostService {
         return postRepository.findAll();
     }
 
+
     public Post create(Post post) {
         return postRepository.save(post);
     }
@@ -70,6 +71,7 @@ public class PostService {
         return ResponseEntity.ok(updatedPost);
 
     }*/
+    // 2 usera id proslediti, proveriti dal korisnik prati tog korisnika, ako da onda vrati sve postove
     public Post commentPost(String postId,Comment c)  {
 
         Post post = postRepository.findById(postId);
@@ -131,5 +133,6 @@ public class PostService {
             return this.postRepository.save(post);
         }
     }
+
 
 }

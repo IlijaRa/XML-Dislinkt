@@ -92,10 +92,8 @@ public class UserService {
                                            @RequestBody User u)  {
 
             User user = userRepository.findById(userId);
-
             System.out.println("prosledjeni user " + u.getUsername());
             System.out.println("pronadjeni user " + user.getUsername());
-
             user.setUsername(u.getUsername());
             user.setPassword(u.getPassword());
             user.setName(u.getName());
@@ -108,10 +106,8 @@ public class UserService {
             user.setExperience(u.getExperience());
             user.setSkills(u.getSkills());
             user.setIsPrivate(u.getIsPrivate());
-
             final User updatedUser = userRepository.save(user);
             return ResponseEntity.ok(updatedUser);
-
     }
     public ArrayList<User> searchUserByUsername(String partOfUsername)
     {
@@ -212,6 +208,14 @@ public class UserService {
             return false;
         }
         System.out.println("No such request exists from '" + followerUserId + "' to '" + userId + "'.");
+        return false;
+    }
+
+    public Boolean isFollowing(String userId, String followedUserId)
+    {
+        User user = userRepository.findById(userId);
+        if(user.getFollowing().contains(followedUserId))
+            return true;
         return false;
     }
 
