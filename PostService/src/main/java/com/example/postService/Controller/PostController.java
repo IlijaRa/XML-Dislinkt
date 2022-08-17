@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 //@RequestMapping(path = "/post")
@@ -85,10 +86,39 @@ public class PostController {
         }
     }
     //comment on post
-    @PutMapping(path = "posts/{postId}")
-    public ResponseEntity<Post> commentPost(@PathVariable String postId,@RequestBody Comment comment){
-        Post savedPost= this.postService.commentPost(postId,comment).getBody();
-        return new ResponseEntity<>(savedPost,HttpStatus.CREATED);
+    @PutMapping(path = "{postId}/comment",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> commentPost(@PathVariable String postId,@RequestBody Comment comment){
+        try{
+            return new ResponseEntity<Post>(postService.commentPost(postId, comment), HttpStatus.OK);
+        } catch (IllegalStateException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //like post
+    @PutMapping(path = "/like",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> likePost(@RequestBody Map<String, String> like){
+        try{
+            return new ResponseEntity<Post>(postService.likePost(like.get("userId"), like.get("postId")), HttpStatus.OK);
+        } catch (IllegalStateException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //dislike post
+    @PutMapping(path = "/dislike",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> dislikePost(@RequestBody Map<String, String> dislike){
+        try{
+            return new ResponseEntity<Post>(postService.dislikePost(dislike.get("userId"), dislike.get("postId")), HttpStatus.OK);
+        } catch (IllegalStateException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // get all comments from one post

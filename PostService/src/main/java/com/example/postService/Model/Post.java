@@ -31,6 +31,10 @@ public class Post {
     private ArrayList<String> dislikedUserIds;
 
     public ArrayList<Comment> getComments() {
+        if(comments==null)
+        {
+            comments = new ArrayList<Comment>();
+        }
         return comments;
     }
 
@@ -39,6 +43,10 @@ public class Post {
     }
 
     public ArrayList<String> getLinks() {
+        if(links==null)
+        {
+            links = new ArrayList<String>();
+        }
         return links;
     }
 
@@ -47,6 +55,10 @@ public class Post {
     }
 
     public ArrayList<String> getLikedUserIds() {
+        if(likedUserIds==null)
+        {
+            likedUserIds = new ArrayList<String>();
+        }
         return likedUserIds;
     }
 
@@ -55,6 +67,10 @@ public class Post {
     }
 
     public ArrayList<String> getDislikedUserIds() {
+        if(dislikedUserIds==null)
+        {
+            dislikedUserIds = new ArrayList<String>();
+        }
         return dislikedUserIds;
     }
 
