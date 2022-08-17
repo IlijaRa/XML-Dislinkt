@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-export default function Login() {
+export default function Login({loginUserHandler,logedUser}) {
+
+console.log('logedUser', logedUser)
+
+const username = useRef();
+const password = useRef();
+
   return (
     <div><div className="login-wrap">
     <div className="login-html">
@@ -12,13 +18,14 @@ export default function Login() {
             <label htmlFor="user" className="label">
               Username
             </label>
-            <input id="user" type="text" className="input" />
+            <input ref={username} id="user" type="text" className="input" />
           </div>
           <div className="group">
             <label htmlFor="pass" className="label">
               Password
             </label>
             <input
+              ref={password}
               id="pass"
               type="password"
               className="input"
@@ -39,7 +46,19 @@ export default function Login() {
             </label>
           </div>
           <div className="group">
-            <input type="submit" className="button" defaultValue="Sign In" />
+          <button
+              className="button login__submit"
+              onClick={(e) => {
+                {
+                  loginUserHandler(
+                    username.current.value,
+                    password.current.value
+                  );
+                }
+              }}
+            >
+              <span className="button__text">Log In </span>
+            </button>
           </div>
           <div className="hr" />
           <div className="foot-lnk">
