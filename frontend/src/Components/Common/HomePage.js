@@ -1,12 +1,23 @@
 import { Button } from 'bootstrap'
-import React from 'react'
+import React, { useRef } from 'react'
 import { Card,ListGroup,ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function HomePage({user,posts,likePostHandler,unlikePostHandler}) {
+export default function HomePage({user,posts,likePostHandler,unlikePostHandler,addCommentHandler}) {
 console.log('user', user)
 console.log('posts', posts)
+
+const content = useRef();
+
+function saveHandler(e) {
+  addCommentHandler({
+        id: 1,
+        content: content.current.value,
+        userId: user.id,
+      });
+}
+
 
   return (
     <div><div id="card">
@@ -129,9 +140,34 @@ console.log('posts', posts)
       <i className="fa fa-check-circle-o check-icon text-primary" />
     </div>
   </div>
+  
 </div>
+
+
+
+
 ))}
-                     
+<br></br>
+                     <div className="mb-3">
+      <label>Add a comment</label>
+      <input type="text" ref={content} className="form-control" placeholder="type a comment"   />
+      <button
+                        style={{ width: "7rem" }}
+                        variant="outline-success"
+                        class="btn btn-primary"
+                        onClick={() => 
+                          { addCommentHandler({
+                            id: 1,
+                            content: content.current.value,
+                            userId: user.id,
+                          },post.id);
+                          window.location.reload();
+                 
+                    }}
+                      >
+                        Comment
+                      </button>
+    </div>
                       
                    
                     </Card.Body>
@@ -140,6 +176,7 @@ console.log('posts', posts)
               </div>
             </div>
           </div>
+          
         </div>
 
 ))}

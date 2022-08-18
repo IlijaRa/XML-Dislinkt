@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Footer from '../Components/Common/Footer'
 import HomePage from '../Components/Common/HomePage'
 import Navbar from '../Components/Common/Navbar'
+import postService from '../Services/PostServices/PostServices';
 import userServices from '../Services/UserServices/UserServices';
 
 export default function HomePageContainer() {
@@ -54,6 +55,19 @@ function unlikePost(userId,postId) {
 }
 
 
+function addComment(comment,postId) {
+  postService
+    .createComment(comment,postId)
+    .then((data) => {
+      console.log("sucessfuly updated post");
+    })
+    .catch((error) => {
+      console.log("Something wen't wrong try again");
+    });
+}
+
+
+
   return (
     <div>
     <Navbar></Navbar>
@@ -62,6 +76,7 @@ function unlikePost(userId,postId) {
       posts= {posts}
       likePostHandler = {likePost}
       unlikePostHandler = {unlikePost}
+      addCommentHandler = {addComment}
     ></HomePage>
     <Footer></Footer>
   </div>

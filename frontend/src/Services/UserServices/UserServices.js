@@ -31,6 +31,10 @@ const userServices = {
     );
   },
 
+  createUser: (user) => {
+    return axios.post(`${process.env.REACT_APP_API_URL_USER}create`,user);
+  },
+
   unlikePost: (userId,postId) => {
     return axios.put(
       `${process.env.REACT_APP_API_URL_POST}dislike`,
@@ -39,7 +43,7 @@ const userServices = {
         postId: postId,
       }
     );
-  },
+  }
 
 
 
