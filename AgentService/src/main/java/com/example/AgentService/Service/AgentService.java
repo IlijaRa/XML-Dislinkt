@@ -49,7 +49,7 @@ public class AgentService {
             throw new IllegalStateException("Agent ne postoji");
         }
         return agent;
-      //  return agentRepository.getById(agentId);
+
     }
 
 

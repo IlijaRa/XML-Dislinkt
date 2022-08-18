@@ -93,10 +93,4 @@ public class Company {
         this.profilePicture = profilePicture;
     }
 
-
-
-
-
-
-
 }

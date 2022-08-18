@@ -51,30 +51,24 @@ public class AgentController {
         }
     }
 
-    @GetMapping(
-            value = "/agentById",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> findByAgentId(@RequestParam(value = "agentId") String agentId) {
+
+    @GetMapping(path = "/agentId/{agentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findByAgentId(@PathVariable String agentId) {
         Agent agent = agentService.findByAgentId(agentId);
-        try{
-            return new ResponseEntity<Agent>(agentService.findByAgentId(agentId), HttpStatus.OK);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        if (agent == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<Agent>(agent, HttpStatus.OK);
     }
 
-    @GetMapping(
-            value = "/agentByUsername",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> findByAgentUsername(@RequestParam(value = "username") String username) {
+    @GetMapping(path = "/username/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findByUsername(@PathVariable String username) {
         Agent agent = agentService.findByUsername(username);
-        try{
-            return new ResponseEntity<Agent>(agentService.findByUsername(username), HttpStatus.OK);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        if (agent == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<Agent>(agent, HttpStatus.OK);
     }
-
 
 
     @DeleteMapping(path = "/deleteAll")
