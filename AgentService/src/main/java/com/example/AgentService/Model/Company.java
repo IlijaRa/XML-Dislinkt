@@ -21,6 +21,9 @@ public class Company {
     private String mobile;
     private String profilePicture;
 
+    private Boolean approved;
+    private String ownerId;
+
     public String getId() {
         return id;
     }
@@ -93,4 +96,19 @@ public class Company {
         this.profilePicture = profilePicture;
     }
 
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
 }

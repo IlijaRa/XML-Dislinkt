@@ -13,7 +13,9 @@ public interface AgentRepository extends MongoRepository<Agent, String>{
      Agent findByUsername(String username);
      Agent getById(String agentId);
 
-    public ArrayList<Agent> findAll();
-    public ArrayList<Agent> findByUsernameContaining(String usernamePart);
+     Agent findByEmail(String email);
+
+     ArrayList<Agent> findAll();
+     ArrayList<Agent> findByUsernameContaining(String usernamePart);
 
 }

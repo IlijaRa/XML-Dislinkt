@@ -5,6 +5,7 @@ import java.util.Map;
 
 
 import com.example.AgentService.AgentServiceApplication;
+import com.example.AgentService.Dto.LoginDto;
 import com.example.AgentService.Model.Agent;
 import com.example.AgentService.Service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,17 @@ public class AgentController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
-
+    //login user
+    @PostMapping(path = "/login",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto){
+        try{
+            return new ResponseEntity<Agent>(agentService.login(loginDto.getUsername(), loginDto.getPassword()), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping(path = "/agentId/{agentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findByAgentId(@PathVariable String agentId) {
