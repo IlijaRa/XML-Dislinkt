@@ -13,14 +13,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "messages")
+@Document(collection = "connections")
 public class Message {
     @Id
     private String id;
     private String senderId;
     private String receiverId;
     private String message;
-    private LocalDateTime sentDate;
+    //private LocalDateTime sentDate;
+    //2022-08-18T12:53:31.231+00:00
 
     public String getId() {
         return id;
@@ -54,11 +55,11 @@ public class Message {
         this.message = message;
     }
 
-    public LocalDateTime getSentDate() {
-        return sentDate;
-    }
-
-    public void setSentDate(LocalDateTime sentDate) {
-        this.sentDate = sentDate;
-    }
+//    public LocalDateTime getSentDate() {
+//        return sentDate;
+//    }
+//
+//    public void setSentDate(LocalDateTime sentDate) {
+//        this.sentDate = sentDate;
+//    }
 }

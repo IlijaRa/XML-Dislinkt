@@ -24,12 +24,12 @@ public class ChatService {
 
     //get all messages
     public ArrayList<Message> getAllMessages(){
-        return chatRepository.getAllMessages();
+        return chatRepository.findAll();
     }
 
     //get all messages by receiverId
     public ArrayList<Message> getAllMessagesByReceiver(String userId) {
-        return chatRepository.getAllMessagesByReceiver(userId);
+        return chatRepository.findAllByReceiverId(userId);
     }
 
     //create new message
@@ -38,7 +38,7 @@ public class ChatService {
     }
 
     public Boolean deleteSingleMessage(String messageId) {
-        Message message = chatRepository.findByMessageId(messageId);
+        Message message = chatRepository.findById(messageId);
         chatRepository.delete(message);
         return true;
     }

@@ -22,9 +22,7 @@ public class ChatController {
     private ChatService chatService;
 
     //get all messages
-    @GetMapping(
-            value = "/messages",
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/messages", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllMessages(){
         ArrayList<Message> messages = chatService.getAllMessages();
         if(messages.isEmpty())
@@ -33,8 +31,7 @@ public class ChatController {
     }
 
     //get all messages by receiverId
-    @GetMapping( value = "/chat",
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( value = "/chat", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllMessagesByReceiverId(@RequestParam(value="receiverId") String userId){
         ArrayList<Message> messages = chatService.getAllMessagesByReceiver(userId);
         if(messages.isEmpty())
@@ -43,10 +40,7 @@ public class ChatController {
     }
 
     //create message
-    @PostMapping(
-            value = "/create",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Message newMessage){
         try {
             return new ResponseEntity<Message>(chatService.createMessage(newMessage) , HttpStatus.CREATED);
@@ -56,8 +50,8 @@ public class ChatController {
     }
 
     //delete message by id
-    @DeleteMapping(value="/post")
-    public ResponseEntity<?> deleteMessage(@RequestParam(value = "messageId") String messageId){
+    @DeleteMapping(value="/delete")
+    public ResponseEntity<?> deleteMessage(@RequestParam(value = "id") String messageId){
         try{
             chatService.deleteSingleMessage(messageId);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -66,4 +60,16 @@ public class ChatController {
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
+
+//    @DeleteMapping( path = "/delete/{id}")
+//    public ResponseEntity<?> deleteMessage(@PathVariable String messageId){
+//        try{
+//            chatService.deleteSingleMessage(messageId);
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        }
+//        catch(Exception e){
+//            return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
+//        }
+//    }
 }
+

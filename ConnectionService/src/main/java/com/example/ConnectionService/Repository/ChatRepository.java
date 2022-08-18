@@ -9,7 +9,8 @@ import java.util.*;
 
 @Repository
 public interface ChatRepository extends MongoRepository<Message, Long>{
-    public ArrayList<Message> getAllMessages();
-    public ArrayList<Message> getAllMessagesByReceiver(String userId);
-    public Message findByMessageId(String messageId);
+    public ArrayList<Message> findAll();
+    public ArrayList<Message> findAllByReceiverId(String userId);
+    public Message findById(String messageId);
 }
+
