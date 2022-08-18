@@ -20,8 +20,7 @@ public class Message {
     private String senderId;
     private String receiverId;
     private String message;
-    //private LocalDateTime sentDate;
-    //2022-08-18T12:53:31.231+00:00
+    private LocalDateTime sentDate;// format : 2022-08-18T14:57:06.128+00:00
 
     public String getId() {
         return id;
@@ -55,11 +54,11 @@ public class Message {
         this.message = message;
     }
 
-//    public LocalDateTime getSentDate() {
-//        return sentDate;
-//    }
-//
-//    public void setSentDate(LocalDateTime sentDate) {
-//        this.sentDate = sentDate;
-//    }
+    public LocalDateTime getSentDate() {
+        return sentDate;
+    }
+
+    public void setSentDate(LocalDateTime sentDate) {
+        this.sentDate = sentDate;
+    }
 }
