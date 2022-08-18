@@ -47,6 +47,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findById(String userId){
+        User user = userRepository.findById(userId);
+        if(user == null){
+            throw new IllegalStateException("Korisnik ne postoji!");
+        }
+        return user;
+    }
+
     public User findByUsername(String username){
         User user = userRepository.findByUsername(username);
         if(user == null){

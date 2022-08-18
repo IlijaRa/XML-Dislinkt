@@ -74,6 +74,18 @@ public class UserController {
 
     //get user by username
     @GetMapping(
+            value = "/userById",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserById(@RequestParam(value="userId") String userId){
+        try{
+            return new ResponseEntity<User>(userService.findById(userId), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //get user by username
+    @GetMapping(
             value = "/user",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getUserByUsername(@RequestParam(value="username") String username){
