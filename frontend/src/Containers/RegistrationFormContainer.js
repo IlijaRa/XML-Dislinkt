@@ -6,9 +6,23 @@ import userServices from '../Services/UserServices/UserServices';
 
 export default function RegistrationFormContainer() {
 
+  const [user, setUser] = useState({});
 
 
-
+  function addUser(user) {
+    userServices
+      .createUser(user)
+      .then((data) => {
+        if (data.status === 204) setUser({});
+        else {
+          setUser(data.data.content);
+          console.log("sucessfuly added a user");
+        }
+      })
+      .catch((error) => {
+        console.log("Something wen't wrong try again", error);
+      });
+  }
 
 
 
@@ -17,7 +31,7 @@ export default function RegistrationFormContainer() {
     <div>
     <Navbar></Navbar>
     <RegistrationForm
-
+       addUserHandler = {addUser}
     ></RegistrationForm>
     <Footer></Footer>
   </div>
