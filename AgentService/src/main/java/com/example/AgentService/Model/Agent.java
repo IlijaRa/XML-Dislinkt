@@ -22,6 +22,9 @@ public class Agent {
         private String email;
         private String phone;
 
+        private String apiToken;
+
+        private String role;
 
 
         public String getId() {

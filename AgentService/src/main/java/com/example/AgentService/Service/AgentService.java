@@ -2,6 +2,7 @@ package com.example.AgentService.Service;
 
 
 
+import com.example.AgentService.Helper.EmailValidator;
 import com.example.AgentService.Model.Agent;
 import com.example.AgentService.Repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class AgentService {
 
     @Autowired
     private AgentRepository agentRepository;
+    private EmailValidator emailValidator = new EmailValidator();
+
 
     public ArrayList<Agent> getAllAgents() {
         return agentRepository.findAll();
@@ -25,12 +28,30 @@ public class AgentService {
 
     public Agent create(Agent agent) {
 
-       boolean agentExist = agentRepository.findByUsername(agent.getUsername()) != null;
-        if(agentExist){
+        boolean isValidEmail = emailValidator.test(agent.getEmail());
+        if(!isValidEmail){
+            throw new IllegalStateException("Email nije u validnom formatu!");
+        }
+        boolean agentExists = agentRepository.findByEmail(agent.getEmail()) != null;
+        if(agentExists){
+            throw new IllegalStateException("Email ime vec postoji!");
+        }
+        agentExists = agentRepository.findByUsername(agent.getUsername()) != null;
+        if(agentExists){
             throw new IllegalStateException("Korisnicko ime agenta vec postoji!");
         }
-
         return agentRepository.save(agent);
+    }
+
+    public Agent login(String username, String password){
+        Agent agent = agentRepository.findByUsername(username);
+        if(agent == null){
+            throw new IllegalStateException("Korisnik ne postoji");
+        }
+        if(!agent.getPassword().equals(password)){
+            throw new IllegalStateException("Lozinka ne postoji");
+        }
+        return agent;
     }
 
     public Agent findByUsername(String username) {
@@ -39,17 +60,15 @@ public class AgentService {
             throw new IllegalStateException("Agent ne postoji!");
         }
         return agent;
-
     }
 
     public Agent findByAgentId(String agentId) {
-        Agent agent = agentRepository.getById(agentId);
+        Agent agent = agentRepository.findById(agentId);
         if(agent==null)
         {
             throw new IllegalStateException("Agent ne postoji");
         }
         return agent;
-
     }
 
 
@@ -63,7 +82,7 @@ public class AgentService {
     }
 
     public Boolean deleteAgentById(String agentId) {
-        Agent agent = agentRepository.getById(agentId);
+        Agent agent = agentRepository.findById(agentId);
         if (agent == null)
             throw new IllegalArgumentException("This agent is not found");
         agentRepository.delete(agent);

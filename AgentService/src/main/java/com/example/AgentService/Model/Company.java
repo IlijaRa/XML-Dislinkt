@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "companies")
 public class Company {
     @Id
     private String id;
@@ -15,11 +17,12 @@ public class Company {
     private String description;
     private String address;
 
-    private String username;
-    private String password;
     private String email;
     private String mobile;
     private String profilePicture;
+
+    private Boolean approved;
+    private String ownerId;
 
     public String getId() {
         return id;
@@ -53,21 +56,6 @@ public class Company {
         this.address = address;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;
@@ -93,4 +81,19 @@ public class Company {
         this.profilePicture = profilePicture;
     }
 
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
 }

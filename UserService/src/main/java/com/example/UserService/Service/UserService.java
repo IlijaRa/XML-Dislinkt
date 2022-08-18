@@ -37,8 +37,6 @@ public class UserService {
         if(userExists){
             throw new IllegalStateException("Korisnicko ime vec postoji!");
         }
-
-
         return userRepository.save(user);
     }
 
