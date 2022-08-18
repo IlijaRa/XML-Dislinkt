@@ -8,11 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 @Repository
-public interface CompanyRepository extends MongoRepository<Company, String> {
+public interface CompanyRepository extends MongoRepository<Company, Long> {
     Company findByName(String name);
     ArrayList<Company> findAll();
     ArrayList<Company> findByOwnerId(String ownerId);
     ArrayList<Company> findByApproved(Boolean approved);
+
+    Company findById(String companyId);
 
 
 

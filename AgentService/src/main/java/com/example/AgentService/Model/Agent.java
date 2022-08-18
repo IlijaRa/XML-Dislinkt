@@ -22,7 +22,6 @@ public class Agent {
         private String email;
         private String phone;
 
-        private Boolean owner;
         private String apiToken;
 
         private String role;

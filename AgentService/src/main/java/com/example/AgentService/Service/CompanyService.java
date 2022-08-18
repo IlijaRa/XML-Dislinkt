@@ -7,7 +7,9 @@ import com.example.AgentService.Repository.AgentRepository;
 import com.example.AgentService.Repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,9 @@ import java.util.ArrayList;
 public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+
+    private AgentRepository agentRepository;
     public Company registerCompany(String ownerId,Company company) {
 
         Company c = companyRepository.findByName(company.getName());
@@ -53,5 +58,64 @@ public class CompanyService {
 
     public ArrayList<Company> getUnapprovedCompanies() {
         return companyRepository.findByApproved(false);
+    }
+    public Boolean approveCompanyRegistration(String adminId,String companyId) {
+        Agent admin = agentRepository.findById(adminId);
+        if(!admin.getRole().equals("Admin"))
+        {
+            System.out.println("Niko sem admina ne moze odobriti registraciju kompanije!");
+            return false;
+        }
+        Company company = companyRepository.findById(companyId);
+        if (company == null) {
+            System.out.println("Nije pronadjena kompanija");
+            return false;
+        }
+        if (company.getApproved()) {
+            System.out.println("Vec je odobrena registracija ove kompanije");
+            return false;
+        }
+        company.setApproved(true);
+        if (companyRepository.save(company) != null) {
+            System.out.println("Registracija firme je odobrena");
+            Agent owner = agentRepository.findById(company.getOwnerId());
+            System.out.println(owner.getUsername());
+            owner.setRole("Owner");
+            agentRepository.save(owner);
+            return true;
+        }
+        System.out.println("Doslo je do greske, registracija firme nije odobrena odobrena");
+        return false;
+    }
+    public Company updateCompany(String companyId,Company company) {
+
+        Company c = companyRepository.findById(companyId);
+        c.setEmail(company.getEmail());
+        c.setDescription(company.getDescription());
+        if(!companyNameExists(company.getName()))
+        {
+            c.setName(company.getName());
+        }
+        c.setAddress(company.getAddress());
+        c.setMobile(company.getMobile());
+        c.setProfilePicture(company.getProfilePicture());
+        if (companyRepository.save(c) != null) {
+            System.out.println("Uspesno izmenjene informacije o kompaniji");
+            return c;
+        }
+        System.out.println("Doslo je do greske, informaciji o kompaniji nisu uspesno izmenjene!");
+        return null;
+    }
+    public Boolean companyNameExists(String companyName)
+    {
+        ArrayList<Company> companies = companyRepository.findAll();
+        for (Company c:companies
+             ) {
+            if (c.getName().equals(companyName))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

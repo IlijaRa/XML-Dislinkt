@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class CompanyController {
     @GetMapping(
             value = "/companies",
             produces =MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllAgents() {
+    public ResponseEntity<?> getAllCompanies() {
         ArrayList<Company> companies = companyService.getAllCompanies();
         if (companies.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -47,6 +48,31 @@ public class CompanyController {
         try{
             companyService.registerCompany(ownerId,company);
             return new ResponseEntity<Company>(company , HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
+        }
+    }
+    //approve company registration, for now everyone can approve it
+    @PutMapping(value="/approve",
+            consumes=MediaType.APPLICATION_JSON_VALUE,
+            produces=MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> approveCompanyRegistration(@RequestBody Map<String, String> registrationRequest){
+        try{
+            return new ResponseEntity<Boolean>(companyService.approveCompanyRegistration(registrationRequest.get("adminId"), registrationRequest.get("companyId")), HttpStatus.OK);
+        } catch (IllegalStateException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(path = "/update/{companyId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> update(@PathVariable String companyId, @RequestBody Company company){
+        try{
+            companyService.updateCompany(companyId,company);
+            return new ResponseEntity<Company>(company ,HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);

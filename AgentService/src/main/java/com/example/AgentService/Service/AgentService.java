@@ -63,7 +63,7 @@ public class AgentService {
     }
 
     public Agent findByAgentId(String agentId) {
-        Agent agent = agentRepository.getById(agentId);
+        Agent agent = agentRepository.findById(agentId);
         if(agent==null)
         {
             throw new IllegalStateException("Agent ne postoji");
@@ -82,7 +82,7 @@ public class AgentService {
     }
 
     public Boolean deleteAgentById(String agentId) {
-        Agent agent = agentRepository.getById(agentId);
+        Agent agent = agentRepository.findById(agentId);
         if (agent == null)
             throw new IllegalArgumentException("This agent is not found");
         agentRepository.delete(agent);

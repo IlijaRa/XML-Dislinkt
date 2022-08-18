@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface AgentRepository extends MongoRepository<Agent, String>{
+public interface AgentRepository extends MongoRepository<Agent, Long>{
 
      Agent findByUsername(String username);
-     Agent getById(String agentId);
+     Agent findById(String agentId);
 
      Agent findByEmail(String email);
 
