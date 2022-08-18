@@ -24,7 +24,6 @@ public class Agent {
 
 
 
-
         public String getId() {
                 return id;
         }
@@ -80,6 +79,7 @@ public class Agent {
         public void setPhone(String phone) {
                 this.phone = phone;
         }
+
 
 
 
