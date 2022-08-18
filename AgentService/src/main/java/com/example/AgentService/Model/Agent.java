@@ -25,6 +25,8 @@ public class Agent {
         private Boolean owner;
         private String apiToken;
 
+        private String role;
+
 
         public String getId() {
                 return id;

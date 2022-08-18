@@ -60,7 +60,6 @@ public class AgentService {
             throw new IllegalStateException("Agent ne postoji!");
         }
         return agent;
-
     }
 
     public Agent findByAgentId(String agentId) {
@@ -70,7 +69,6 @@ public class AgentService {
             throw new IllegalStateException("Agent ne postoji");
         }
         return agent;
-
     }
 
 
