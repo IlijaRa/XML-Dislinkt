@@ -19,7 +19,9 @@ import java.util.Map;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
-// get all companies
+
+
+    // get all companies
     @GetMapping(
             value = "/companies",
             produces =MediaType.APPLICATION_JSON_VALUE)
@@ -30,6 +32,7 @@ public class CompanyController {
         }
         return new ResponseEntity<ArrayList<Company>>(companies, HttpStatus.OK);
     }
+
     //get all companies of specific owner
     @GetMapping(path="/{ownerId}/companies")
     public ResponseEntity<ArrayList<Company>> getAllCommentsFromPost(@PathVariable String ownerId){
@@ -53,7 +56,8 @@ public class CompanyController {
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
-    //approve company registration, for now everyone can approve it
+
+    //approve company registration
     @PutMapping(value="/approve",
             consumes=MediaType.APPLICATION_JSON_VALUE,
             produces=MediaType.APPLICATION_JSON_VALUE
@@ -66,6 +70,7 @@ public class CompanyController {
         }
     }
 
+    //update company information
     @PutMapping(path = "/update/{companyId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)

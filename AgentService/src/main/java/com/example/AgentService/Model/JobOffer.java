@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class JobOffer {
     @Id
     private String id;
-    private String title;
+    private String position;
     private String description;
+    private String location;
     private ArrayList<String> requirements = new ArrayList<>();
-    private double rating;
-    private ArrayList<Comment> comments;
+    private ArrayList<String> daily_activities = new ArrayList<>();
     private String CompanyId;
 
     public String getId() {
@@ -32,12 +32,12 @@ public class JobOffer {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPosition() {
+        return position;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getDescription() {
@@ -48,6 +48,14 @@ public class JobOffer {
         this.description = description;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public ArrayList<String> getRequirements() {
         return requirements;
     }
@@ -56,20 +64,12 @@ public class JobOffer {
         this.requirements = requirements;
     }
 
-    public double getRating() {
-        return rating;
+    public ArrayList<String> getDaily_activities() {
+        return daily_activities;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public ArrayList<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
+    public void setDaily_activities(ArrayList<String> daily_activities) {
+        this.daily_activities = daily_activities;
     }
 
     public String getCompanyId() {
