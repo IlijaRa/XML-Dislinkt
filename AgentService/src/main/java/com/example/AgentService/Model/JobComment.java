@@ -4,6 +4,7 @@ package com.example.AgentService.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -11,11 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "job_comments")
 public class JobComment {
+    @Id
     private String id;
     private String pros;
     private String cons;
     private double rating;
     private double salary;
+    private String interviewId;
     private String JobOfferId;
 
     public String getId() {
@@ -58,6 +61,14 @@ public class JobComment {
         this.salary = salary;
     }
 
+    public String getInterviewId() {
+        return interviewId;
+    }
+
+    public void setInterviewId(String interviewId) {
+        this.interviewId = interviewId;
+    }
+
     public String getJobOfferId() {
         return JobOfferId;
     }
@@ -65,4 +76,5 @@ public class JobComment {
     public void setJobOfferId(String jobOfferId) {
         JobOfferId = jobOfferId;
     }
+
 }
