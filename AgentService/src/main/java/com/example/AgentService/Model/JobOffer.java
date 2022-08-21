@@ -20,8 +20,8 @@ public class JobOffer {
     private String position;
     private String description;
     private String location;
-    private ArrayList<String> requirements = new ArrayList<>();
-    private ArrayList<String> daily_activities = new ArrayList<>();
+    private ArrayList<Requirement> requirements = new ArrayList<>();
+    private ArrayList<DailyActivity> daily_activities = new ArrayList<>();
     private String CompanyId;
 
     public String getId() {
@@ -56,19 +56,19 @@ public class JobOffer {
         this.location = location;
     }
 
-    public ArrayList<String> getRequirements() {
+    public ArrayList<Requirement> getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(ArrayList<String> requirements) {
+    public void setRequirements(ArrayList<Requirement> requirements) {
         this.requirements = requirements;
     }
 
-    public ArrayList<String> getDaily_activities() {
+    public ArrayList<DailyActivity> getDaily_activities() {
         return daily_activities;
     }
 
-    public void setDaily_activities(ArrayList<String> daily_activities) {
+    public void setDaily_activities(ArrayList<DailyActivity> daily_activities) {
         this.daily_activities = daily_activities;
     }
 
