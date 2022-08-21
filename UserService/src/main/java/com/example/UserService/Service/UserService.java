@@ -1,7 +1,9 @@
 package com.example.UserService.Service;
 
 import com.example.UserService.Helper.EmailValidator;
+import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
+import com.example.UserService.Repository.NotificationRepository;
 import com.example.UserService.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     private EmailValidator emailValidator = new EmailValidator();
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
 
     public User create(User user) {
@@ -223,6 +228,16 @@ public class UserService {
         if(user.getFollowing().contains(followedUserId))
             return true;
         return false;
+    }
+
+    public User saveNotification(String userId,Notification notification)
+    {
+        User user = userRepository.findById(userId);
+        ArrayList<Notification> notifications = user.getNotifications();
+        notifications.add(notification);
+        user.setNotifications(notifications);
+   //     this.notificationRepository.save(notification);
+        return userRepository.save(user);
     }
 
     public String generateAPIToken(String userId) {

@@ -36,6 +36,18 @@ public class User {
     private ArrayList<String> followRequests;
     private ArrayList<String> blocked;
 
+    private ArrayList<Notification> notifications;
+
+    public ArrayList<Notification> getNotifications() {
+        if(notifications==null)
+            notifications = new ArrayList<Notification>();
+        return notifications;
+    }
+
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
     public String getApiToken() {
         return apiToken;
     }

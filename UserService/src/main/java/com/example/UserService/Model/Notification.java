@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Document(collection = "notification")
 public class Notification {
 
     @Id
@@ -17,7 +19,23 @@ public class Notification {
 
     private String text;
 
-    private LocalDate creationTime;
+    private LocalDateTime creationTime;
+
+    private Boolean read;
+
+    public Notification()
+    {
+        this.creationTime =  LocalDateTime.now();
+        this.read = false;
+    }
+
+    public Boolean getRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
 
     public String getId() {
         return id;
@@ -35,11 +53,12 @@ public class Notification {
         this.text = text;
     }
 
-    public LocalDate getCreationTime() {
+    public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(LocalDate creationTime) {
-        this.creationTime = creationTime;
+    public void setCreationTime() {
+        this.creationTime =  LocalDateTime.now();
+
     }
 }

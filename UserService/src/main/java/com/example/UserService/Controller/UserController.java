@@ -2,6 +2,7 @@ package com.example.UserService.Controller;
 
 
 import com.example.UserService.Dto.LoginDto;
+import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
 import com.example.UserService.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -199,6 +196,32 @@ public class UserController {
             return new ResponseEntity<String>(userService.generateAPIToken(userId),HttpStatus.OK);
         } catch(IllegalStateException e){
             return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+    //create user notification, za sad ostavljeno da vraca notifikaciju kao odgovor
+    @PostMapping(path = "/{userId}/saveNotification",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> putPost(@PathVariable String userId, @RequestBody Notification notification){
+        try{
+            userService.saveNotification(userId,notification);
+            return new ResponseEntity<Notification>(notification ,HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
+        }
+    }
+    //get all notifications of user
+    //get user by username
+    @GetMapping(
+            value = "/notificationsByUser",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllNotificationsOfUser(@RequestParam(value="userId") String userId){
+        try{
+            User user = userService.findById(userId);
+            return new ResponseEntity<ArrayList<Notification>>(user.getNotifications(), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 }
