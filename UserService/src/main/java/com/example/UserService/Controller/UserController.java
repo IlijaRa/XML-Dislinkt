@@ -4,6 +4,7 @@ package com.example.UserService.Controller;
 import com.example.UserService.Dto.LoginDto;
 import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
+import com.example.UserService.Service.NotificationService;
 import com.example.UserService.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping("/")
     public String helloWorld(){
@@ -222,6 +226,31 @@ public class UserController {
             return new ResponseEntity<ArrayList<Notification>>(user.getNotifications(), HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+//unread notifications by user
+    @GetMapping(
+            value = "/unreadNotificationsByUser",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllUnreadNotificationsOfUser(@RequestParam(value="userId") String userId){
+        try{
+            User user = userService.findById(userId);
+            return new ResponseEntity<ArrayList<Notification>>(userService.getAllUnreadNotificationsOfUser(userId), HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+    @PutMapping(path = "/markAsRead",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> markNotificationAsRead(@RequestBody Map<String, String> notificationInfo){
+        try{
+            Notification notification = notificationService.findById(notificationInfo.get("notificationId"));
+            notificationService.markAsRead(notificationInfo.get("userId"), notificationInfo.get("notificationId"));
+            return new ResponseEntity<Notification>(notification ,HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
 }

@@ -7,6 +7,7 @@ import com.example.UserService.Repository.NotificationRepository;
 import com.example.UserService.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,9 @@ public class UserService {
 
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
 
     public User create(User user) {
@@ -156,6 +160,10 @@ public class UserService {
         }
         if(toFollowUser.isPrivate()){
             toFollowUser.getFollowRequests().add(followerUsername);
+            Notification notification = new Notification();
+            notification.setText("Imate novi zahtev od"+followerUsername);
+            notificationRepository.save(notification);
+            toFollowUser.getNotifications().add(notification);
             return userRepository.save(toFollowUser);
         }else{
             followerUser.getFollowing().add(toFollowUsername);
@@ -236,8 +244,22 @@ public class UserService {
         ArrayList<Notification> notifications = user.getNotifications();
         notifications.add(notification);
         user.setNotifications(notifications);
-   //     this.notificationRepository.save(notification);
+        this.notificationRepository.save(notification);
         return userRepository.save(user);
+    }
+    public ArrayList<Notification> getAllUnreadNotificationsOfUser(String userId)
+    {
+        User user = userRepository.findById(userId);
+        ArrayList<Notification> allNotifications = user.getNotifications();
+        ArrayList<Notification> unreadNotifications = new ArrayList<Notification>();
+        for (Notification notification:allNotifications
+             ) {
+            if(!notification.getRead())
+            {
+                unreadNotifications.add(notification);
+            }
+        }
+        return unreadNotifications;
     }
 
     public String generateAPIToken(String userId) {
