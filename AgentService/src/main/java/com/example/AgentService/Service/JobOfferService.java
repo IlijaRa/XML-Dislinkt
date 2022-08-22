@@ -38,6 +38,10 @@ public class JobOfferService {
     //get all job offers of specific company
     public ArrayList<JobOffer> getOffersByCompanyId(String companyId) {
         ArrayList<JobOffer> job_offers = jobOfferRepository.findByCompanyId(companyId);
+        for (JobOffer o:
+             job_offers) {
+            System.out.println(o);
+        }
         if(job_offers == null)
         {
             throw new IllegalStateException("Kompaniaj nema oglasa za posao");
