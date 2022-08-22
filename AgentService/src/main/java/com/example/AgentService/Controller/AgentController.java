@@ -43,7 +43,7 @@ public class AgentController {
 
     //create agent
     @PostMapping(
-            value = "/create",
+            value = "/createAgent",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Agent newAgent){

@@ -13,9 +13,6 @@ public interface CompanyRepository extends MongoRepository<Company, Long> {
     ArrayList<Company> findAll();
     ArrayList<Company> findByOwnerId(String ownerId);
     ArrayList<Company> findByApproved(Boolean approved);
-
     Company findById(String companyId);
-
-
 
 }
