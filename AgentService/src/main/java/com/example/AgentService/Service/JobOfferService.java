@@ -51,6 +51,8 @@ public class JobOfferService {
 
     //create job offer
     public JobOffer createOffer(JobOffer jobOffer) {
+        System.out.println(jobOffer.getCompanyId());
+
         Agent agent = agentRepository.findById(companyRepository.findById(jobOffer.getCompanyId()).getOwnerId());
         if(!agent.getRole().equals("Owner")){
             throw new IllegalStateException("Agent koji nije vlasnik ne sme da kreira ponude za posao");
