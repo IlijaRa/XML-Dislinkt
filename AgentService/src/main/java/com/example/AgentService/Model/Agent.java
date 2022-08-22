@@ -23,7 +23,6 @@ public class Agent {
         private String phone;
 
         private String apiToken;
-
         private String role;
 
 
@@ -83,9 +82,13 @@ public class Agent {
                 this.phone = phone;
         }
 
+        public String getRole() {
+                return role;
+        }
 
-
-
+        public void setRole(String role) {
+                this.role = role;
+        }
 }
 
 

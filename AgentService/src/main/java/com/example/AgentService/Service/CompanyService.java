@@ -87,9 +87,18 @@ public class CompanyService {
         System.out.println("Doslo je do greske, registracija firme nije odobrena odobrena");
         return false;
     }
-    public Company updateCompany(String companyId,Company company) {
-
+    public Company updateCompany(String companyId, Company company) {
         Company c = companyRepository.findById(companyId);
+
+        Agent agent = agentRepository.findById(c.getOwnerId());
+        if(agent == null)
+        {
+            throw new IllegalStateException("Agent ne postoji");
+        }
+        if (agent.getRole() != "Owner"){
+            throw new IllegalStateException("Agent koji nije vlasnik ne sme da menja sadrzaj kompanije");
+        }
+
         c.setEmail(company.getEmail());
         c.setDescription(company.getDescription());
         if(!companyNameExists(company.getName()))

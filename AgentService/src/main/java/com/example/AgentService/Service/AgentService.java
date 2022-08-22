@@ -4,6 +4,7 @@ package com.example.AgentService.Service;
 
 import com.example.AgentService.Helper.EmailValidator;
 import com.example.AgentService.Model.Agent;
+import com.example.AgentService.Model.Company;
 import com.example.AgentService.Repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,10 +72,27 @@ public class AgentService {
         return agent;
     }
 
-
-
     public ArrayList<Agent> findByUsernameContaining(String usernamePart) {
         return agentRepository.findByUsernameContaining(usernamePart);
+    }
+
+    //update agent role
+    public Agent updateAgentRole(String agentId, String role) {
+
+        Agent agent = agentRepository.findById(agentId);
+        if(agent == null)
+        {
+            throw new IllegalStateException("Agent ne postoji");
+        }
+        agent.setRole(role);
+        if (agentRepository.save(agent) != null) {
+            System.out.println("Uspesno izmenjene informacije o ulozi agenta");
+            return agent;
+        }
+        else
+            System.out.println("Doslo je do greske, informacije o ulozi agenta nisu uspesno izmenjene!");
+
+        return null;
     }
 
     public void deleteAllAgents() {
@@ -93,7 +111,4 @@ public class AgentService {
     public void save(Agent agent) {
         agentRepository.save(agent);
     }
-
-
-
 }
