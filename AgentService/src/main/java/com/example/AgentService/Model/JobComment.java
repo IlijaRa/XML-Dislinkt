@@ -18,7 +18,7 @@ public class JobComment {
     private String cons;
     private double rating;
     private double salary;
-    private String interviewId;
+    private Interview interview;
     private String JobOfferId;
 
     public String getId() {
@@ -61,12 +61,12 @@ public class JobComment {
         this.salary = salary;
     }
 
-    public String getInterviewId() {
-        return interviewId;
+    public Interview getInterview() {
+        return interview;
     }
 
-    public void setInterviewId(String interviewId) {
-        this.interviewId = interviewId;
+    public void setInterview(Interview interview) {
+        this.interview = interview;
     }
 
     public String getJobOfferId() {
