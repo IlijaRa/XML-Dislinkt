@@ -41,4 +41,6 @@ public class JobOfferService {
         return jobOffers;
     }
 
+
+
 }
