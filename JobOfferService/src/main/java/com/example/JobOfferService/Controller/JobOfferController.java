@@ -74,4 +74,7 @@ public class JobOfferController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+
 }
