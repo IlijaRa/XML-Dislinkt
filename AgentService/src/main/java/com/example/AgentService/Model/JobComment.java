@@ -19,7 +19,7 @@ public class JobComment {
     private double rating;
     private double salary;
     private Interview interview;
-    private String JobOfferId;
+    private String jobOfferId;
 
     public String getId() {
         return id;
@@ -70,11 +70,11 @@ public class JobComment {
     }
 
     public String getJobOfferId() {
-        return JobOfferId;
+        return jobOfferId;
     }
 
     public void setJobOfferId(String jobOfferId) {
-        JobOfferId = jobOfferId;
+        jobOfferId = jobOfferId;
     }
 
 }
