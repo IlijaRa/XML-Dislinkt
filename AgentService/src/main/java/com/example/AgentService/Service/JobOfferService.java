@@ -38,12 +38,11 @@ public class JobOfferService {
     //get all job offers of specific company
     public ArrayList<JobOffer> getOffersByCompanyId(String companyId) {
         ArrayList<JobOffer> job_offers = jobOfferRepository.findByCompanyId(companyId);
-        for (JobOffer o:
-             job_offers) {
+        for (JobOffer o :
+                job_offers) {
             System.out.println(o);
         }
-        if(job_offers == null)
-        {
+        if (job_offers == null) {
             throw new IllegalStateException("Kompaniaj nema oglasa za posao");
         }
         return job_offers;
@@ -52,7 +51,7 @@ public class JobOfferService {
     //create job offer
     public JobOffer createOffer(JobOffer jobOffer) {
         Agent agent = agentRepository.findById(companyRepository.findById(jobOffer.getCompanyId()).getOwnerId());
-        if(!agent.getRole().equals("Owner")){
+        if (!agent.getRole().equals("Owner")) {
             throw new IllegalStateException("Agent koji nije vlasnik ne sme da kreira ponude za posao");
         }
         return jobOfferRepository.save(jobOffer);
@@ -63,10 +62,10 @@ public class JobOfferService {
         JobOffer offer = jobOfferRepository.findById(offerId);
         Agent agent = agentRepository.findById(companyRepository.findById(offer.getCompanyId()).getOwnerId());
 
-        if(offer == null) {
+        if (offer == null) {
             throw new IllegalStateException("Ponuda za posao ne postoji");
         }
-        if(!agent.getRole().equals("Owner")){
+        if (!agent.getRole().equals("Owner")) {
             throw new IllegalStateException("Agent koji nije vlasnik ne sme da menja sadrzaj ponude za posao");
         }
 
@@ -89,5 +88,24 @@ public class JobOfferService {
         JobOffer jobOffer = jobOfferRepository.findById(offerId);
         jobOfferRepository.delete(jobOffer);
         return true;
+    }
+
+    public JobOffer createOffer(JobOffer offer, Company company) {
+
+        if (jobOfferRepository.save(offer) != null) {
+            System.out.println("Offer created");
+            return offer;
+
+        }
+        else if (company.getApiToken() != null) {
+            if (jobOfferRepository.save(offer) != null) {
+                System.out.println("Offer created");
+                return offer;
+            }
+            System.out.println("Offer not created");
+            return null;
+        }
+        System.out.println("Offer not created");
+        return null;
     }
 }
