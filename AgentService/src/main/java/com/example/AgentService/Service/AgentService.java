@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
@@ -115,6 +116,9 @@ public class AgentService {
 
     public Agent setApiToken(String agentId, String apiToken) {
         Agent agent = agentRepository.findById(agentId);
+        System.out.println(apiToken);
+        System.out.println(agent.getUsername());
+
         agent.setApiToken(apiToken);
         if (agentRepository.save(agent) != null) {
             System.out.println("Api token set");
@@ -123,5 +127,30 @@ public class AgentService {
         System.out.println("Api token not set");
         return null;
     }
+    public String generateAPIToken(String userId) {
+        Agent agent = agentRepository.findById(userId);
 
+        if (agent == null) {
+            return null;
+        }
+        String upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String alphaNumeric = upperAlphabet + lowerAlphabet + numbers;
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int length = 48;
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(alphaNumeric.length());
+            sb.append(alphaNumeric.charAt(index));
+        }
+        String token = sb.toString();
+        agent.setApiToken(token);
+        if (agentRepository.save(agent) != null) {
+            return token;
+        } else {
+            return null;
+        }
+    }
 }

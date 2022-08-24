@@ -36,7 +36,7 @@ public class JobCommentController {
         return new ResponseEntity<ArrayList<JobComment>>(job_comments, HttpStatus.OK);
     }
 
-    //get job comments by JobOfferId - does not work
+    //get job comments by JobOfferId
     @GetMapping(path="/{JobOfferId}/jobComments")
     public ResponseEntity<ArrayList<JobComment>> getJobCommentsFromOffer(@PathVariable String JobOfferId){
         ArrayList<JobComment> job_offers = jobCommentService.getCommentsFromOffer(JobOfferId);

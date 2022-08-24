@@ -92,6 +92,7 @@ public class JobOfferService {
 
     public JobOffer createOffer(JobOffer offer, Company company) {
 
+
         if (jobOfferRepository.save(offer) != null) {
             System.out.println("Offer created");
             return offer;

@@ -104,10 +104,10 @@ public class AgentController {
     }
 
 
-    @PutMapping(path = "/setToken",
+    @PutMapping(value = "/setToken",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Agent> setApiToken(Map<String, String> json) {
+    public ResponseEntity<Agent> setApiToken(@RequestBody Map<String, String> json) {
         String agentId = json.get("agentId");
         String apiToken = json.get("apiToken");
 
@@ -121,10 +121,10 @@ public class AgentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(path = "/setFirmToken",
+    @PutMapping(value = "/setFirmToken",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Company> setFirmApiToken(Map<String, String> json) {
+    public ResponseEntity<Company> setFirmApiToken(@RequestBody Map<String, String> json) {
         String companyId = json.get("companyId");
         String apiToken = json.get("apiToken");
 
