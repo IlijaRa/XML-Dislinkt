@@ -60,6 +60,8 @@ function addComment(comment,postId) {
     .createComment(comment,postId)
     .then((data) => {
       console.log("sucessfuly updated post");
+      window.location.reload();
+
     })
     .catch((error) => {
       console.log("Something wen't wrong try again");
