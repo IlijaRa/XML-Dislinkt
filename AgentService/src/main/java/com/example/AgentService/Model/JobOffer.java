@@ -22,7 +22,7 @@ public class JobOffer {
     private String location;
     private ArrayList<Requirement> requirements = new ArrayList<>();
     private ArrayList<DailyActivity> daily_activities = new ArrayList<>();
-    private String companyId; //kada se kreira u postmanu radi provere pise se companyId
+    private String CompanyId; //kada se kreira u postmanu radi provere pise se companyId
 
     public String getId() {
         return id;
@@ -73,10 +73,10 @@ public class JobOffer {
     }
 
     public String getCompanyId() {
-        return companyId;
+        return CompanyId;
     }
 
     public void setCompanyId(String companyId) {
-        this.companyId = companyId;
+        this.CompanyId = companyId;
     }
 }

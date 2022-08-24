@@ -36,15 +36,15 @@ public class JobCommentController {
         return new ResponseEntity<ArrayList<JobComment>>(job_comments, HttpStatus.OK);
     }
 
-    //get job comments by JobOfferId - does not work
-    @GetMapping(path="/{jobOfferId}/jobComments")
-    public ResponseEntity<ArrayList<JobComment>> getJobCommentsFromOffer(@PathVariable String jobOfferId){
-        ArrayList<JobComment> job_offers = jobCommentService.getCommentsFromOffer(jobOfferId);
-        if (job_offers.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(job_offers,HttpStatus.OK);
-    }
+//    //get job comments by JobOfferId - does not work
+//    @GetMapping(path="/{JobOfferId}/job_comments")
+//    public ResponseEntity<ArrayList<JobComment>> getJobCommentsFromOffer(@PathVariable String JobOfferId){
+//        ArrayList<JobComment> job_offers = jobCommentService.getCommentsFromOffer(JobOfferId);
+//        if (job_offers.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(job_offers,HttpStatus.OK);
+//    }
 
     //create job comment
     @PostMapping(value = "/createJobComment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
