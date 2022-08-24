@@ -28,8 +28,8 @@ public class JobOfferController {
         return new ResponseEntity<ArrayList<JobOffer>>(job_offers, HttpStatus.OK);
     }
 
-//    //get all job offers of specific company - does not work
-    @GetMapping(path = "/{companyId}/jobOffers", produces = MediaType.APPLICATION_JSON_VALUE)
+    //get all job offers of specific company - does not work
+    @GetMapping(path = "/jobOffers/{companyId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<JobOffer>> getJobOffersByCompanyId(@PathVariable String companyId){
         ArrayList<JobOffer> job_offers = jobOfferService.getOffersByCompanyId(companyId);
         if (job_offers.isEmpty()) {

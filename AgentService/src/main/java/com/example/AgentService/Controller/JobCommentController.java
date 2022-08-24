@@ -37,9 +37,9 @@ public class JobCommentController {
     }
 
     //get job comments by JobOfferId - does not work
-    @GetMapping(path="/{jobOfferId}/jobComments")
-    public ResponseEntity<ArrayList<JobComment>> getJobCommentsFromOffer(@PathVariable String jobOfferId){
-        ArrayList<JobComment> job_offers = jobCommentService.getCommentsFromOffer(jobOfferId);
+    @GetMapping(path="/{JobOfferId}/jobComments")
+    public ResponseEntity<ArrayList<JobComment>> getJobCommentsFromOffer(@PathVariable String JobOfferId){
+        ArrayList<JobComment> job_offers = jobCommentService.getCommentsFromOffer(JobOfferId);
         if (job_offers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
