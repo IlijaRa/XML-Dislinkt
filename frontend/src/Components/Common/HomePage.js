@@ -120,7 +120,7 @@ function saveHandler(e) {
         className="user-img rounded-circle mr-2"
       />
       <span>
-        <small className="font-weight-bold text-primary">olan_sams</small>{" "}
+        <small className="font-weight-bold text-primary">{user.username}</small>{" "}
         <small className="font-weight-bold">
           {" "} {comment.content} 
         </small>
@@ -161,7 +161,6 @@ function saveHandler(e) {
                             content: content.current.value,
                             userId: user.id,
                           },post.id);
-                          window.location.reload();
                  
                     }}
                       >
