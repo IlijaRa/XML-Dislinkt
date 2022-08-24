@@ -61,15 +61,5 @@ public class ChatController {
         }
     }
 
-//    @DeleteMapping( path = "/delete/{id}")
-//    public ResponseEntity<?> deleteMessage(@PathVariable String messageId){
-//        try{
-//            chatService.deleteSingleMessage(messageId);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//        catch(Exception e){
-//            return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
-//        }
-//    }
 }
 

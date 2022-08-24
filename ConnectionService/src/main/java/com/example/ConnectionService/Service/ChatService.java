@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.yaml.snakeyaml.events.Event;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.List;
 
@@ -22,14 +23,18 @@ public class ChatService {
     @Autowired
     private ChatRepository chatRepository;
 
-    //get all messages
+    //get all messages - sorted by newest
     public ArrayList<Message> getAllMessages(){
-        return chatRepository.findAll();
+        ArrayList<Message> messages = chatRepository.findAll();
+        messages.sort(Comparator.comparing(Message::getSentDate));
+        return messages;
     }
 
-    //get all messages by receiverId
+    //get all messages by receiverId - sorted by newest
     public ArrayList<Message> getAllMessagesByReceiver(String userId) {
-        return chatRepository.findAllByReceiverId(userId);
+        ArrayList<Message> messages = chatRepository.findAllByReceiverId(userId);
+        messages.sort(Comparator.comparing(Message::getSentDate));
+        return messages;
     }
 
     //create new message
@@ -37,10 +42,10 @@ public class ChatService {
         return chatRepository.save(newMessage);
     }
 
+    //delete message by id
     public Boolean deleteSingleMessage(String messageId) {
         Message message = chatRepository.findById(messageId);
         chatRepository.delete(message);
         return true;
     }
-
 }
