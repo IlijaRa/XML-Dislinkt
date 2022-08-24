@@ -28,15 +28,15 @@ public class JobOfferController {
         return new ResponseEntity<ArrayList<JobOffer>>(job_offers, HttpStatus.OK);
     }
 
-//    //get all job offers of specific company - does not work
-//    @GetMapping(path = "/job_offers/{companyId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<ArrayList<JobOffer>> getJobOffersByCompanyId(@PathVariable String companyId){
-//        ArrayList<JobOffer> job_offers = jobOfferService.getOffersByCompanyId(companyId);
-//        if (job_offers.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(job_offers,HttpStatus.OK);
-//    }
+    //get all job offers of specific company - does not work
+    @GetMapping(path = "/jobOffers/{companyId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArrayList<JobOffer>> getJobOffersByCompanyId(@PathVariable String companyId){
+        ArrayList<JobOffer> job_offers = jobOfferService.getOffersByCompanyId(companyId);
+        if (job_offers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(job_offers,HttpStatus.OK);
+    }
 
     //create job offer
     @PostMapping(value = "/createOffer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
