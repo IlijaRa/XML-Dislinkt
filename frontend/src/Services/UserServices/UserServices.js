@@ -61,6 +61,15 @@ const userServices = {
 
 
 
+  approveRequest: (userId,followerId) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}approve`,
+    {
+      userId: userId,
+      followerUserId: followerId,
+    });
+  },
+
+
 };
 
 export default userServices;

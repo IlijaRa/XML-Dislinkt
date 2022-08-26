@@ -9,7 +9,8 @@ export default function NewFeedContainer() {
 
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
-    
+    const [post,setPost] = useState({});
+
     var logedUser = JSON.parse(localStorage.getItem("User"));
    
 
@@ -75,14 +76,35 @@ function likePost(userId,postId) {
         console.log("Something wen't wrong try again");
       });
   }
+
+
+  function createPost(post) {
+    postService.cratePost(post)
+      .then((data) => {
+        if (data.status === 204) setUser({});
+        else {
+          setPost(data.data.content);
+          console.log("sucessfuly added a post");
+       
+        }
+      })
+      .catch((error) => {
+        console.log("Something wen't wrong try again", error);
+      });
+  }
+
   
 
   return (
     <div> 
     <Navbar></Navbar>
-    <NewFeeds user={user} posts={posts}   likePostHandler = {likePost}
+    <NewFeeds 
+      user={user} posts={posts}  
+      likePostHandler = {likePost}
       unlikePostHandler = {unlikePost}
-      addCommentHandler = {addComment} ></NewFeeds>
+      addCommentHandler = {addComment} 
+      createPostHandler = {createPost}>
+      </NewFeeds>
     <Footer></Footer>
   </div>
   )
