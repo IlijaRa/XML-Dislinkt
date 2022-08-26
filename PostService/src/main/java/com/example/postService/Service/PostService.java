@@ -48,6 +48,11 @@ public class PostService {
         System.out.println("Deleting all posts...");
     }
 
+    public void deleteUserPosts(String userId){
+        ArrayList<Post> toDeletePosts = postRepository.findAllByUserId(userId);
+        postRepository.deleteAll(toDeletePosts);
+    }
+
     public ArrayList<Post> getAllPostsByUserId(String userId) {
         return postRepository.findAllByUserId(userId);
     }
