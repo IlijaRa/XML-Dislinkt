@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Map;
-
+import org.springframework.kafka.core.KafkaTemplate;
+//import com.example.CommunicationService.Event.UserDeleteEvent;
 @RestController
 //@RequestMapping(path = "/users")
 @CrossOrigin(origins = "*")
