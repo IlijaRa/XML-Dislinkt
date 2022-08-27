@@ -5,11 +5,6 @@ const userServices = {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}user?username=${username}`);
   },
 
-
-  getUserById: (id) => {
-    return axios.get(`${process.env.REACT_APP_API_URL_USER}userById?userId=${id}`);
-  },
-
   getUserByEmail: (email) => {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}userByEmail?email=${email}`);
   },
