@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Map;
-
+import org.springframework.kafka.core.KafkaTemplate;
+//import com.example.CommunicationService.Event.UserDeleteEvent;
 @RestController
 //@RequestMapping(path = "/users")
 @CrossOrigin(origins = "*")
@@ -108,17 +109,39 @@ public class UserController {
         }
     }
 
-    //delete user by username
-    @DeleteMapping(value = "/user",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteUserByUsername(@RequestParam(value="username") String username){
-        try{
-            userService.deleteUserByUsername(username);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<String>("User deleted by username", HttpStatus.OK);
-    }
+//    //delete user by username
+//    @DeleteMapping(value = "/user",
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> deleteUserByUsername(@RequestParam(value="username") String username){
+//        try{
+//            userService.deleteUserByUsername(username);
+//        } catch (IllegalStateException e) {
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<String>("User deleted by username", HttpStatus.OK);
+//    }
+
+//    //delete user by username
+//    //TODO: SAGA
+//    @DeleteMapping(path = "/{username}",
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> deleteUser(@PathVariable("username") String username){
+//        try{
+//
+//            User user = userService.findByUsername(username);
+//
+//            //Saga start
+//            userService.deleteUserByUsername(username);
+//            UserDeleteEvent userDeleteEvent = new UserDeleteEvent();
+//            userDeleteEvent.setUserId(user.getId());
+//            kafkaTemplate.send("user_delete", userDeleteEvent.getUserId());
+//
+//        } catch (IllegalStateException e) {
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<String>("User deleted", HttpStatus.OK);
+//    }
+
     //delete user by email
     @DeleteMapping(value = "/userByEmail",
             produces = MediaType.APPLICATION_JSON_VALUE)
