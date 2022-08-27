@@ -7,9 +7,7 @@ import java.util.Map;
 import com.example.AgentService.AgentServiceApplication;
 import com.example.AgentService.Dto.LoginDto;
 import com.example.AgentService.Model.Agent;
-import com.example.AgentService.Model.Company;
 import com.example.AgentService.Service.AgentService;
-import com.example.AgentService.Service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,9 +23,6 @@ public class AgentController {
 
     @Autowired
     private AgentService agentService;
-
-    @Autowired
-    private CompanyService companyService;
 
     @RequestMapping("/")
     public String helloWorld(){
@@ -102,43 +97,5 @@ public class AgentController {
     public void deleteAgent(@PathVariable String agentId) {
         agentService.deleteAgentById(agentId);
     }
-
-
-    @PutMapping(path = "/setToken",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Agent> setApiToken(Map<String, String> json) {
-        String agentId = json.get("agentId");
-        String apiToken = json.get("apiToken");
-
-        if (agentId == null || apiToken == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        Agent agent = agentService.setApiToken(agentId, apiToken);
-        if (agent != null) {
-            return new ResponseEntity<>(agent, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @PutMapping(path = "/setFirmToken",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Company> setFirmApiToken(Map<String, String> json) {
-        String companyId = json.get("companyId");
-        String apiToken = json.get("apiToken");
-
-        if (companyId == null || apiToken == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        Company company = companyService.setApiToken(companyId, apiToken);
-        if (company != null) {
-            return new ResponseEntity<>(company, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-
-
 
 }
