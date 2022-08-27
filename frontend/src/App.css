@@ -344,9 +344,7 @@ a{color:inherit;text-decoration:none}
   background-color: #c9cfd4;
 }
 
-body {
-    background-color: #f7f6f6
-}
+
 
 .card {
     
@@ -435,7 +433,7 @@ body {
   color: #fff;
   background: #4267B2;
 }
-.container{
+.containerNewPost{
  
   overflow: hidden;
   background: #fff;
@@ -682,3 +680,4 @@ form textarea:valid ~ button:hover{
 .list li.active .radio::before{
   background: #4267B2;
 }
+

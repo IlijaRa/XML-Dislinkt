@@ -29,7 +29,7 @@ const link = useRef();
     {" "}
     <h1 style={{ textAlign: "center" }}> New feeds </h1>
   </div>
-  <div className="container">
+  <div className="containerNewPost">
   <div className="wrapper">
     <section className="post">
       <header>Posts</header>

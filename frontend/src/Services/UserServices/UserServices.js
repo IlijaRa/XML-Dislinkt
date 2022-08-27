@@ -70,6 +70,15 @@ const userServices = {
   },
 
 
+  rejectRequest: (userId,followerId) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}reject`,
+    {
+      userId: userId,
+      followerUserId: followerId,
+    });
+  },
+
+
 };
 
 export default userServices;

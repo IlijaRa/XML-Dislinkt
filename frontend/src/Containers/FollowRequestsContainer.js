@@ -28,6 +28,7 @@ export default function FollowRequestsContainer() {
                data.data
               ]);
 
+          
         })
          .catch((error) => console.log(`error`, error));
 
@@ -41,7 +42,32 @@ export default function FollowRequestsContainer() {
         .approveRequest(userId,followerId)
         .then((data) => {
           console.log("sucessfuly accepted request");
-          window.location.reload();
+          
+          userServices.getUserById(user.id).then((data) => {
+          
+            localStorage.setItem("User", JSON.stringify(data.data));
+            window.location.reload();
+          })
+         
+        })
+        .catch((error) => {
+          console.log("Something wen't wrong try again");
+        });
+    }
+
+
+    function reject(userId,followerId) {
+      userServices
+        .rejectRequest(userId,followerId)
+        .then((data) => {
+          console.log("sucessfuly rejected request");
+          
+          userServices.getUserById(user.id).then((data) => {
+          
+            localStorage.setItem("User", JSON.stringify(data.data));
+            window.location.reload();
+          })
+         
         })
         .catch((error) => {
           console.log("Something wen't wrong try again");
@@ -52,7 +78,7 @@ export default function FollowRequestsContainer() {
   return (
     <div>   
     <Navbar></Navbar>
-   <FriendRequests logedUser={logedUser} friendRequests={friendRequests} approveHandler={approve}></FriendRequests>
+   <FriendRequests logedUser={logedUser} friendRequests={friendRequests} approveHandler={approve} rejectHandler={reject}></FriendRequests>
     <Footer></Footer></div>
   )
 }

@@ -8,7 +8,7 @@ import {
   } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function FriendRequests({friendRequests,approveHandler,logedUser}) {
+export default function FriendRequests({friendRequests,approveHandler,logedUser,rejectHandler}) {
     const key = 'id';
 
     const arrayUniqueByKey = [...new Map(friendRequests.map(item =>
@@ -70,7 +70,11 @@ export default function FriendRequests({friendRequests,approveHandler,logedUser}
                   </Button>
 
                   <Button
-                  
+                  onClick={() => {
+                    rejectHandler(logedUser.id, user.id
+                    )
+      
+                  }}
                   style={{ width: "8rem" }}
                   variant="outline-danger"
                 >
