@@ -8,30 +8,15 @@ import { Link } from 'react-router-dom'
 
 export default function NewFeeds({user,posts,likePostHandler,unlikePostHandler,addCommentHandler}) {
   
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
-  var unique = posts.filter(onlyUnique);
 
 const content = useRef();
-
-    console.log('posts', unique)
-
-
+    
+ console.log('posts', posts)
+//console.log('userasd', user.following[0])
   return (
     <div> <div>
-       <div className="header">
-    {" "}
-    <h1 style={{ textAlign: "center" }}> New feeds </h1>
-  </div>
-    {posts?.map((postss) => (
-
-
+    {posts?.map((post) => (
       <div className="container">
-
-{postss?.map((post) => (
-
         <div className="row gutters">
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="card h-100">
@@ -40,16 +25,16 @@ const content = useRef();
                 
                   <Card.Body>
                     <Card.Title className="cardTitle">
-                   {post?.title}
+                   {post.title}
                     </Card.Title>
                     <Card.Text></Card.Text>
                   </Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
-                      {post?.description} 
+                      {post.description} 
                     </ListGroupItem>
                     <ListGroupItem>
-                     Likes: {post?.likes} {" "} Dislikes: {post?.dislikes} 
+                     Likes: {post.likes} {" "} Dislikes: {post.dislikes} 
                     </ListGroupItem>
                    
                   </ListGroup>
@@ -61,7 +46,7 @@ const content = useRef();
                       variant="outline-success"
                       class="btn btn-primary"
                       onClick={() => 
-                        {likePostHandler(user.id,post?.id
+                        {likePostHandler(user.id,post.id
                     )
                window.location.reload();
                   }}
@@ -72,7 +57,7 @@ const content = useRef();
                       style={{ width: "8rem" }}
                       variant="outline-success"
                       class="btn btn-danger"
-                      onClick={() =>{ unlikePostHandler(user.id,post?.id
+                      onClick={() =>{ unlikePostHandler(user.id,post.id
                         );
                window.location.reload();
                   }}
@@ -94,7 +79,7 @@ const content = useRef();
     <span>
       <small className="font-weight-bold text-primary">{user.username}</small>{" "}
       <small className="font-weight-bold">
-        {" "} {comment?.content} 
+        {" "} {comment.content} 
       </small>
     </span>
   </div>
@@ -118,7 +103,7 @@ const content = useRef();
 
 
 
-))} 
+))}
 <br></br>
                    <div className="mb-3">
     <label>Add a comment</label>
@@ -147,11 +132,10 @@ const content = useRef();
             </div>
           </div>
         </div>
-        ))} 
+        
       </div>
 
-))} 
-
+))}
   </div></div>
   )
 }

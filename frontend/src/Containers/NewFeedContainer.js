@@ -20,6 +20,9 @@ export default function NewFeedContainer() {
    
     for (var i = 0; i < logedUser.following.length; i++) {
 
+    
+
+
          userServices.getPostsByUserId(logedUser.following[i])
          .then((data) => {
            
@@ -31,8 +34,11 @@ export default function NewFeedContainer() {
         })
          .catch((error) => console.log(`error`, error));
 
+
       }
        
+      
+    
     }, [])
     
 

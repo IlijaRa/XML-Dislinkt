@@ -11,7 +11,6 @@ import HomePageContainer from './Containers/HomePageContainer';
 import LoginContainer from './Containers/LoginContainer';
 import PublicProfilesContainer from './Containers/PublicProfilesContainer';
 import NewFeedContainer from './Containers/NewFeedContainer';
-import FollowRequestsContainer from './Containers/FollowRequestsContainer';
 
 function App() {
   return (
@@ -32,9 +31,6 @@ function App() {
           </Route>
           <Route path="/newFeed">
             <NewFeedContainer></NewFeedContainer>
-          </Route>
-          <Route path="/followRequests">
-            <FollowRequestsContainer></FollowRequestsContainer>
           </Route>
         </Switch>
       </Router>
