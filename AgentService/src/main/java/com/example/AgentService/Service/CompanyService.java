@@ -127,4 +127,14 @@ public class CompanyService {
         }
         return false;
     }
+
+    public Company setApiToken(String companyId, String apiToken) {
+        Company company = companyRepository.findById(companyId);
+        if (company != null) {
+            company.setApiToken(apiToken);
+            companyRepository.save(company);
+            return company;
+        }
+        return null;
+    }
 }

@@ -91,23 +91,5 @@ public class JobOfferService {
         return true;
     }
 
-    public JobOffer createOffer(JobOffer offer, Company company) {
 
-
-        if (jobOfferRepository.save(offer) != null) {
-            System.out.println("Offer created");
-            return offer;
-
-        }
-        else if (company.getApiToken() != null) {
-            if (jobOfferRepository.save(offer) != null) {
-                System.out.println("Offer created");
-                return offer;
-            }
-            System.out.println("Offer not created");
-            return null;
-        }
-        System.out.println("Offer not created");
-        return null;
-    }
 }
