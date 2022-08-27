@@ -36,23 +36,11 @@ export default function FollowRequestsContainer() {
     }, [])
     
 
-    function approve(userId,followerId) {
-      userServices
-        .approveRequest(userId,followerId)
-        .then((data) => {
-          console.log("sucessfuly accepted request");
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log("Something wen't wrong try again");
-        });
-    }
-    
 
   return (
     <div>   
     <Navbar></Navbar>
-   <FriendRequests logedUser={logedUser} friendRequests={friendRequests} approveHandler={approve}></FriendRequests>
+   <FriendRequests friendRequests={friendRequests}></FriendRequests>
     <Footer></Footer></div>
   )
 }

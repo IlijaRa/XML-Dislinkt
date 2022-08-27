@@ -31,14 +31,6 @@ const postService = {
       `${process.env.REACT_APP_API_URL_POST}${postId}/comment`,
      comment
     );
-  },
-
-
-  cratePost: (post) => {
-    return axios.post(
-      `${process.env.REACT_APP_API_URL_POST}create`,
-     post
-    );
   }
 
 };

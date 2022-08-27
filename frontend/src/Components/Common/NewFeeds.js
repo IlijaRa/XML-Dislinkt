@@ -6,7 +6,7 @@ import { Card,ListGroup,ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function NewFeeds({user,posts,likePostHandler,unlikePostHandler,addCommentHandler,createPostHandler}) {
+export default function NewFeeds({user,posts,likePostHandler,unlikePostHandler,addCommentHandler}) {
   
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -15,10 +15,6 @@ export default function NewFeeds({user,posts,likePostHandler,unlikePostHandler,a
   var unique = posts.filter(onlyUnique);
 
 const content = useRef();
-const title = useRef();
-const description = useRef();
-const imageLink = useRef();
-const link = useRef();
 
     console.log('posts', unique)
 
@@ -29,79 +25,6 @@ const link = useRef();
     {" "}
     <h1 style={{ textAlign: "center" }}> New feeds </h1>
   </div>
-  <div className="container">
-  <div className="wrapper">
-    <section className="post">
-      <header>Posts</header>
-      <form action="#">
-        <div className="content">
-          <img src="https://webmuch.com/wp-content/uploads/2013/04/LinkedIn-Logo-022.png" alt="logo" />
-          <div className="details">
-            <p>Add new post</p>
-            <div className="privacy">
-              <i className="fas fa-user-friends" />
-              <span>Friends</span>
-              <i className="fas fa-caret-down" />
-            </div>
-          </div>
-        </div>
-        <textarea
-          placeholder="Title"
-          spellCheck="false"
-          required=""
-          defaultValue={""}
-          ref= {title}
-        />
-          <textarea
-          placeholder="What's on your mind, CodeWithNepal?"
-          spellCheck="false"
-          required=""
-          defaultValue={""}
-          ref= {description}
-
-        />
-           <input
-         className="form-control"
-          placeholder="Image link"
-          spellCheck="false"
-          required=""
-          defaultValue={""}
-          ref= {imageLink}
-        />
-          <input
-         className="form-control"
-          placeholder="Link"
-          spellCheck="false"
-          required=""
-          defaultValue={""}
-          ref= {link}
-        />
-
-        
-       
-      
-        <button
-        onClick={() => {
-          createPostHandler({
-            id: 10,
-            title: title.current.value,
-            description: description.current.value,
-            userId: user.id,
-            imageLink: imageLink.current.value,
-            likes: 0,
-            dislikes: 0
-          }
-          )
-         
-        }}
-        >Post</button>
-      </form>
-    </section>
- 
-  </div>
-</div>
-
-  
     {posts?.map((postss) => (
 
 
