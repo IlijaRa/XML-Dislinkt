@@ -7,9 +7,7 @@ import java.util.Map;
 import com.example.AgentService.AgentServiceApplication;
 import com.example.AgentService.Dto.LoginDto;
 import com.example.AgentService.Model.Agent;
-import com.example.AgentService.Model.Company;
 import com.example.AgentService.Service.AgentService;
-import com.example.AgentService.Service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,9 +23,6 @@ public class AgentController {
 
     @Autowired
     private AgentService agentService;
-
-    @Autowired
-    private CompanyService companyService;
 
     @RequestMapping("/")
     public String helloWorld(){
@@ -137,6 +132,7 @@ public class AgentController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
 
 

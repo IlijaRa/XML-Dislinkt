@@ -5,7 +5,6 @@ package com.example.AgentService.Service;
 import com.example.AgentService.Helper.EmailValidator;
 import com.example.AgentService.Model.Agent;
 import com.example.AgentService.Model.Company;
-import com.example.AgentService.Model.JobOffer;
 import com.example.AgentService.Repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -153,4 +152,5 @@ public class AgentService {
             return null;
         }
     }
+
 }

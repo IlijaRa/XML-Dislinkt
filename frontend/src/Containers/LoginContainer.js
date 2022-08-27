@@ -25,9 +25,9 @@ export default function LoginContainer() {
                 localStorage.getItem("User")
               );
                 if (Object.keys(user).length !== 0) {
-                 history.push("/homePage/nina"); 
+                 history.push("/newFeed"); 
               
-                 alert("sucessfuly logedOn a cottage owner");
+                 alert("sucessfuly loged on");
                  window.location.reload();
                 }
                else if (Object.keys(user).length == 0) {
@@ -37,7 +37,7 @@ export default function LoginContainer() {
         }
       })
       .catch((error) => {
-        console.log("Something wen't wrong try again", error);
+        alert(error);
       });
   }
 
