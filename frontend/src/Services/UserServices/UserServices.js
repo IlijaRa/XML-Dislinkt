@@ -5,6 +5,11 @@ const userServices = {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}user?username=${username}`);
   },
 
+
+  getUserById: (id) => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}userById?userId=${id}`);
+  },
+
   getUserByEmail: (email) => {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}userByEmail?email=${email}`);
   },
@@ -43,8 +48,26 @@ const userServices = {
         postId: postId,
       }
     );
-  }
+  },
 
+
+  getAllUsers: () => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}users`);
+  },
+
+  searchForUsername: (username) => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}search/${username}`);
+  },
+
+
+
+  approveRequest: (userId,followerId) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}approve`,
+    {
+      userId: userId,
+      followerUserId: followerId,
+    });
+  },
 
 
 };
