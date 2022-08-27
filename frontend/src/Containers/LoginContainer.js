@@ -25,9 +25,9 @@ export default function LoginContainer() {
                 localStorage.getItem("User")
               );
                 if (Object.keys(user).length !== 0) {
-                 history.push("/newFeed"); 
+                 history.push("/homePage/nina"); 
               
-                 alert("sucessfuly loged on");
+                 alert("sucessfuly logedOn a cottage owner");
                  window.location.reload();
                 }
                else if (Object.keys(user).length == 0) {
