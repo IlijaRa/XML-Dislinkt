@@ -121,7 +121,6 @@ public class UserService {
             user.setExperience(u.getExperience());
             user.setSkills(u.getSkills());
             user.setIsPrivate(u.getIsPrivate());
-            user.setFollowing(u.getFollowing());
             final User updatedUser = userRepository.save(user);
             return ResponseEntity.ok(updatedUser);
     }

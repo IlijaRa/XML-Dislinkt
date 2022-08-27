@@ -37,7 +37,7 @@ export default function LoginContainer() {
         }
       })
       .catch((error) => {
-        alert(error);
+        console.log("Something wen't wrong try again", error);
       });
   }
 
