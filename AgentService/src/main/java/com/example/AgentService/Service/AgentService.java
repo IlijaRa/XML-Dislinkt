@@ -5,7 +5,6 @@ package com.example.AgentService.Service;
 import com.example.AgentService.Helper.EmailValidator;
 import com.example.AgentService.Model.Agent;
 import com.example.AgentService.Model.Company;
-import com.example.AgentService.Model.JobOffer;
 import com.example.AgentService.Repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,16 +111,4 @@ public class AgentService {
     public void save(Agent agent) {
         agentRepository.save(agent);
     }
-
-    public Agent setApiToken(String agentId, String apiToken) {
-        Agent agent = agentRepository.findById(agentId);
-        agent.setApiToken(apiToken);
-        if (agentRepository.save(agent) != null) {
-            System.out.println("Api token set");
-            return agent;
-        }
-        System.out.println("Api token not set");
-        return null;
-    }
-
 }
