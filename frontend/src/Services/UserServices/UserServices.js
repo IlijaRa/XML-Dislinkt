@@ -43,16 +43,7 @@ const userServices = {
         postId: postId,
       }
     );
-  },
-
-
-  getAllUsers: () => {
-    return axios.get(`${process.env.REACT_APP_API_URL_USER}users`);
-  },
-
-  searchForUsername: (username) => {
-    return axios.get(`${process.env.REACT_APP_API_URL_USER}search/${username}`);
-  },
+  }
 
 
 

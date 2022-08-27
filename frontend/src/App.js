@@ -9,8 +9,6 @@ import {
 import RegistrationFormContainer from './Containers/RegistrationFormContainer';
 import HomePageContainer from './Containers/HomePageContainer';
 import LoginContainer from './Containers/LoginContainer';
-import PublicProfilesContainer from './Containers/PublicProfilesContainer';
-import NewFeedContainer from './Containers/NewFeedContainer';
 
 function App() {
   return (
@@ -25,12 +23,6 @@ function App() {
           </Route>
           <Route path="/login">
             <LoginContainer></LoginContainer>
-          </Route>
-          <Route path="/publicProfiles">
-            <PublicProfilesContainer></PublicProfilesContainer>
-          </Route>
-          <Route path="/newFeed">
-            <NewFeedContainer></NewFeedContainer>
           </Route>
         </Switch>
       </Router>
