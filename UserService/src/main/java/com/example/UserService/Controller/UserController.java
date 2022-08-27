@@ -181,6 +181,17 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
+
+    @PutMapping(path = "/reject",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> rejectFollow(@RequestBody Map<String, String> userIds) {
+        if (userService.rejectFollow(userIds.get("userId"), userIds.get("followerUserId"))) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+    }
+
     //get all users by part of username
     @GetMapping(path = "/search/{username}",
             produces = MediaType.APPLICATION_JSON_VALUE)

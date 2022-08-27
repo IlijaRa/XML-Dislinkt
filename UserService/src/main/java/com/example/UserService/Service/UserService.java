@@ -230,6 +230,23 @@ public class UserService {
         return false;
     }
 
+    public Boolean rejectFollow(String userId, String followerUserId) {
+        User user = userRepository.findById(userId);
+        if (user.getFollowRequests() != null && user.getFollowRequests().contains(followerUserId)) {
+            user.getFollowRequests().remove(followerUserId);
+            if (userRepository.save(user) != null ) {
+                System.out.println("User '" + userId + "' rejected follow request from '" + followerUserId + "'.");
+                return true;
+            }
+            System.out.println("User '" + userId + "' failed to reject follow request from '" + followerUserId + "'.");
+            return false;
+        }
+        System.out.println("No such request exists from '" + followerUserId + "' to '" + userId + "'.");
+        return false;
+    }
+
+
+
     public Boolean isFollowing(String userId, String followedUserId)
     {
         User user = userRepository.findById(userId);
