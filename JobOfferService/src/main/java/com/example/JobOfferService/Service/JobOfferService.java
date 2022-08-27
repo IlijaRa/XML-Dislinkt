@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Comment;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -40,6 +41,7 @@ public class JobOfferService {
 
         return jobOffers;
     }
+
 
 
 
