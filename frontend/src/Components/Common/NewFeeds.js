@@ -53,7 +53,7 @@ const link = useRef();
           ref= {title}
         />
           <textarea
-          placeholder="What's on your mind, CodeWithNepal?"
+          placeholder="What's on your mind?"
           spellCheck="false"
           required=""
           defaultValue={""}
@@ -83,11 +83,11 @@ const link = useRef();
         <button
         onClick={() => {
           createPostHandler({
-            id: 10,
             title: title.current.value,
             description: description.current.value,
             userId: user.id,
             imageLink: imageLink.current.value,
+            links: [link.current.value],
             likes: 0,
             dislikes: 0
           }
@@ -128,7 +128,18 @@ const link = useRef();
                     <ListGroupItem>
                      Likes: {post?.likes} {" "} Dislikes: {post?.dislikes} 
                     </ListGroupItem>
-                   
+                    <ListGroupItem> 
+          <img src={post?.imageLink} className="center" width="200"
+                    height="170"
+                    />
+         
+                    </ListGroupItem>
+                    {post.links?.map((link) => (
+                    <ListGroupItem> 
+          Link: {link}
+        
+                    </ListGroupItem>
+                    ))}
                   </ListGroup>
                   <Card.Body>
 

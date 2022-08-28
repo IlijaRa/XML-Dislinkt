@@ -73,7 +73,7 @@ export default function FriendRequests({friendRequests,approveHandler,logedUser,
                   onClick={() => {
                     rejectHandler(logedUser.id, user.id
                     )
-      
+
                   }}
                   style={{ width: "8rem" }}
                   variant="outline-danger"

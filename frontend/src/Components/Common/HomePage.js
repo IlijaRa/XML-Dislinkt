@@ -4,9 +4,10 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function HomePage({ user, posts, likePostHandler, unlikePostHandler, addCommentHandler }) {
+export default function HomePage({ user, posts, likePostHandler, unlikePostHandler, addCommentHandler,followUserHandler,logedUserr,blockHandler }) {
   console.log('user', user)
   console.log('posts', posts)
+console.log("logedUserr", logedUserr.username);
 
   const content = useRef();
 
@@ -37,6 +38,7 @@ export default function HomePage({ user, posts, likePostHandler, unlikePostHandl
           steak, pig ham tongue buffalo beef ribs hamburger pork venison.{" "}
         </p>
       </div>
+      
       <div id="stats">
         <div className="col">
           <p className="stat">108</p>
@@ -52,8 +54,28 @@ export default function HomePage({ user, posts, likePostHandler, unlikePostHandl
         </div>
       </div>
       <div id="buttons">
-        <button class="btn btn-primary" >Follow</button>
+      {user.private === false &&
+    <button  onClick={() => {
+      followUserHandler(logedUserr.username, user.username
+      )
+    }} 
+    class="btn btn-primary" >Follow
+    </button>
+  }
+   {user.private === true &&
+    <button class="btn btn-primary" onClick={() => {
+      followUserHandler(logedUserr.username, user.username
+      )
+    }} >Send follow request</button>
+  }
+       
         <button class="btn btn-light" id="msg">Message</button>
+        <button  onClick={() => {
+      blockHandler(logedUserr.username, user.username
+      )
+    }} 
+    class="btn btn-danger" >Block
+    </button>
       </div>
     </div>
 

@@ -5,6 +5,10 @@ const userServices = {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}user?username=${username}`);
   },
 
+  getAllUsers: () => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}users`);
+  },
+
 
   getUserById: (id) => {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}userById?userId=${id}`);
@@ -59,7 +63,24 @@ const userServices = {
     return axios.get(`${process.env.REACT_APP_API_URL_USER}search/${username}`);
   },
 
+  followUser: (followerUsername, toFollowUsername) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}follow`,
+    {
+      followerId: followerUsername,
+      toFollowId: toFollowUsername
+    }
+    );
+  },
 
+
+  blockUser: (blockerUsername, toBlockUsername) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}block`,
+    {
+      blockerId: blockerUsername,
+      blockedId: toBlockUsername
+    }
+    );
+  },
 
   approveRequest: (userId,followerId) => {
     return axios.put(`${process.env.REACT_APP_API_URL_USER}approve`,
@@ -78,6 +99,10 @@ const userServices = {
     });
   },
 
+
+  updateUser: (user) => {
+    return axios.put(`${process.env.REACT_APP_API_URL_USER}user/${user.id}`, user)
+  },
 
 };
 

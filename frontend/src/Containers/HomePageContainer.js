@@ -14,6 +14,8 @@ const [posts, setPosts] = useState([]);
 
 var logedUser = JSON.parse(localStorage.getItem("User"));
 
+const [logedUserr, setLogedUserr] = useState(logedUser);
+
 useEffect(() => {
   userServices.getUserByUsername(username)
     .then((data) => {
@@ -70,15 +72,40 @@ function addComment(comment,postId) {
 
 
 
+function followUser(followerUsername,toFollowUsername) {
+  userServices.followUser(followerUsername,toFollowUsername)
+    .then((data) => {
+      alert("sucessfuly followed user");
+      
+    })
+    .catch((error) => {
+     alert("Something wen't wrong try again");
+    });
+}
+
+function block(blockerUsername,toBlockUsername) {
+  userServices.blockUser(blockerUsername,toBlockUsername)
+    .then((data) => {
+      alert("sucessfuly blocked user");
+    })
+    .catch((error) => {
+     alert("Something wen't wrong try again");
+    });
+}
+
+
   return (
     <div>
     <Navbar></Navbar>
     <HomePage
       user={user}
+      logedUserr={logedUserr}
       posts= {posts}
+      blockHandler = {block}
       likePostHandler = {likePost}
       unlikePostHandler = {unlikePost}
       addCommentHandler = {addComment}
+      followUserHandler= {followUser}
     ></HomePage>
     <Footer></Footer>
   </div>

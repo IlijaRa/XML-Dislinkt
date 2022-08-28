@@ -681,3 +681,9 @@ form textarea:valid ~ button:hover{
   background: #4267B2;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}

@@ -66,7 +66,7 @@ public class JobOfferController {
         jobOfferService.deleteByJobOfferId(jobOfferId);
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "search/{search}")
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE, path = "search/{search}")
     public ResponseEntity<?> getJobOffersBySearch(@PathVariable String search){
         ArrayList<JobOffer> list = jobOfferService.findBySearch(search);
         if(list.size() > 0){
