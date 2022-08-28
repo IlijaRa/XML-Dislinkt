@@ -10,11 +10,6 @@ export default function PublicProfilesContainer() {
 
     const [users, setUsers] = useState([]);
 
-
-   
-
-
-
     useEffect(() => {
         userServices.getAllUsers()
           .then((data) => {

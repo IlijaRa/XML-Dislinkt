@@ -26,7 +26,7 @@ public class Message {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime sentDate;// format : 2022-08-18T14:57:06.128+00:00
+    private String sentDate;// format : 2022-08-18T14:57:06.128+00:00
 
     public String getId() {
         return id;
@@ -44,12 +44,12 @@ public class Message {
         this.senderId = senderId;
     }
 
-    public String getRecieverId() {
+    public String getReceiverId() {
         return receiverId;
     }
 
-    public void setRecieverId(String recieverId) {
-        this.receiverId = recieverId;
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public String getMessage() {
@@ -60,11 +60,11 @@ public class Message {
         this.message = message;
     }
 
-    public LocalDateTime getSentDate() {
+    public String getSentDate() {
         return sentDate;
     }
 
-    public void setSentDate(LocalDateTime sentDate) {
+    public void setSentDate(String sentDate) {
         this.sentDate = sentDate;
     }
 }
