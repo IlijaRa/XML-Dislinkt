@@ -163,25 +163,25 @@ public class UserController {
         return new ResponseEntity<String>("User deleted by email", HttpStatus.OK);
     }
 
-//    @PutMapping("/user/{id}")
-//    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String userId,
-//                                                           @RequestBody User user)
-//    {
-//        return userService.updateUser(userId, user);
-//    }
+  @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String userId,
+                                                          @RequestBody User user)
+    {
+       return userService.updateUser(userId, user);
+   }
     //TODO: SAGA
-    @PutMapping(
-            value = "/update",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateUser(@RequestBody User user){
-        try {
-            User editedUser = userService.update(user);
-            return new ResponseEntity<User>(editedUser, HttpStatus.OK);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+//    @PutMapping(
+//            value = "/update",
+//            consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> updateUser(@RequestBody User user){
+//        try {
+//            User editedUser = userService.updateUser(user.id, );
+//            return new ResponseEntity<User>(editedUser, HttpStatus.OK);
+//        } catch (IllegalStateException e) {
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//    }
     @GetMapping(
             value = "/following",
             produces = MediaType.APPLICATION_JSON_VALUE)

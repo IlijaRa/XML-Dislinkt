@@ -1,6 +1,6 @@
 package com.example.postService;
 
-import com.example.CommunicationService.Event.UserUpdateEvent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

@@ -26,7 +26,7 @@ public class Message {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private String sentDate;// format : 2022-08-18T14:57:06.128+00:00
+    private LocalDateTime sentDate;// format : 2022-08-18T14:57:06.128+00:00
 
     public Message()
     {
@@ -65,11 +65,11 @@ public class Message {
         this.message = message;
     }
 
-    public String getSentDate() {
+    public LocalDateTime getSentDate() {
         return sentDate;
     }
 
-    public void setSentDate(String sentDate) {
+    public void setSentDate(LocalDateTime sentDate) {
         this.sentDate = sentDate;
     }
 }
