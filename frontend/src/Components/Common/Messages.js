@@ -79,7 +79,6 @@ const answer = useRef();
                                 senderId: user.id,
                                 receiverId: message.senderId,
                                 message: answer.current.value,
-                                sentDate: new Date().toLocaleString("en-US", {timeZone: clientTimezone})
                             }
                         )
                 

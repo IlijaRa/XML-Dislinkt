@@ -238,7 +238,7 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
                         
                         }} 
         type="submit" className="btn btn-primary">
-        Create job offer
+        Update
       </button>
     </div>
    

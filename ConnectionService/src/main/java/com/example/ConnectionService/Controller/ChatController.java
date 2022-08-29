@@ -1,8 +1,7 @@
 package com.example.ConnectionService.Controller;
 
-import com.example.CommunicationService.Event.UserDeleteEvent;
+
 import com.example.CommunicationService.Event.UserNotifyEvent;
-import com.example.CommunicationService.Event.UserUpdateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
