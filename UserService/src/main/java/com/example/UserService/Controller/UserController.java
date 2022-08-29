@@ -1,11 +1,14 @@
 package com.example.UserService.Controller;
 
 
+import com.example.CommunicationService.Event.UserDeleteEvent;
+import com.example.CommunicationService.Event.UserUpdateEvent;
 import com.example.UserService.Dto.LoginDto;
 import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
 import com.example.UserService.Service.NotificationService;
 import com.example.UserService.Service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Map;
 import org.springframework.kafka.core.KafkaTemplate;
-//import com.example.CommunicationService.Event.UserDeleteEvent;
+
+
 @RestController
 //@RequestMapping(path = "/users")
 @CrossOrigin(origins = "*")
@@ -32,6 +36,11 @@ public class UserController {
 
     @Autowired
     NotificationService notificationService;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+
+
 
     @RequestMapping("/")
     public String helloWorld(){
@@ -121,26 +130,26 @@ public class UserController {
 //        return new ResponseEntity<String>("User deleted by username", HttpStatus.OK);
 //    }
 
-//    //delete user by username
-//    //TODO: SAGA
-//    @DeleteMapping(path = "/{username}",
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> deleteUser(@PathVariable("username") String username){
-//        try{
-//
-//            User user = userService.findByUsername(username);
-//
-//            //Saga start
-//            userService.deleteUserByUsername(username);
-//            UserDeleteEvent userDeleteEvent = new UserDeleteEvent();
-//            userDeleteEvent.setUserId(user.getId());
-//            kafkaTemplate.send("user_delete", userDeleteEvent.getUserId());
-//
-//        } catch (IllegalStateException e) {
-//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<String>("User deleted", HttpStatus.OK);
-//    }
+    //delete user by username
+    //TODO: SAGA
+    @DeleteMapping(path = "/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteUser(@PathVariable("username") String username){
+        try{
+
+            User user = userService.findByUsername(username);
+
+            //Saga start
+            userService.deleteUserByUsername(username);
+            UserDeleteEvent userDeleteEvent = new UserDeleteEvent();
+            userDeleteEvent.setUserId(user.getId());
+            kafkaTemplate.send("user_delete", userDeleteEvent.getUserId());
+
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("User deleted", HttpStatus.OK);
+    }
 
     //delete user by email
     @DeleteMapping(value = "/userByEmail",
@@ -154,13 +163,25 @@ public class UserController {
         return new ResponseEntity<String>("User deleted by email", HttpStatus.OK);
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String userId,
-                                                           @RequestBody User user)
-    {
-        return userService.updateUser(userId, user);
+//    @PutMapping("/user/{id}")
+//    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String userId,
+//                                                           @RequestBody User user)
+//    {
+//        return userService.updateUser(userId, user);
+//    }
+    //TODO: SAGA
+    @PutMapping(
+            value = "/update",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateUser(@RequestBody User user){
+        try {
+            User editedUser = userService.update(user);
+            return new ResponseEntity<User>(editedUser, HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
-
     @GetMapping(
             value = "/following",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -214,7 +235,6 @@ public class UserController {
         }
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
-
     //get all users by part of username
     @GetMapping(path = "/search/{username}",
             produces = MediaType.APPLICATION_JSON_VALUE)

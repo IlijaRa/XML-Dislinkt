@@ -121,8 +121,19 @@ public class UserService {
             user.setExperience(u.getExperience());
             user.setSkills(u.getSkills());
             user.setIsPrivate(u.getIsPrivate());
+            user.setNotifications(u.getNotifications());
             final User updatedUser = userRepository.save(user);
             return ResponseEntity.ok(updatedUser);
+    }
+    public User update(User editedUser){
+        User existingUser=userRepository.findById(editedUser.getId());
+        if(existingUser==null){
+            throw new IllegalStateException("User does not exist!");
+        }
+        else{
+            userRepository.delete(existingUser);
+            return userRepository.save(editedUser);
+        }
     }
     public ArrayList<User> searchUserByUsername(String partOfUsername)
     {
@@ -229,7 +240,6 @@ public class UserService {
         System.out.println("No such request exists from '" + followerUserId + "' to '" + userId + "'.");
         return false;
     }
-
     public Boolean rejectFollow(String userId, String followerUserId) {
         User user = userRepository.findById(userId);
         if (user.getFollowRequests() != null && user.getFollowRequests().contains(followerUserId)) {
@@ -244,6 +254,8 @@ public class UserService {
         System.out.println("No such request exists from '" + followerUserId + "' to '" + userId + "'.");
         return false;
     }
+
+
 
 
 

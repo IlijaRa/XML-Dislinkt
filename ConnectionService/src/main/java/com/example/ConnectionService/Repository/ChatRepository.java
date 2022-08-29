@@ -12,5 +12,9 @@ public interface ChatRepository extends MongoRepository<Message, Long>{
     public ArrayList<Message> findAll();
     public ArrayList<Message> findAllByReceiverId(String userId);
     public Message findById(String messageId);
+
+    public ArrayList<Message> findAllBySenderId(String userId);
+
+
 }
 

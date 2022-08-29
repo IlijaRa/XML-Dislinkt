@@ -26,7 +26,8 @@ public class ChatService {
     //get all messages - sorted by newest
     public ArrayList<Message> getAllMessages(){
         ArrayList<Message> messages = chatRepository.findAll();
-        messages.sort(Comparator.comparing(Message::getSentDate));
+
+        messages.sort(Comparator.comparing(Message::getSentDate).reversed());
         return messages;
     }
 
@@ -48,4 +49,10 @@ public class ChatService {
         chatRepository.delete(message);
         return true;
     }
+    //delete all messages sent by user, when user is deleted all of his messages are also deleted, SAGA Pattern
+    public void deleteUserMessages(String userId){
+        ArrayList<Message> messagesToDelete = chatRepository.findAllBySenderId(userId);
+        chatRepository.deleteAll(messagesToDelete);
+    }
+
 }

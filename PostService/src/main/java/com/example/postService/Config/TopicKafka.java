@@ -9,4 +9,10 @@ public class TopicKafka {
     public NewTopic userDeleteTopic(){
         return TopicBuilder.name("user_delete").build();
     }
+    @Bean
+    public NewTopic userPostNotifyTopic(){
+        return TopicBuilder.name("user_post_notify").build();
+    }
+
+
 }
