@@ -138,6 +138,26 @@ public class PostService {
             return this.postRepository.save(post);
         }
     }
+    public void deleteUserComments(String userId){
+        ArrayList<Post> posts = postRepository.findAllByUserId(userId);
+        for(Post post: posts){
+            ArrayList<Comment> postComments = post.getComments();
+            for(Comment comment: postComments){
+                if(comment.getUserId().compareTo(userId) == 0){
+                    postComments.remove(comment);
+                }
+            }
+            post.setComments(postComments);
+            postRepository.save(post);
+        }
+    }
+    public void updateUserPosts(String userId, String description){
+        ArrayList<Post> posts = postRepository.findAllByUserId(userId);
+        for(Post post: posts){
+            post.setDescription(description);
+            postRepository.save(post);
+        }
+    }
 
 
 }

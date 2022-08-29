@@ -1,9 +1,13 @@
 package com.example.ConnectionService.Controller;
 
+import com.example.CommunicationService.Event.UserDeleteEvent;
+import com.example.CommunicationService.Event.UserNotifyEvent;
+import com.example.CommunicationService.Event.UserUpdateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import com.example.ConnectionService.Service.*;
 import com.example.ConnectionService.Model.*;
@@ -20,6 +24,10 @@ import java.util.List;
 public class ChatController {
     @Autowired
     private ChatService chatService;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
 
     //get all messages
     @GetMapping(value = "/messages", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,6 +51,10 @@ public class ChatController {
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Message newMessage){
         try {
+            //Saga start
+            UserNotifyEvent userNotifyEvent = new UserNotifyEvent();
+            userNotifyEvent.setUserId(newMessage.getReceiverId());
+            kafkaTemplate.send("user_notify", userNotifyEvent.getUserId());
             return new ResponseEntity<Message>(chatService.createMessage(newMessage) , HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);

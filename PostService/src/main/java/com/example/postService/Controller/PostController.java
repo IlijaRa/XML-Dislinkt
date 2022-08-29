@@ -1,5 +1,7 @@
 package com.example.postService.Controller;
 
+import com.example.CommunicationService.Event.UserNotifyEvent;
+import com.example.CommunicationService.Event.UserPostNotifyEvent;
 import com.example.postService.Model.Comment;
 import com.example.postService.Model.Post;
 import com.example.postService.Service.CommentService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,6 +26,9 @@ public class PostController {
     private PostService postService;
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
     @RequestMapping("/")
     public String helloWorld(){
         return "Hello World from Spring Boot";
@@ -54,6 +60,12 @@ public class PostController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Post newPost){
         try {
+
+
+            UserPostNotifyEvent userPostNotifyEvent = new UserPostNotifyEvent();
+            userPostNotifyEvent.setPostUserId(newPost.getUserId());
+            kafkaTemplate.send("user_post_notify", userPostNotifyEvent.getPostUserId());
+
             return new ResponseEntity<Post>(postService.create(newPost) , HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);

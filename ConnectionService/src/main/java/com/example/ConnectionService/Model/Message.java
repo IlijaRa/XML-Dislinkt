@@ -9,13 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Document(collection = "connections")
 public class Message {
     @Id
@@ -27,6 +27,11 @@ public class Message {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String sentDate;// format : 2022-08-18T14:57:06.128+00:00
+
+    public Message()
+    {
+        this.sentDate= LocalDateTime.now();
+    }
 
     public String getId() {
         return id;
