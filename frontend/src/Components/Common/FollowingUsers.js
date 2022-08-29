@@ -6,35 +6,28 @@ import {
     CardGroup,
     Button,
   } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 
-export default function Messages({user,messages,users,sendMessageHandler}) {
+export default function FollowingUsers({followingUsers,logedUser,sendMessageHandler}) {
 
-    console.log("messages", messages);
-    console.log("users", users);
-    console.log("users", user);
-    var dateString = new Date().toISOString()
-    console.log("first", dateString);
-    var clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let answers = useRef([React.createRef(), React.createRef()]);
+    const key = 'id';
+
+    const arrayUniqueByKey = [...new Map(followingUsers.map(item =>
+      [item[key], item])).values()];
+    console.log("followingUsers", arrayUniqueByKey);
+
+    console.log("logedUser", logedUser);
+
+
     
 
-    console.log("username", users.filter(obj => {
-        return obj.id === "2"
-      })[0]?.username);
-    
-
-let answers = useRef([React.createRef(), React.createRef()]);
-
-
-  return ( <div><div className="header">
+  return (
+  <div><div className="header">
   {" "}
-  <h1 style={{ textAlign: "center" }}> Messages </h1>
+  <h1 style={{ textAlign: "center" }}> Following users </h1>
 </div>
 
-{messages.map((message,i) => 
-
- (
-    
+{arrayUniqueByKey.map((user, i) => (
   <div className="container">
     <div className="row gutters">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -44,28 +37,33 @@ let answers = useRef([React.createRef(), React.createRef()]);
               <Card.Img variant="top" />
               <Card.Body>
                 <Card.Title className="cardTitle">
-                Poruka od  {users.filter(obj => {
-    return obj.id === message.senderId
-  })[0]?.name} {users.filter(obj => {
-    return obj.id === message.senderId
-  })[0]?.username}
+                  {user.name} {user.surname}
                 </Card.Title>
-                <Card.Text>{message.username}</Card.Text>
-                <Card.Text>{message.email}</Card.Text>
+                <Card.Text>{user.username}</Card.Text>
+                <Card.Text>{user.email}</Card.Text>
                 
               </Card.Body>
               <ListGroup className="list-group-flush">
               <ListGroupItem>
-              Message: {message.message}
+              Biography: {user.biography}
 
                  
                 </ListGroupItem>
                 <ListGroupItem>
+                  Phone number: {user.phone}
+                 
+                </ListGroupItem>
+                <ListGroupItem>
+                 Gender: {user.gender}
+                 
+                </ListGroupItem>
+
+                <ListGroupItem>
                 <li key={i}>
-             
                 <input
+                  type="text"
          className="form-control"
-          placeholder="Answer"
+          placeholder="Send a message "
           spellCheck="false"
           required=""
           defaultValue={""}
@@ -73,16 +71,20 @@ let answers = useRef([React.createRef(), React.createRef()]);
         />
        </li>
                 </ListGroupItem>
+              
               </ListGroup>
+
+           
+             
+         
               <Card.Body>
-            
                 <Button
                     onClick={() => {
                         sendMessageHandler(
                             {
-                                senderId: user.id,
-                                receiverId: message.senderId,
-                                message: answers.current[i].current.value,
+                                senderId: logedUser.id,
+                                receiverId: user.id,
+                                message: answers.current[i].current.value
                             }
                         )
                 
@@ -93,13 +95,14 @@ let answers = useRef([React.createRef(), React.createRef()]);
                  Send message
                 </Button>
               
-              
               </Card.Body>
+              
             </Card>
           </div>
         </div>
       </div>
     </div>
   </div>
-))}</div>);
+))}</div>
+)
 }

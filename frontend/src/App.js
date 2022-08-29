@@ -15,6 +15,7 @@ import MessageContainer from './Containers/MessageContainer';
 import JobOffersContainer from './Containers/JobOffersContainer';
 import CreateJobOfferContainer from './Containers/CreateJobOfferContainer';
 import UpdateUserContainer from './Containers/UpdateUserContainer';
+import FollowingUsersContainer from './Containers/FollowingUsersContainer';
 
 
 function App() {
@@ -52,6 +53,10 @@ function App() {
           <Route path="/updateUser">
             <UpdateUserContainer></UpdateUserContainer>
           </Route>
+          <Route path="/following">
+            <FollowingUsersContainer></FollowingUsersContainer>
+          </Route>
+
          
         </Switch>
       </Router>
