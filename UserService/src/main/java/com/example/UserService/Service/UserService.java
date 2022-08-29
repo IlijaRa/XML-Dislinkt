@@ -291,6 +291,17 @@ public class UserService {
         return unreadNotifications;
     }
 
+    public Boolean areMutuallyBlocked(String firstUsername,String secondUsername)
+    {
+        User firstUser = userRepository.findByUsername(firstUsername);
+        User secondUser = userRepository.findByUsername(secondUsername);
+        if(firstUser.getBlocked().contains(secondUsername) || secondUser.getBlocked().contains(firstUsername))
+            return true;
+        return false;
+    }
+
+
+
     public String generateAPIToken(String userId) {
         User user = userRepository.findById(userId);
 

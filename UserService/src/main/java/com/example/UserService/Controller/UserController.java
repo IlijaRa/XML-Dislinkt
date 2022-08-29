@@ -215,6 +215,18 @@ public class UserController {
         }
     }
 
+    //proverava da li je barem 1 od 2 korisnika blokirao ovog drugog, true znaci da jeste
+    @GetMapping(
+            value = "/areBlocked",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> areMutuallyBlocked(@RequestBody Map<String, String> blocked){
+        try{
+            return new ResponseEntity<Boolean>(userService.areMutuallyBlocked(blocked.get("firstUsername"),blocked.get("secondUsername")),HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping(path = "/approve",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
