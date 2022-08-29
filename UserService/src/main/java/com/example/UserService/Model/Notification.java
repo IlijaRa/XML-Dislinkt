@@ -59,6 +59,5 @@ public class Notification {
 
     public void setCreationTime() {
         this.creationTime =  LocalDateTime.now();
-
     }
 }

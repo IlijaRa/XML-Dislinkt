@@ -80,6 +80,10 @@ public class NotificationService {
         return this.notificationRepository.findById(notificationId);
     }
 
+    public ArrayList<Notification> getAllNotifications()
+    {
+        return this.notificationRepository.findAll();
+    }
 
 
 
