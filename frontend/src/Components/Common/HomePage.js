@@ -73,7 +73,6 @@ console.log("logedUserr", logedUserr.username);
         <button  onClick={() => {
       blockHandler(logedUserr.username, user.username
       )
-      localStorage.setItem("User", JSON.stringify(logedUserr));
 
     }} 
     class="btn btn-danger" >Block
