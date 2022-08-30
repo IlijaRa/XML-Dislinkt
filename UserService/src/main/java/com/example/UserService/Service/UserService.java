@@ -3,6 +3,8 @@ package com.example.UserService.Service;
 import com.example.UserService.Helper.EmailValidator;
 import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
+import com.example.UserService.Repository.EducationRepository;
+import com.example.UserService.Repository.ExperienceRepository;
 import com.example.UserService.Repository.NotificationRepository;
 import com.example.UserService.Repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,10 @@ import java.util.Random;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EducationRepository educationRepository;
+    @Autowired
+    private ExperienceRepository experienceRepository;
     private EmailValidator emailValidator = new EmailValidator();
 
     @Autowired

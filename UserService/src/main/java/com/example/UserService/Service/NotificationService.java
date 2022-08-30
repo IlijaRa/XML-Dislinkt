@@ -21,25 +21,12 @@ public class NotificationService {
 
     @Autowired
     private UserRepository userRepository;
-/*
 
-    public Notification save(Notification notification, String userId) {
-        notification.setCreationTime();
-        User user = userService.findById(userId);
-        if(user==null)
-        {
-            System.out.println("Korisnik nije pronadjen!");
-            return null;
-        }
 
-        Notification savedNotification = notificationRepository.save(notification);
-        UserNotification userNotification = new UserNotification();
-        userNotification.setUser(user);
-        userNotification.setNotification(notification);
-        userNotification.setRead(false);
-        userNotificationRepository.save(userNotification);
-        return savedNotification;
-    }*/
+    public void save(Notification notification)
+    {
+        this.notificationRepository.save(notification);
+    }
     public Notification markAsRead(String userId,String notificationId)
     {
         User user = userRepository.findById(userId);
