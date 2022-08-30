@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Experience {
 
     @Id
@@ -21,6 +21,15 @@ public class Experience {
     private LocalDate toDate;
     private String description;
 
+    public Experience()
+    {
+        if(id==null)
+        {
+            UUID uuid = UUID.randomUUID();
+            String uuidAsString = uuid.toString();
+            id=uuidAsString;
+        }
+    }
     public String getId() {
         return id;
     }

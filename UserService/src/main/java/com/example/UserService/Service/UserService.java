@@ -1,6 +1,7 @@
 package com.example.UserService.Service;
 
 import com.example.UserService.Helper.EmailValidator;
+import com.example.UserService.Model.Education;
 import com.example.UserService.Model.Notification;
 import com.example.UserService.Model.User;
 import com.example.UserService.Repository.EducationRepository;
@@ -123,6 +124,7 @@ public class UserService {
             user.setGender(u.getGender());
             user.setBiography(u.getBiography());
             user.setInterests(u.getInterests());
+            ArrayList<Education> ed = u.getEducation();
             user.setEducation(u.getEducation());
             user.setExperience(u.getExperience());
             user.setSkills(u.getSkills());

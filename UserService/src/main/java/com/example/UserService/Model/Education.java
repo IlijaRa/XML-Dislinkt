@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Education {
 
     @Id
@@ -16,6 +17,17 @@ public class Education {
     private String educationalFacility;
     private LocalDate fromDate;
     private LocalDate toDate;
+
+    public Education()
+    {
+        if(id==null)
+        {
+            UUID uuid = UUID.randomUUID();
+            String uuidAsString = uuid.toString();
+            id=uuidAsString;
+        }
+
+    }
 
     public String getId() {
         return id;
