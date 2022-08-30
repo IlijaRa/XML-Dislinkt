@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class KafkaListeners {
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
 
 
     @KafkaListener(
@@ -25,6 +27,7 @@ public class KafkaListeners {
         User user = userService.findById(userId);
         Notification notification = new Notification();
         notification.setText("Imate novu poruku");
+        notificationService.save(notification);
         ArrayList<Notification> userNotifications = user.getNotifications();
         userNotifications.add(notification);
         user.setNotifications(userNotifications);
@@ -47,6 +50,7 @@ public class KafkaListeners {
             {
                 Notification notification = new Notification();
                 notification.setText(postUser.getUsername()+" je postavio novi post");
+                notificationService.save(notification);
                 ArrayList<Notification> userNotifications = user.getNotifications();
                 userNotifications.add(notification);
                 user.setNotifications(userNotifications);
