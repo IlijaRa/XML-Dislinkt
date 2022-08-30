@@ -75,6 +75,7 @@ public class CompanyService {
             System.out.println("Vec je odobrena registracija ove kompanije");
             return false;
         }
+        company.setRequest("false");
         company.setApproved(true);
         if (companyRepository.save(company) != null) {
             System.out.println("Registracija firme je odobrena");

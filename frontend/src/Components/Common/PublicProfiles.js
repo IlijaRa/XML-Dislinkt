@@ -8,7 +8,7 @@ import {
   } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-export default function PublicProfiles({users,searchByUsernameHandler}) {
+export default function PublicProfiles({logedUserr,followUserHandler,users,searchByUsernameHandler}) {
 
     console.log('users', users)
 
@@ -89,6 +89,12 @@ export default function PublicProfiles({users,searchByUsernameHandler}) {
                   >
                     View profile
                   </Button>
+                  <Button  onClick={() => {
+      followUserHandler(logedUserr.username, user.username
+      )
+    }} 
+    class="btn btn-primary" >Follow
+    </Button>
                   </Link>
                 
                 </Card.Body>

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-export default function Login({loginUserHandler,logedUser}) {
+export default function Login({loginUserHandler,logedUser,loginAgentHandler}) {
 
 console.log('logedUser', logedUser)
 
@@ -51,6 +51,11 @@ const password = useRef();
               onClick={(e) => {
                 {
                   loginUserHandler(
+                    username.current.value,
+                    password.current.value
+                  );
+
+                  loginAgentHandler(
                     username.current.value,
                     password.current.value
                   );

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,removeTags2,tags1,addTags1,removeTags1,tags,addTags,removeTags,logedUser,updateUserHandler}) {
 
@@ -11,8 +11,36 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
     const gender = useRef();
     const biography = useRef();
 
-    
+    const fromDateEdu = useRef();
+    const toDateEdu = useRef();
 
+    const comany = useRef();
+    const position = useRef();
+    const fromDate = useRef();
+    const toDate = useRef();
+    const desciption = useRef();
+
+
+
+      const [privateProfile, setPrivateProfile] = useState(logedUser.private);
+      
+      var education = [];
+      var len = tags2.length;
+      for (var i = 0; i < len; i++) {
+        education.push({
+              id: Math.floor(Math.random() * 100) + 1,
+              title: tags2[i],
+          });
+      }
+  
+      var experience = [];
+      var len1 = tags3.length;
+      for (var i = 0; i < len1; i++) {
+        experience.push({
+              id: Math.floor(Math.random() * 100) + 1,
+              title: tags3[i],
+          });
+      }
   return (
     
     <div className='regForm'> 
@@ -141,7 +169,7 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
 
 
                   <div className="mb-3">
-      <label>Education</label>
+      {/* <label>Education</label>
                   <div className="tags-input">
                     <ul id="tags">
                       {tags2?.map((tag, index) => (
@@ -189,9 +217,42 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
                       }
                       placeholder="Press shift to add experience"
                     />
-                  </div>
-                  </div>
+                  </div> */}
 
+
+
+                  <div className="radio-btn-container">
+                    Private profile?
+                  <div
+                      className="radio-btn"
+                      onClick={() => {
+                        setPrivateProfile(true);
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        value={privateProfile}
+                        name="badd"
+                        checked={privateProfile == true}
+                      />
+                      Yes
+                    </div>
+                  </div>
+                  <div
+                      className="radio-btn"
+                      onClick={() => {
+                        setPrivateProfile(false);
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        value={privateProfile}
+                        name="badd"
+                        checked={privateProfile == false}
+                      />
+                      No
+                    </div>
+                    </div>
 
 
     
@@ -228,8 +289,9 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
                          }
                          logedUser.skills = tags;
                          logedUser.interests = tags1;
-                         logedUser.education = tags2;
-                         logedUser.experience = tags3;
+                         logedUser.education = education;
+                         logedUser.experience = experience;
+                         logedUser.private = privateProfile;
                          updateUserHandler(logedUser);
                          localStorage.setItem("User", JSON.stringify(logedUser));
 

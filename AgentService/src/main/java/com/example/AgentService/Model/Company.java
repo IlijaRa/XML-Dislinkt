@@ -24,6 +24,7 @@ public class Company {
     private Boolean approved;
     private String ownerId;
 
+    private String request;
 
     private String apiToken;
 
@@ -106,5 +107,13 @@ public class Company {
 
     public void setApiToken(String apiToken) {
         this.apiToken = apiToken;
+    }
+
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request;
     }
 }

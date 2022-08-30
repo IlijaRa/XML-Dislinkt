@@ -6,7 +6,7 @@ import { Card,ListGroup,ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function NewFeeds({user,posts,likePostHandler,unlikePostHandler,addCommentHandler,createPostHandler}) {
+export default function NewFeeds({tags,addTags,removeTags,user,posts,likePostHandler,unlikePostHandler,addCommentHandler,createPostHandler}) {
   
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -68,14 +68,28 @@ const link = useRef();
           defaultValue={""}
           ref= {imageLink}
         />
-          <input
-         className="form-control"
-          placeholder="Link"
-          spellCheck="false"
-          required=""
-          defaultValue={""}
-          ref= {link}
-        />
+          <div className="tags-input">
+                    <ul id="tags">
+                      {tags?.map((tag, index) => (
+                        <li key={index} className="tag">
+                          <span className="tag-title">{tag}</span>
+                          <span
+                            className="tag-close-icon"
+                            onClick={() => removeTags(index)}
+                          >
+                            x
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <input
+                      type="text"
+                      onKeyUp={(event) =>
+                        event.key === "Shift" ? addTags(event) : null
+                      }
+                      placeholder="Press shift to requirement"
+                    />
+                  </div>      
 
         
        
@@ -87,7 +101,7 @@ const link = useRef();
             description: description.current.value,
             userId: user.id,
             imageLink: imageLink.current.value,
-            links: [link.current.value],
+            links: tags,
             likes: 0,
             dislikes: 0
           }
