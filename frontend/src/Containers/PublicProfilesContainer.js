@@ -8,9 +8,17 @@ import userServices from '../Services/UserServices/UserServices'
 export default function PublicProfilesContainer() {
 
 
+
     const [users, setUsers] = useState([]);
 
+    const [logedUserr, setlogedUser] = useState({});
+
+    var logedUser = JSON.parse(localStorage.getItem("User"));
+
     useEffect(() => {
+
+
+    setlogedUser(logedUser);
         userServices.getAllUsers()
           .then((data) => {
             setUsers(data.data);
@@ -34,11 +42,22 @@ export default function PublicProfilesContainer() {
 
 
 
+      function followUser(followerUsername,toFollowUsername) {
+        userServices.followUser(followerUsername,toFollowUsername)
+          .then((data) => {
+            alert("sucessfuly followed user");
+            
+          })
+          .catch((error) => {
+           alert("Something wen't wrong try again");
+          });
+      }
+      
 
   return (
     <div> <div>
     <Navbar></Navbar>
-   <PublicProfiles users={users} searchByUsernameHandler= {searchByUsername}></PublicProfiles>
+   <PublicProfiles logedUserr={logedUserr} followUserHandler={followUser} users={users} searchByUsernameHandler= {searchByUsername}></PublicProfiles>
     <Footer></Footer>
   </div></div>
   )

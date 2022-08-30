@@ -12,6 +12,9 @@ let { username } = useParams();
 const [user, setUser] = useState({});
 const [posts, setPosts] = useState([]);
 
+const [blocked, setBlocked] = useState();
+
+
 var logedUser = JSON.parse(localStorage.getItem("User"));
 
 const [logedUserr, setLogedUserr] = useState(logedUser);
@@ -29,7 +32,18 @@ useEffect(() => {
     })
     .catch((error) => console.log(`error`, error));
 
+
+    userServices.areBlocked(logedUser?.username,username)
+    .then((data) => {
+      setBlocked(data);
+    })
+    .catch((error) => console.log(`error`, error));
+    
+
+   
 }, [])
+
+
 
 
 function likePost(userId,postId) {
@@ -94,6 +108,18 @@ function block(blockerUsername,toBlockUsername) {
 }
 
 
+function deleteUserByUsername(username) {
+  userServices.deleteUserByUsername(username)
+    .then((data) => {
+      alert("sucessfuly deleted user");
+    })
+    .catch((error) => {
+     alert("Something wen't wrong try again");
+    });
+}
+
+
+
   return (
     <div>
     <Navbar></Navbar>
@@ -106,6 +132,9 @@ function block(blockerUsername,toBlockUsername) {
       unlikePostHandler = {unlikePost}
       addCommentHandler = {addComment}
       followUserHandler= {followUser}
+      username={username}
+      blocked={blocked}
+      deleteUserByUsernameHandler={deleteUserByUsername}
     ></HomePage>
     <Footer></Footer>
   </div>

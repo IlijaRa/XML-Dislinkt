@@ -20,11 +20,11 @@ export default function CreateJobOffer({tags1,addTags1,removeTags1,tags,addTags,
     }
 
     var dailyActivities = [];
-    var len = tags1.length;
-    for (var i = 0; i < len; i++) {
+    var len1 = tags1.length;
+    for (var i = 0; i < len1; i++) {
         dailyActivities.push({
             id: Math.floor(Math.random() * 100) + 1,
-            title: tags[i],
+            title: tags1[i],
         });
     }
    

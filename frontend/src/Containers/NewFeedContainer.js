@@ -11,6 +11,9 @@ export default function NewFeedContainer() {
     const [posts, setPosts] = useState([]);
     const [post,setPost] = useState({});
 
+  const [tags, setTags] = useState([]);
+
+
     var logedUser = JSON.parse(localStorage.getItem("User"));
    
 
@@ -93,12 +96,26 @@ function likePost(userId,postId) {
       });
   }
 
+  const removeTags = (indexToRemove) => {
+    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+  };
+  const addTags = (event) => {
+    if (event.target.value !== "") {
+      setTags([...tags, event.target.value]);
+      //  props.selectedTags([...tags, event.target.value]);
+
+      event.target.value = "";
+    }
+  };
   
 
   return (
     <div> 
     <Navbar></Navbar>
     <NewFeeds 
+    tags={tags}
+    removeTags={removeTags}
+    addTags={addTags} 
       user={user} posts={posts}  
       likePostHandler = {likePost}
       unlikePostHandler = {unlikePost}

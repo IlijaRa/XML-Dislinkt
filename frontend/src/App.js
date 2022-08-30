@@ -16,6 +16,13 @@ import JobOffersContainer from './Containers/JobOffersContainer';
 import CreateJobOfferContainer from './Containers/CreateJobOfferContainer';
 import UpdateUserContainer from './Containers/UpdateUserContainer';
 import FollowingUsersContainer from './Containers/FollowingUsersContainer';
+import NotificationsContainer from './Containers/NotificationsContainer';
+import RegistrationFormAgentContainer from './Containers/RegistrationFormAgentContainer';
+import CreateCompanyContainer from './Containers/CreateCompanyContainer';
+import CompanyRequests from './Components/Common/CompanyRequests';
+import CompanyRequestsContainer from './Containers/CompanyRequestsContainer';
+import CompaniesByUserContainer from './Containers/CompaniesByUserContainer';
+import AllCompaniesContainer from './Containers/AllCompaniesContainer';
 
 
 function App() {
@@ -56,8 +63,24 @@ function App() {
           <Route path="/following">
             <FollowingUsersContainer></FollowingUsersContainer>
           </Route>
-
-         
+          <Route path="/notifications">
+            <NotificationsContainer></NotificationsContainer>
+          </Route>
+          <Route path="/registrationAgent">
+            <RegistrationFormAgentContainer></RegistrationFormAgentContainer>
+          </Route>
+          <Route path="/createCompany">
+            <CreateCompanyContainer></CreateCompanyContainer>
+          </Route>
+          <Route path="/companyRequests">
+            <CompanyRequestsContainer></CompanyRequestsContainer>
+          </Route>
+          <Route path="/companiesByUser">
+            <CompaniesByUserContainer></CompaniesByUserContainer>
+          </Route>
+          <Route path="/allCompanies">
+            <AllCompaniesContainer></AllCompaniesContainer>
+          </Route>
         </Switch>
       </Router>
     </div>

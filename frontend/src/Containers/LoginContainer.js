@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import Footer from '../Components/Common/Footer'
 import Login from '../Components/Common/Login'
 import Navbar from '../Components/Common/Navbar'
+import agentServices from '../Services/AgentServices/AgentServices';
 import userServices from '../Services/UserServices/UserServices';
 
 export default function LoginContainer() {
@@ -38,9 +39,40 @@ export default function LoginContainer() {
         }
       })
       .catch((error) => {
-        alert(error);
+        console.log(error);
       });
   }
+
+  function loginAgent(username, password) {
+    agentServices
+      .login(username, password)
+      .then((data) => {
+        if (data.status === 204) setLogedUser();
+        else {
+          agentServices
+            .login(username, password)
+            .then((data) => {
+              setLogedUser(data.data);
+              localStorage.setItem("User", JSON.stringify(data.data));
+              var user = JSON.parse(
+                localStorage.getItem("User")
+              );
+                if (Object.keys(user).length !== 0) {
+                 history.push("/allCompanies"); 
+                 alert("sucessfuly loged on agent");
+                 window.location.reload();
+                }
+               else if (Object.keys(user).length == 0) {
+              } 
+            })
+            .catch((error) => console.log(`error`, error));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
 
   return (
@@ -49,6 +81,7 @@ export default function LoginContainer() {
     <Login
   loginUserHandler={loginUser}
   logedUser={logedUser}
+  loginAgentHandler = {loginAgent}
     ></Login>
     <Footer></Footer>
   </div></div>

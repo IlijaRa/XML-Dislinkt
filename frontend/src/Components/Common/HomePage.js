@@ -4,12 +4,18 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function HomePage({ user, posts, likePostHandler, unlikePostHandler, addCommentHandler,followUserHandler,logedUserr,blockHandler }) {
+export default function HomePage({ deleteUserByUsernameHandler,user, posts, likePostHandler, unlikePostHandler, addCommentHandler,followUserHandler,logedUserr,blockHandler,username ,blocked}) {
   console.log('user', user)
   console.log('posts', posts)
 console.log("logedUserr", logedUserr.username);
 
+console.log("blocked", blocked);
+
+
   const content = useRef();
+
+  console.log("username", username);
+  
 
   function saveHandler(e) {
     addCommentHandler({
@@ -54,7 +60,8 @@ console.log("logedUserr", logedUserr.username);
         </div>
       </div>
       <div id="buttons">
-      {user.private === false &&
+
+      {user.private === false && logedUserr.username !== username &&
     <button  onClick={() => {
       followUserHandler(logedUserr.username, user.username
       )
@@ -62,14 +69,31 @@ console.log("logedUserr", logedUserr.username);
     class="btn btn-primary" >Follow
     </button>
   }
-   {user.private === true &&
+
+
+{logedUserr.username === username &&
+    <button  onClick={() => {
+      deleteUserByUsernameHandler(logedUserr.username
+      )
+    }} 
+    class="btn btn-danger" >Delete
+    </button>
+  }
+
+   {user.private === true && logedUserr.username !== username &&
     <button class="btn btn-primary" onClick={() => {
       followUserHandler(logedUserr.username, user.username
       )
     }} >Send follow request</button>
   }
        
-        <button class="btn btn-light" id="msg">Message</button>
+      <Link to={`/updateUser`}>
+       {logedUserr.username === username &&
+        <button class="btn btn-light" id="msg">Update</button>
+       }
+      </Link>
+
+        {logedUserr.username !== username &&
         <button  onClick={() => {
       blockHandler(logedUserr.username, user.username
       )
@@ -77,6 +101,7 @@ console.log("logedUserr", logedUserr.username);
     }} 
     class="btn btn-danger" >Block
     </button>
+     }
       </div>
     </div>
 
@@ -102,7 +127,18 @@ console.log("logedUserr", logedUserr.username);
                         <ListGroupItem>
                           Likes: {post.likes} {" "} Dislikes: {post.dislikes}
                         </ListGroupItem>
-
+                        <ListGroupItem> 
+          <img src={post?.imageLink} className="center" width="200"
+                    height="170"
+                    />
+         
+                    </ListGroupItem>
+                    {post.links?.map((link) => (
+                    <ListGroupItem> 
+          Link: {link}
+        
+                    </ListGroupItem>
+                    ))}
                       </ListGroup>
                       <Card.Body>
 
