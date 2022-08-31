@@ -46,7 +46,7 @@ export default function PublicProfilesContainer() {
         userServices.followUser(followerUsername,toFollowUsername)
           .then((data) => {
             alert("sucessfuly followed user");
-            
+            localStorage.setItem("User", JSON.stringify(logedUser));
           })
           .catch((error) => {
            alert("Something wen't wrong try again");

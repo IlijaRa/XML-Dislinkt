@@ -3,6 +3,7 @@ import Footer from "../Components/Common/Footer";
 import Navbar from "../Components/Common/Navbar";
 import CompaniesByUser from "../Components/Common/CompaniesByUser";
 import agentServices from "../Services/AgentServices/AgentServices";
+import NavBarAgent from "../Components/Common/NavBarAgent";
 
 export default function CompaniesByUserContainer() {
 
@@ -36,7 +37,7 @@ export default function CompaniesByUserContainer() {
 
   return  (
     <div>   
-    <Navbar></Navbar>
+    <NavBarAgent></NavBarAgent>
     <CompaniesByUser updateCompanyHandler={updateCompany} companies={companies}></CompaniesByUser>
     <Footer></Footer>
     </div>

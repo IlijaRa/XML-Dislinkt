@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,removeTags2,tags1,addTags1,removeTags1,tags,addTags,removeTags,logedUser,updateUserHandler}) {
+export default function UpdateUser({tags5,addTags5,removeTags5,tags4,addTags4,removeTags4,tags3,addTags3,removeTags3,tags2,addTags2,removeTags2,tags1,addTags1,removeTags1,tags,addTags,removeTags,logedUser,updateUserHandler}) {
 
 
     const name = useRef();
@@ -25,22 +25,25 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
       const [privateProfile, setPrivateProfile] = useState(logedUser.private);
       
       var education = [];
-      var len = tags2.length;
+      var len = tags2?.length;
       for (var i = 0; i < len; i++) {
         education.push({
               id: Math.floor(Math.random() * 100) + 1,
-              title: tags2[i],
+              educationalFacility: tags2[i],
           });
       }
   
       var experience = [];
-      var len1 = tags3.length;
+      var len1 = tags3?.length;
       for (var i = 0; i < len1; i++) {
         experience.push({
               id: Math.floor(Math.random() * 100) + 1,
-              title: tags3[i],
+              company: tags3[i],
+              position:tags4[i],
+              description:tags5[i],
           });
       }
+
   return (
     
     <div className='regForm'> 
@@ -169,7 +172,7 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
 
 
                   <div className="mb-3">
-      {/* <label>Education</label>
+                  <label>Education - educational facility</label>
                   <div className="tags-input">
                     <ul id="tags">
                       {tags2?.map((tag, index) => (
@@ -189,13 +192,11 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
                       onKeyUp={(event) =>
                         event.key === "Shift" ? addTags2(event) : null
                       }
-                      placeholder="Press shift to add education"
+                      placeholder="Press shift to add interests"
                     />
                   </div>
-                  </div>
 
-                  <div className="mb-3">
-      <label>Experience</label>
+                  <label>Experience - company </label>
                   <div className="tags-input">
                     <ul id="tags">
                       {tags3?.map((tag, index) => (
@@ -215,9 +216,59 @@ export default function UpdateUser({tags3,addTags3,removeTags3,tags2,addTags2,re
                       onKeyUp={(event) =>
                         event.key === "Shift" ? addTags3(event) : null
                       }
-                      placeholder="Press shift to add experience"
+                      placeholder="Press shift to add company"
                     />
-                  </div> */}
+                  </div>
+
+                  <label>Experience - position </label>
+                  <div className="tags-input">
+                    <ul id="tags">
+                      {tags4?.map((tag, index) => (
+                        <li key={index} className="tag">
+                          <span className="tag-title">{tag}</span>
+                          <span
+                            className="tag-close-icon"
+                            onClick={() => removeTags4(index)}
+                          >
+                            x
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <input
+                      type="text"
+                      onKeyUp={(event) =>
+                        event.key === "Shift" ? addTags4(event) : null
+                      }
+                      placeholder="Press shift to add position"
+                    />
+                  </div>
+
+                  <label>Experience - description </label>
+                  <div className="tags-input">
+                    <ul id="tags">
+                      {tags5?.map((tag, index) => (
+                        <li key={index} className="tag">
+                          <span className="tag-title">{tag}</span>
+                          <span
+                            className="tag-close-icon"
+                            onClick={() => removeTags5(index)}
+                          >
+                            x
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <input
+                      type="text"
+                      onKeyUp={(event) =>
+                        event.key === "Shift" ? addTags5(event) : null
+                      }
+                      placeholder="Press shift to add description"
+                    />
+                  </div>
+
+                 
 
 
 

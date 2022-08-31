@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Navbar() {
+export default function NavBarAgent() {
 
   var logedUser = JSON.parse(localStorage.getItem("User"));
 
@@ -38,45 +38,40 @@ export default function Navbar() {
           {/* Left links */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="publicProfiles">
-              Public profiles
+              <a className="nav-link" href="allCompanies">
+              All companies
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="newFeed">
-                New feed
+              <a className="nav-link" href="companiesByUser">
+                My companies
+              </a>
+            </li>
+            {logedUser.role === "admin" &&
+            <li className="nav-item">
+              <a className="nav-link" href="companyRequests">
+              Company request
+              </a>
+            </li>
+            }
+            <li className="nav-item">
+              <a className="nav-link" href="createCompany">
+              Create company
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="followRequests">
-              Follow Requests
+              <a className="nav-link" href="registrationAgent">
+             Agent registration
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="messages">
-              Messages
+              <a className="nav-link" href="/login">
+             Login
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="jobOffers">
-              Job offers
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="createJobOffer">
-              Create Job Offer
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="following">
-              Following users
-              </a>
-            </li>
-            <li className="nav-item">
-            <a className="nav-link" href={`updateUser/${logedUser.username}`}>
-              Update profile
-              </a>
-            </li>
+            
+           
+           
           </ul>
           {/* Left links */}
         </div>

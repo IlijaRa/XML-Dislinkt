@@ -10,7 +10,7 @@ import {
 export default function Notifications({notifications,markAsReadHandler,logedUser}) {
 
 console.log("notifications", notifications);
-console.log("notifications", notifications[0].creationTime.slice(0, 10));
+console.log("notifications", notifications[0]?.creationTime.slice(0, 10));
 console.log("logedUser", logedUser);
 
 
@@ -21,7 +21,7 @@ console.log("logedUser", logedUser);
   </div>
  
     
-  {notifications.map((notification) => (
+  {notifications?.map((notification) => (
     <div className="container">
       <div className="row gutters">
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -31,16 +31,16 @@ console.log("logedUser", logedUser);
                 <Card.Img variant="top" />
                 <Card.Body>
                   <Card.Title className="cardTitle">
-                   Notify: {notification.text}
+                   Notify: {notification?.text}
                   </Card.Title>
-                  <Card.Text>Creation date: {notification.creationTime.slice(0, 10)}</Card.Text>
-                  <Card.Text>Creation time: {notification.creationTime.slice(11, 19)}</Card.Text>
+                  <Card.Text>Creation date: {notification?.creationTime?.slice(0, 10)}</Card.Text>
+                  <Card.Text>Creation time: {notification?.creationTime?.slice(11, 19)}</Card.Text>
 
                 </Card.Body>
                 <Card.Body>
                 <Button
                   onClick={() => {
-                    markAsReadHandler(logedUser.id, notification.id
+                    markAsReadHandler(logedUser.id, notification?.id
                     )
                   }}
                   style={{ width: "12rem" }}

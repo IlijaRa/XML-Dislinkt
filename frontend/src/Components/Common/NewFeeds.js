@@ -20,14 +20,14 @@ const description = useRef();
 const imageLink = useRef();
 const link = useRef();
 
-    console.log('posts', unique)
+  
 
 
   return (
     <div> <div>
        <div className="header">
     {" "}
-    <h1 style={{ textAlign: "center" }}> New feeds </h1>
+    <h1 style={{ textAlign: "center" }}> News feed </h1>
   </div>
   <div className="containerNewPost">
   <div className="wrapper">
@@ -148,7 +148,7 @@ const link = useRef();
                     />
          
                     </ListGroupItem>
-                    {post.links?.map((link) => (
+                    {post?.links?.map((link) => (
                     <ListGroupItem> 
           Link: {link}
         
@@ -184,7 +184,7 @@ const link = useRef();
 
                    </div>
 
-                   {post.comments?.map((comment) => (
+                   {post?.comments?.map((comment) => (
                    <div className="card p-3 mt-2">
 <div className="d-flex justify-content-between align-items-center">
   <div className="user d-flex flex-row align-items-center">

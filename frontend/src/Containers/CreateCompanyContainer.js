@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreateCompany from "../Components/Common/CreateCompany";
 import Footer from "../Components/Common/Footer";
 import Navbar from "../Components/Common/Navbar";
+import NavBarAgent from "../Components/Common/NavBarAgent";
 import agentServices from "../Services/AgentServices/AgentServices";
 
 export default function CreateCompanyContainer() {
@@ -27,7 +28,7 @@ export default function CreateCompanyContainer() {
 
     
   return <div>
-  <Navbar></Navbar>
+  <NavBarAgent></NavBarAgent>
   <CreateCompany addCompanyHandler={addCompany}></CreateCompany>
   <Footer></Footer>
 </div>

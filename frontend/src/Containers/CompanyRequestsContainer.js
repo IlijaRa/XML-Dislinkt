@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CompanyRequests from "../Components/Common/CompanyRequests";
 import Footer from "../Components/Common/Footer";
 import Navbar from "../Components/Common/Navbar";
+import NavBarAgent from "../Components/Common/NavBarAgent";
 import agentServices from "../Services/AgentServices/AgentServices";
 
 export default function CompanyRequestsContainer() {
@@ -35,7 +36,7 @@ export default function CompanyRequestsContainer() {
 
   return  (
     <div>   
-    <Navbar></Navbar>
+    <NavBarAgent></NavBarAgent>
     <CompanyRequests approveHandler={approve} companies={companies} logedUser={logedUser}></CompanyRequests>
     <Footer></Footer></div>
   )

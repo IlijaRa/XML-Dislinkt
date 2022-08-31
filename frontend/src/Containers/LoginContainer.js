@@ -77,7 +77,6 @@ export default function LoginContainer() {
 
   return (
     <div> <div>
-    <Navbar></Navbar>
     <Login
   loginUserHandler={loginUser}
   logedUser={logedUser}

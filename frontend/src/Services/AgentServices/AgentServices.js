@@ -84,6 +84,13 @@ getAllJobCommentsByJobOfferId: (jobOffer) => {
   return axios.get(`${process.env.REACT_APP_API_URL_AGENT}${jobOffer.id}/jobComments`);
 },
 
+getAllJobOffers: () => {
+  return axios.get(`${process.env.REACT_APP_API_URL_AGENT}offers`);
+},
+
+searchByPosition: (search) => {
+  return axios.get(`${process.env.REACT_APP_API_URL_AGENT}search/${search}`);
+},
 
 };
 
