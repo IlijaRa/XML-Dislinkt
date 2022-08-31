@@ -188,9 +188,9 @@ public class UserController {
     @GetMapping(
             value = "/following",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getUserByUsername(@RequestBody Map<String, String> isFollowing){
+    public ResponseEntity<?> getUserByUsername(@RequestParam(value="userId") String userId,@RequestParam(value="followedUserId") String followedUserId){
         try{
-            return new ResponseEntity<Boolean>(userService.isFollowing(isFollowing.get("userId"),isFollowing.get("followedUserId")),HttpStatus.OK);
+            return new ResponseEntity<Boolean>(userService.isFollowing(userId,followedUserId),HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -222,9 +222,9 @@ public class UserController {
     @GetMapping(
             value = "/areBlocked",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> areMutuallyBlocked(@RequestBody Map<String, String> blocked){
+    public ResponseEntity<?> areMutuallyBlocked(@RequestParam(value="firstUsername") String firstUsername,@RequestParam(value="secondUsername") String secondUsername){
         try{
-            return new ResponseEntity<Boolean>(userService.areMutuallyBlocked(blocked.get("firstUsername"),blocked.get("secondUsername")),HttpStatus.OK);
+            return new ResponseEntity<Boolean>(userService.areMutuallyBlocked(firstUsername,secondUsername),HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
