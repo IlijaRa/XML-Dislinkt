@@ -4,12 +4,13 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-export default function HomePage({ deleteUserByUsernameHandler,user, posts, likePostHandler, unlikePostHandler, addCommentHandler,followUserHandler,logedUserr,blockHandler,username ,blocked}) {
+export default function HomePage({following, deleteUserByUsernameHandler,user, posts, likePostHandler, unlikePostHandler, addCommentHandler,followUserHandler,logedUserr,blockHandler,username ,blocked}) {
   console.log('user', user)
   console.log('posts', posts)
 console.log("logedUserr", logedUserr.username);
 
 console.log("blocked", blocked);
+console.log("following", following);
 
 
   const content = useRef();
@@ -38,13 +39,25 @@ console.log("blocked", blocked);
           src="https://drive.google.com/uc?id=1EVA3KUBLxCXF2EGmTf4LUB8F4yAvBrjl"
         />
       </div>
+
+      {blocked === true && 
+      <div id="bio">
+        <p>
+        USER ARE BLOCKED
+        </p>
+      </div>
+      }
+
+      {blocked === false && 
       <div id="bio">
         <p>
           Hello, my name is John! Bacon ipsum dolor amet short ribs prosciutto strip
           steak, pig ham tongue buffalo beef ribs hamburger pork venison.{" "}
         </p>
       </div>
-      
+}
+
+{blocked === false && 
       <div id="stats">
         <div className="col">
           <p className="stat">108</p>
@@ -59,6 +72,7 @@ console.log("blocked", blocked);
           <p className="label1">Following</p>
         </div>
       </div>
+}
       <div id="buttons">
 
       {user.private === false && logedUserr.username !== username &&
@@ -80,7 +94,11 @@ console.log("blocked", blocked);
     </button>
   }
 
-   {user.private === true && logedUserr.username !== username &&
+
+
+
+
+   {user.private === true && logedUserr.username !== username && 
     <button class="btn btn-primary" onClick={() => {
       followUserHandler(logedUserr.username, user.username
       )
@@ -105,6 +123,7 @@ console.log("blocked", blocked);
       </div>
     </div>
 
+    {blocked === false && (user.private === false || (user.private === true && following===true)) &&
       <div>
         {posts.map((post) => (
           <div className="container">
@@ -239,7 +258,7 @@ console.log("blocked", blocked);
           </div>
 
         ))}
-      </div>
+      </div>}
     </div>
   )
 }

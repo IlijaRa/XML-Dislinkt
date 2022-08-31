@@ -104,12 +104,8 @@ const userServices = {
     return axios.put(`${process.env.REACT_APP_API_URL_USER}user/${user.id}`, user)
   },
 
-  areBlocked: (firstUsername1,secondUsername1) => {
-    return axios.get(`${process.env.REACT_APP_API_URL_USER}areBlocked`, 
-    {
-      firstUsername:firstUsername1,
-      secondUsername:secondUsername1,
-    }
+  areBlocked: (firstUsername,secondUsername) => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}areBlocked?firstUsername=${firstUsername}&secondUsername=${secondUsername}`
     )
   },
 
@@ -131,6 +127,12 @@ const userServices = {
     return axios.delete(`${process.env.REACT_APP_API_URL_USER}${username}`
     )
   },
+
+  areFollowing: (userId,followedUserId) => {
+    return axios.get(`${process.env.REACT_APP_API_URL_USER}following?userId=${userId}&followedUserId=${followedUserId}`
+    )
+  },
+
 
 };
 
