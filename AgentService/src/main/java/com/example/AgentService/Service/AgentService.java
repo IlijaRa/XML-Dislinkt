@@ -53,6 +53,7 @@ public class AgentService {
         if(!agent.getPassword().equals(password)){
             throw new IllegalStateException("Lozinka ne postoji");
         }
+        String s= generateAPIToken(agent.getId());
         return agent;
     }
 

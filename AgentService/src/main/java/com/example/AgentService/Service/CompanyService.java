@@ -96,7 +96,7 @@ public class CompanyService {
         {
             throw new IllegalStateException("Agent ne postoji");
         }
-        if (!agent.getRole().equals("Owner") ){
+        if (!agent.getRole().equals("Owner")){
             throw new IllegalStateException("Agent koji nije vlasnik ne sme da menja sadrzaj kompanije");
         }
 

@@ -22,7 +22,7 @@ public class JobOffer {
     private String location;
     private ArrayList<Requirement> requirements = new ArrayList<>();
     private ArrayList<DailyActivity> daily_activities = new ArrayList<>();
-    private String companyId; //kada se kreira u postmanu radi provere pise se companyId
+    private String companyId;
 
     public String getId() {
         return id;
