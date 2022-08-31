@@ -25,6 +25,7 @@ import CompaniesByUserContainer from './Containers/CompaniesByUserContainer';
 import AllCompaniesContainer from './Containers/AllCompaniesContainer';
 import CompanyHomePageContainer from './Containers/CompanyHomePageContainer';
 import JobOfferCommentsContainer from './Containers/JobOfferCommentsContainer';
+import AllProfilesContainer from './Containers/AllProfilesContainer';
 
 
 function App() {
@@ -88,6 +89,9 @@ function App() {
           </Route>
           <Route path="/jobOfferComments">
             <JobOfferCommentsContainer></JobOfferCommentsContainer>
+          </Route>
+          <Route path="/allProfiles">
+            <AllProfilesContainer></AllProfilesContainer>
           </Route>
 
         </Switch>
