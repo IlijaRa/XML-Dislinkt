@@ -158,11 +158,11 @@ public class UserService {
     }
 
     //follow user
-    public User follow(String followerUsername, String toFollowUsername) {
-        System.out.println(followerUsername);
-        System.out.println(toFollowUsername);
-        User followerUser = userRepository.findByUsername(followerUsername);
-        User toFollowUser = userRepository.findByUsername(toFollowUsername);
+    public User follow(String followerId, String toFollowId) {
+        System.out.println(followerId);
+        System.out.println(toFollowId);
+        User followerUser = userRepository.findById(followerId);
+        User toFollowUser = userRepository.findById(toFollowId);
 
         if(followerUser == null){
             throw new IllegalStateException("followerUser does not exist!");
@@ -170,22 +170,22 @@ public class UserService {
         if(toFollowUser == null){
             throw new IllegalStateException("toFollowUser does not exist!");
         }
-        if(followerUser.getFollowing().contains(toFollowUsername)){
+        if(followerUser.getFollowing().contains(toFollowId)){
             throw new IllegalStateException("Vec pratite ovog korisnika!");
         }
-        if(followerUser.getBlocked().contains(toFollowUsername))
+        if(followerUser.getBlocked().contains(toFollowId))
         {
             throw new IllegalStateException("Blokirali ste ovog korisnika!");
         }
         if(toFollowUser.isPrivate()){
-            toFollowUser.getFollowRequests().add(followerUsername);
+            toFollowUser.getFollowRequests().add(followerId);
             Notification notification = new Notification();
-            notification.setText("Imate novi zahtev od"+followerUsername);
+            notification.setText("Imate novi zahtev od"+followerId);
             notificationRepository.save(notification);
             toFollowUser.getNotifications().add(notification);
             return userRepository.save(toFollowUser);
         }else{
-            followerUser.getFollowing().add(toFollowUsername);
+            followerUser.getFollowing().add(toFollowId);
             return userRepository.save(followerUser);
         }
     }
