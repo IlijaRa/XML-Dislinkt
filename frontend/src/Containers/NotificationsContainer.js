@@ -27,6 +27,7 @@ export default function NotificationsContainer() {
         userServices.markAsReadNotifi(userId,notificationId)
           .then((data) => {
             alert("sucessfuly marked a notify as read");
+            window.location.reload();
           })
           .catch((error) => {
             console.log("Something wen't wrong try again");
