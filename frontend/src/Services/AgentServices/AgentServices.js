@@ -59,6 +59,32 @@ const agentServices = {
     return axios.get(`${process.env.REACT_APP_API_URL_AGENT}${ownerId}/companies`);
   },
 
+
+  /////
+
+  createJobComment: (jobComment) => {
+    return axios.post(`${process.env.REACT_APP_API_URL_AGENT}createJobComment`,jobComment);
+  },
+
+
+//////
+
+createJobOffer: (jobOffer) => {
+  return axios.post(`${process.env.REACT_APP_API_URL_AGENT}createOffer`,jobOffer);
+},
+
+
+getAllJobOffersByCompany: (companyId) => {
+  return axios.get(`${process.env.REACT_APP_API_URL_AGENT}jobOffers/${companyId}`);
+},
+
+///
+
+getAllJobCommentsByJobOfferId: (jobOffer) => {
+  return axios.get(`${process.env.REACT_APP_API_URL_AGENT}${jobOffer.id}/jobComments`);
+},
+
+
 };
 
 export default agentServices;

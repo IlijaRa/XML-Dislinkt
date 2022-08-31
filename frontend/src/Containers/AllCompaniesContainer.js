@@ -22,22 +22,22 @@ export default function AllCompaniesContainer() {
         }, [])
   
   
-        //  function updateCompany(company) {
-        //     agentServices.updateCompany(company)
-        //        .then((data) => {
-        //          console.log("sucessfuly updated");
-        //        })
-        //        .catch((error) => {
-        //          console.log("Something wen't wrong try again");
-        //        });
-        //    }
+          function addJobComment(jobOffer) {
+             agentServices.createJobComment(jobOffer)
+                .then((data) => {
+                  console.log("sucessfuly createdJob comment");
+                })
+                .catch((error) => {
+                  console.log("Something wen't wrong try again");
+               });
+           }
   
   
   
     return  (
       <div>   
       <Navbar></Navbar>
-      <AllCompanies companies={companies}></AllCompanies>
+      <AllCompanies companies={companies} addJobCommentHandler={addJobComment}></AllCompanies>
       <Footer></Footer>
       </div>
     )
