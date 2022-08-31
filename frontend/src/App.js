@@ -23,6 +23,8 @@ import CompanyRequests from './Components/Common/CompanyRequests';
 import CompanyRequestsContainer from './Containers/CompanyRequestsContainer';
 import CompaniesByUserContainer from './Containers/CompaniesByUserContainer';
 import AllCompaniesContainer from './Containers/AllCompaniesContainer';
+import CompanyHomePageContainer from './Containers/CompanyHomePageContainer';
+import JobOfferCommentsContainer from './Containers/JobOfferCommentsContainer';
 
 
 function App() {
@@ -81,6 +83,13 @@ function App() {
           <Route path="/allCompanies">
             <AllCompaniesContainer></AllCompaniesContainer>
           </Route>
+          <Route path="/companyHomePage">
+            <CompanyHomePageContainer></CompanyHomePageContainer>
+          </Route>
+          <Route path="/jobOfferComments">
+            <JobOfferCommentsContainer></JobOfferCommentsContainer>
+          </Route>
+
         </Switch>
       </Router>
     </div>

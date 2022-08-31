@@ -74,6 +74,7 @@ public class JobCommentService {
         jc.setRating(jobComment.getRating());
         jc.setSalary(jobComment.getSalary());
         jc.setInterview(jobComment.getInterview());
+        jc.setJobOfferId(jobComment.getJobOfferId());
 
         if (jobCommentRepository.save(jc) != null) {
             System.out.println("Uspesno izmenjene informacije o komentaru");
