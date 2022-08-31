@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import Footer from '../Components/Common/Footer'
 import Login from '../Components/Common/Login'
 import Navbar from '../Components/Common/Navbar'
+import NavbarUnregistered from '../Components/Common/NavBarUnregistered';
 import agentServices from '../Services/AgentServices/AgentServices';
 import userServices from '../Services/UserServices/UserServices';
 
@@ -77,6 +78,7 @@ export default function LoginContainer() {
 
   return (
     <div> <div>
+      <NavbarUnregistered></NavbarUnregistered>
     <Login
   loginUserHandler={loginUser}
   logedUser={logedUser}
