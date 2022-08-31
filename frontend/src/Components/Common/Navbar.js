@@ -78,7 +78,7 @@ export default function Navbar() {
               </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link" href={`updateUser/${logedUser.username}`}>
+            <a className="nav-link" href={`updateUser`}>
               Update profile
               </a>
             </li>
@@ -132,7 +132,7 @@ export default function Navbar() {
           <div className="dropdown">
             <a
               className="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="/homePage/nina"
+              href="/myHomePage"
               id="navbarDropdownMenuAvatar"
               role="button"
               data-mdb-toggle="dropdown"
