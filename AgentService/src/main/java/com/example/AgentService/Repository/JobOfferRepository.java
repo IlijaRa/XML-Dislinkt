@@ -12,4 +12,6 @@ public interface JobOfferRepository extends MongoRepository<JobOffer, Long> {
     ArrayList<JobOffer> findAll();
     ArrayList<JobOffer> findByCompanyId(String companyId);
     JobOffer findById(String offerId);
+
+    ArrayList<JobOffer> getByPositionContaining(String positionPart);
 }

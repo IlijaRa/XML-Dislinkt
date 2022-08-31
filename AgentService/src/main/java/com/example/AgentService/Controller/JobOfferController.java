@@ -71,4 +71,12 @@ public class JobOfferController {
             return new ResponseEntity<String>(e.getMessage() ,HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE, path = "search/{position}")
+    public ResponseEntity<?> getJobOffersBySearch(@PathVariable String position){
+        ArrayList<JobOffer> list = jobOfferService.searchByPosition(position);
+        if(list.size() > 0){
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

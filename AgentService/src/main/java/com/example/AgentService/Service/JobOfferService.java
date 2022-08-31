@@ -91,5 +91,10 @@ public class JobOfferService {
         return true;
     }
 
+    public ArrayList<JobOffer> searchByPosition(String position){
+        ArrayList<JobOffer> jobOffers = jobOfferRepository.getByPositionContaining(position);
+        return jobOffers;
+    }
+
 
 }

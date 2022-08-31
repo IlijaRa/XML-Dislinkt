@@ -38,7 +38,6 @@ public class JobOfferService {
 
     public ArrayList<JobOffer> findBySearch(String search){
         ArrayList<JobOffer> jobOffers = jobOfferRepository.getByPositionContaining(search);
-
         return jobOffers;
     }
 
