@@ -13,6 +13,8 @@ const [user, setUser] = useState({});
 const [posts, setPosts] = useState([]);
 
 const [blocked, setBlocked] = useState();
+const [following, setFollowing] = useState();
+
 
 
 var logedUser = JSON.parse(localStorage.getItem("User"));
@@ -35,11 +37,15 @@ useEffect(() => {
 
     userServices.areBlocked(logedUser?.username,username)
     .then((data) => {
-      setBlocked(data);
+      setBlocked(data.data);
     })
     .catch((error) => console.log(`error`, error));
     
-
+    userServices.areFollowing(logedUser?.id,user.id)
+    .then((data) => {
+      setFollowing(data.data);
+    })
+    .catch((error) => console.log(`error`, error));
    
 }, [])
 
@@ -124,6 +130,7 @@ function deleteUserByUsername(username) {
     <div>
     <Navbar></Navbar>
     <HomePage
+    following={following}
       user={user}
       logedUserr={logedUserr}
       posts= {posts}
