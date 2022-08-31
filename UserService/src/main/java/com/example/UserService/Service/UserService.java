@@ -53,6 +53,7 @@ public class UserService {
         if(userExists){
             throw new IllegalStateException("Korisnicko ime vec postoji!");
         }
+        user.setIsPrivate(false);
         return userRepository.save(user);
     }
 

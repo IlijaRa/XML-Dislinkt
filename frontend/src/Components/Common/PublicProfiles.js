@@ -89,8 +89,9 @@ export default function PublicProfiles({logedUserr,followUserHandler,users,searc
                   >
                     View profile
                   </Button>
+                 
                   <Button  onClick={() => {
-      followUserHandler(logedUserr.username, user.username
+      followUserHandler(logedUserr.id, user.id
       )
     }} 
     class="btn btn-primary" >Follow

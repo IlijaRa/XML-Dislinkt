@@ -43,7 +43,7 @@ export default function NavbarUnregistered() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="newFeed">
+              <a className="nav-link" href="registration">
                 Registration
               </a>
             </li>
