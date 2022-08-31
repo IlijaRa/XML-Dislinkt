@@ -8,6 +8,9 @@ import agentServices from "../Services/AgentServices/AgentServices";
 export default function CompanyHomePageContainer() {
 
     const [jobOffers, setJobOffers] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [tags1, setTags1] = useState([]);
+    
 
     var company = JSON.parse(localStorage.getItem("Company"));
   
@@ -47,10 +50,40 @@ export default function CompanyHomePageContainer() {
           }
 
 
+          const removeTags = (indexToRemove) => {
+            setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+          };
+          const addTags = (event) => {
+            if (event.target.value !== "") {
+              setTags([...tags, event.target.value]);
+              //  props.selectedTags([...tags, event.target.value]);
+        
+              event.target.value = "";
+            }
+          };
+    
+    
+          const removeTags1 = (indexToRemove) => {
+            setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
+          };
+          const addTags1 = (event) => {
+            if (event.target.value !== "") {
+              setTags1([...tags1, event.target.value]);
+              //  props.selectedTags([...tags, event.target.value]);
+              event.target.value = "";
+            }
+          };
+
+
   return (
     <div>   
     <Navbar></Navbar>
-    <CompanyHomePage company={company} createJobOfferHandler={createJobOffer} addJobCommentHandler={addJobComment} jobOffers={jobOffers}></CompanyHomePage>
+    <CompanyHomePage tags={tags}
+        removeTags={removeTags}
+        addTags={addTags} 
+        tags1={tags1}
+        removeTags1={removeTags1}
+        addTags1={addTags1} company={company} createJobOfferHandler={createJobOffer} addJobCommentHandler={addJobComment} jobOffers={jobOffers}></CompanyHomePage>
     <Footer></Footer></div>
   )
 }

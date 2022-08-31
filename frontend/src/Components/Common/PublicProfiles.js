@@ -81,9 +81,9 @@ export default function PublicProfiles({logedUserr,followUserHandler,users,searc
                 
                 </ListGroup>
                 <Card.Body>
-                <Link to={`/homepage/${user.username}`}>
+               
                   <Button
-                  
+                    href={`/homepage/${user.username}`}
                     style={{ width: "8rem" }}
                     variant="outline-success"
                   >
@@ -95,7 +95,7 @@ export default function PublicProfiles({logedUserr,followUserHandler,users,searc
     }} 
     class="btn btn-primary" >Follow
     </Button>
-                  </Link>
+                  
                 
                 </Card.Body>
               </Card>

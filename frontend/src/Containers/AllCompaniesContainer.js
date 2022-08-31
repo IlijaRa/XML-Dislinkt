@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AllCompanies from "../Components/Common/AllCompanies";
 import Footer from "../Components/Common/Footer";
 import Navbar from "../Components/Common/Navbar";
+import NavBarAgent from "../Components/Common/NavBarAgent";
 import agentServices from "../Services/AgentServices/AgentServices";
 
 export default function AllCompaniesContainer() {
@@ -36,7 +37,7 @@ export default function AllCompaniesContainer() {
   
     return  (
       <div>   
-      <Navbar></Navbar>
+      <NavBarAgent></NavBarAgent>
       <AllCompanies companies={companies} addJobCommentHandler={addJobComment}></AllCompanies>
       <Footer></Footer>
       </div>

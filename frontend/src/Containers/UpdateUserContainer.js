@@ -14,10 +14,14 @@ export default function UpdateUserContainer() {
      
     const [tags, setTags] = useState(logedUser.skills);
     const [tags1, setTags1] = useState(logedUser.interests);
-    const [tags2, setTags2] = useState(logedUser.education);
-    const [tags3, setTags3] = useState(logedUser.experience);
 
-    console.log("logedUser1", logedUser.skills);
+    const [tags2, setTags2] = useState([]);
+    const [tags3, setTags3] = useState([]);
+
+    const [tags4, setTags4] = useState([]);
+    const [tags5, setTags5] = useState([]);
+
+    
     
   
       function updateUser(user) {
@@ -82,6 +86,27 @@ export default function UpdateUserContainer() {
               event.target.value = "";
             }
           };
+
+          
+          const removeTags4 = (indexToRemove) => {
+            setTags4([...tags4.filter((_, index) => index !== indexToRemove)]);
+          };
+          const addTags4 = (event) => {
+            if (event.target.value !== "") {
+              setTags4([...tags4, event.target.value]);
+              event.target.value = "";
+            }
+          };
+
+          const removeTags5 = (indexToRemove) => {
+            setTags5([...tags5.filter((_, index) => index !== indexToRemove)]);
+          };
+          const addTags5 = (event) => {
+            if (event.target.value !== "") {
+              setTags5([...tags5, event.target.value]);
+              event.target.value = "";
+            }
+          };
     
     
 
@@ -101,6 +126,12 @@ export default function UpdateUserContainer() {
         tags3={tags3}
         removeTags3={removeTags3}
         addTags3={addTags3}
+        tags4={tags4}
+        removeTags4={removeTags4}
+        addTags4={addTags4}
+        tags5={tags5}
+        removeTags5={removeTags5}
+        addTags5={addTags5}
 
         updateUserHandler={updateUser} logedUser={logedUser}></UpdateUser>
     <Footer></Footer>

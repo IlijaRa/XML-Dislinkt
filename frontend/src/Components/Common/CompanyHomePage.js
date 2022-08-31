@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-bootstrap";
 
-export default function CompanyHomePage({company,jobOffers,createJobOfferHandler,addJobCommentHandler}) {
+export default function CompanyHomePage({tags1,addTags1,removeTags1,tags,addTags,removeTags,company,jobOffers,createJobOfferHandler,addJobCommentHandler}) {
 
     console.log("jobOffers", jobOffers);
 
@@ -18,6 +18,31 @@ export default function CompanyHomePage({company,jobOffers,createJobOfferHandler
   let ratings = useRef([React.createRef(), React.createRef()]);
   let salaries = useRef([React.createRef(), React.createRef()]);
   let interviews = useRef([React.createRef(), React.createRef()]);
+
+
+  
+const position = useRef();
+const description = useRef();
+const location = useRef();
+
+var requirements = [];
+var len = tags.length;
+for (var i = 0; i < len; i++) {
+    requirements.push({
+        id: Math.floor(Math.random() * 100) + 1,
+        title: tags[i],
+    });
+}
+
+var dailyActivities = [];
+var len1 = tags1.length;
+for (var i = 0; i < len1; i++) {
+    dailyActivities.push({
+        id: Math.floor(Math.random() * 100) + 1,
+        title: tags1[i],
+    });
+}
+
 
     
   return (
@@ -38,6 +63,124 @@ export default function CompanyHomePage({company,jobOffers,createJobOfferHandler
         </p>
       </div>
       
+      <div className="header">
+    {" "}
+    <h1 style={{ textAlign: "center" }}> News feed </h1>
+  </div>
+  <div className="containerNewPost">
+  <div className="wrapper">
+    <section className="post">
+      <header>Job Offers</header>
+      <form action="#">
+        <div className="content">
+          <img src="https://webmuch.com/wp-content/uploads/2013/04/LinkedIn-Logo-022.png" alt="logo" />
+          <div className="details">
+            <p>Add new job offer</p>
+            <div className="privacy">
+              <i className="fas fa-user-friends" />
+              <span>Friends</span>
+              <i className="fas fa-caret-down" />
+            </div>
+          </div>
+        </div>
+        <textarea
+          placeholder="Position"
+          spellCheck="false"
+          required=""
+          defaultValue={""}
+          ref= {position}
+        />
+          <textarea
+          placeholder="Description"
+          spellCheck="false"
+          required=""
+          defaultValue={""}
+          ref= {description}
+
+        />
+           <textarea
+          placeholder="Location"
+          spellCheck="false"
+          required=""
+          defaultValue={""}
+          ref= {location}
+        />
+            <div className="mb-3">
+      <label>Requirements</label>
+    <div className="tags-input">
+                    <ul id="tags">
+                      {tags?.map((tag, index) => (
+                        <li key={index} className="tag">
+                          <span className="tag-title">{tag}</span>
+                          <span
+                            className="tag-close-icon"
+                            onClick={() => removeTags(index)}
+                          >
+                            x
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <input
+                      type="text"
+                      onKeyUp={(event) =>
+                        event.key === "Shift" ? addTags(event) : null
+                      }
+                      placeholder="Press shift to requirement"
+                    />
+                  </div>      
+    </div>
+
+    <div className="mb-3">
+      <label>Daily activities</label>
+                  <div className="tags-input">
+                    <ul id="tags">
+                      {tags1?.map((tag, index) => (
+                        <li key={index} className="tag">
+                          <span className="tag-title">{tag}</span>
+                          <span
+                            className="tag-close-icon"
+                            onClick={() => removeTags1(index)}
+                          >
+                            x
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <input
+                      type="text"
+                      onKeyUp={(event) =>
+                        event.key === "Shift" ? addTags1(event) : null
+                      }
+                      placeholder="Press shift to add daily activity"
+                    />
+                  </div>
+                  </div>
+
+        
+       
+      
+        <button
+      onClick={() => {
+        createJobOfferHandler({
+          position: position.current.value,
+          description: description.current.value,
+          location: location.current.value,
+          companyId: company.id,
+          requirements: requirements,
+          daily_activities: dailyActivities
+
+        }
+        )
+       
+      }}
+        >Create job offer</button>
+      </form>
+    </section>
+ 
+  </div>
+</div>
+
       {jobOffers.map((jobOffer,i) => 
 
       

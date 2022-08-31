@@ -18,7 +18,9 @@ export default function CompaniesByUser({companies,updateCompanyHandler}) {
   let mobiles = useRef([React.createRef(), React.createRef()]);
 
 
-
+  var companiess = companies.filter(obj => {
+    return obj.approved === true
+  })
 
 
 
@@ -27,7 +29,7 @@ export default function CompaniesByUser({companies,updateCompanyHandler}) {
   <h1 style={{ textAlign: "center" }}> My companies </h1>
   </div>
   
-  {companies.map((request,i) => 
+  {companiess.map((request,i) => 
   
   (
     
@@ -101,12 +103,14 @@ export default function CompaniesByUser({companies,updateCompanyHandler}) {
                 <Button
                   onClick={() => {
                    
-                    request.name = names.current[i].value;
-                    request.description = descriptions.current[i].value;
-                    request.mobile = mobiles.current[i].value;
-                    request.email = emails.current[i].value;
-                    request.address = address.current[i].value;
+                    request.name = names.current[i].current.value;
+                    request.description = descriptions.current[i].current.value;
+                    request.mobile = mobiles.current[i].current.value;
+                    request.email = emails.current[i].current.value;
+                    request.address = address.current[i].current.value;
                     request.profilePicture =  request.profilePicture;
+                    request.request = false;
+                    request.apiToken = "asfafasfaf";
                     updateCompanyHandler(request);
 
                    }} 
