@@ -41,7 +41,7 @@ export default function AllProfilesContainer() {
       function followUser(followerUsername,toFollowUsername) {
         userServices.followUser(followerUsername,toFollowUsername)
           .then((data) => {
-            alert("sucessfuly followed user");
+            alert("sucessfuly");
             localStorage.setItem("User", JSON.stringify(logedUser));
           })
           .catch((error) => {

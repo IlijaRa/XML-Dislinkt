@@ -37,6 +37,11 @@ export default function Navbar() {
           </a>
           {/* Left links */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+              <a className="nav-link" href="allProfiles">
+              All profiles
+              </a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="publicProfiles">
               Public profiles
