@@ -64,6 +64,12 @@ export default function NavBarAgent() {
              Agent registration
               </a>
             </li>
+            {logedUser.role === "Admin" &&
+            <li className="nav-item">
+              <a className="nav-link" href="companyRequests">
+              Company requests
+              </a>
+            </li>}
             <li className="nav-item">
               <a className="nav-link" href="/login">
              Login

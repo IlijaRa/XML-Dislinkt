@@ -11,7 +11,7 @@ import {
 export default function CompanyHomePage({tags1,addTags1,removeTags1,tags,addTags,removeTags,company,jobOffers,createJobOfferHandler,addJobCommentHandler}) {
 
     console.log("jobOffers", jobOffers);
-
+    var logedUser = JSON.parse(localStorage.getItem("User"));
                                       
   let conss = useRef([React.createRef(), React.createRef()]);
   let pross = useRef([React.createRef(), React.createRef()]);
@@ -68,6 +68,7 @@ for (var i = 0; i < len1; i++) {
     <h1 style={{ textAlign: "center" }}> News feed </h1>
   </div>
   <div className="containerNewPost">
+    {logedUser.role === "Owner" &&
   <div className="wrapper">
     <section className="post">
       <header>Job Offers</header>
@@ -179,6 +180,7 @@ for (var i = 0; i < len1; i++) {
     </section>
  
   </div>
+  }
 </div>
 
       {jobOffers.map((jobOffer,i) => 
@@ -228,8 +230,8 @@ for (var i = 0; i < len1; i++) {
         
                     </ListGroupItem>
                     ))}
-
-                   
+      {logedUser.role === "Agent" && 
+      <div>
       <label>Pros</label>
       <li key={i}>
       <input type="text" className="form-control" placeholder="Pros" ref={pross.current[i]} />
@@ -254,11 +256,13 @@ for (var i = 0; i < len1; i++) {
       <li key={i}>
       <input type="text" className="form-control" placeholder="Interview" ref={interviews.current[i]}   />
       </li>
+    </div>}
     
 
     
               </ListGroup>
               <Card.Body>
+              {logedUser.role === "Agent" &&
               <Button
                   
                   onClick={() =>  addJobCommentHandler({
@@ -273,7 +277,11 @@ for (var i = 0; i < len1; i++) {
                   variant="outline-success"
                 >
                  Add comment
-                </Button>
+                </Button>}
+            
+
+
+
 
                 <Button
                  onClick={() => {

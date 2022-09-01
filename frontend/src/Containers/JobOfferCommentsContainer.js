@@ -3,6 +3,8 @@ import Footer from "../Components/Common/Footer";
 import JobOfferComments from "../Components/Common/JobOfferComments";
 import Navbar from "../Components/Common/Navbar";
 import agentServices from "../Services/AgentServices/AgentServices";
+import NavBarAgent from "../Components/Common/NavBarAgent";
+
 
 export default function JobOfferCommentsContainer() {
 
@@ -33,7 +35,7 @@ export default function JobOfferCommentsContainer() {
 
 
   return <div>
-  <Navbar></Navbar>
+  <NavBarAgent></NavBarAgent>
   <JobOfferComments comments={comments}></JobOfferComments>
   <Footer></Footer>
 </div>

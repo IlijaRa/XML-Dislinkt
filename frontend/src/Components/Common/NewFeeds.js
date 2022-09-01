@@ -1,9 +1,14 @@
 
 import userServices from '../../Services/UserServices/UserServices';
-import { Button } from 'bootstrap'
 import React, { useRef } from 'react'
-import { Card,ListGroup,ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import {
+  Card,
+  ListGroup,
+  ListGroupItem,
+  CardGroup,
+  Button,
+} from "react-bootstrap";
 
 
 export default function NewFeeds({tags,addTags,removeTags,user,posts,likePostHandler,unlikePostHandler,addCommentHandler,createPostHandler}) {
@@ -13,6 +18,7 @@ export default function NewFeeds({tags,addTags,removeTags,user,posts,likePostHan
   }
 
   var unique = posts.filter(onlyUnique);
+  let contents = useRef([React.createRef(), React.createRef()]);
 
 const content = useRef();
 const title = useRef();
@@ -121,7 +127,7 @@ const link = useRef();
 
       <div className="container">
 
-{postss?.map((post) => (
+{postss?.map((post,i) => (
 
         <div className="row gutters">
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -224,22 +230,25 @@ const link = useRef();
 <br></br>
                    <div className="mb-3">
     <label>Add a comment</label>
-    <input type="text" ref={content} className="form-control" placeholder="type a comment"   />
-    <button
+    <li key={i}>
+    <input type="text" ref= {contents.current[i]} className="form-control" placeholder="type a comment"   />
+    </li>
+    <li key={i}>
+    <Button
                       style={{ width: "7rem" }}
                       variant="outline-success"
                       class="btn btn-primary"
                       onClick={() => 
                         { addCommentHandler({
                           id: 1,
-                          content: content.current.value,
+                          content: contents.current[i].current.value,
                           userId: user.id,
                         },post.id);
                
                   }}
                     >
                       Comment
-                    </button>
+                    </Button></li>
   </div>
                     
                  
