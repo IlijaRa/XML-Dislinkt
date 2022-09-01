@@ -122,7 +122,7 @@ export default function NavBarAgent() {
           <div className="dropdown">
             <a
               className="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="/homePage/nina"
+              
               id="navbarDropdownMenuAvatar"
               role="button"
               data-mdb-toggle="dropdown"

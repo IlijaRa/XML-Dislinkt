@@ -26,6 +26,7 @@ import AllCompaniesContainer from './Containers/AllCompaniesContainer';
 import CompanyHomePageContainer from './Containers/CompanyHomePageContainer';
 import JobOfferCommentsContainer from './Containers/JobOfferCommentsContainer';
 import AllProfilesContainer from './Containers/AllProfilesContainer';
+import MyHomePageContainer from './Containers/MyHomePageContainer';
 
 
 function App() {
@@ -92,6 +93,9 @@ function App() {
           </Route>
           <Route path="/allProfiles">
             <AllProfilesContainer></AllProfilesContainer>
+          </Route>
+          <Route path="/myHomePage">
+            <MyHomePageContainer></MyHomePageContainer>
           </Route>
 
         </Switch>

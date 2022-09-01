@@ -31,6 +31,8 @@ let answers = useRef([React.createRef(), React.createRef()]);
   <h1 style={{ textAlign: "center" }}> Messages </h1>
 </div>
 
+{messages.lenght>0 &&
+<div>
 {messages.map((message,i) => 
 
  (
@@ -101,5 +103,5 @@ let answers = useRef([React.createRef(), React.createRef()]);
       </div>
     </div>
   </div>
-))}</div>);
+))}</div>}</div>);
 }
