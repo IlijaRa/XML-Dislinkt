@@ -96,7 +96,7 @@ console.log("following", following);
       </div>
     </div>
 
-    {posts.leght>0 &&
+    {
       <div>
         {posts.map((post) => (
           <div className="container">

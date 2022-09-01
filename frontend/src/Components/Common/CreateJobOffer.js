@@ -36,7 +36,6 @@ export default function CreateJobOffer({tags1,addTags1,removeTags1,tags,addTags,
             position: position.current.value,
             description: description.current.value,
             location: location.current.value,
-            companyId: companyId.current.value,
             requirements: requirements,
             daily_activities: dailyActivities,
           });
@@ -72,14 +71,7 @@ export default function CreateJobOffer({tags1,addTags1,removeTags1,tags,addTags,
         ref={location}
       />
     </div>
-    <div className="mb-3">
-      <label>Company id</label>
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Enter company id"
-        ref={companyId}
-      />
+    <div className="mb-3">      
     </div>
 
     <div className="mb-3">

@@ -64,11 +64,6 @@ const search = useRef();
                  {da?.title}
                 </ListGroupItem>
                 ))}
-                 
-                  <ListGroupItem>
-                   Company id : {jobOffer?.companyId}
-                   
-                  </ListGroupItem>
 
                 
                 </ListGroup>
